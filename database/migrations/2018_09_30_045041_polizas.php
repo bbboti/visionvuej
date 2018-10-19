@@ -1,0 +1,57 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Polizas extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('polizas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('cliente_id');
+            $table->integer('compania_id');
+            $table->integer('codigo_productor_id');
+            $table->integer('tipo_riesgo_id');
+            $table->string('numero')->nullable();
+            $table->integer('estado_poliza_id')->nullable();
+            $table->string('renueva_numero')->nullable();
+            $table->enum('tipo_vigencia', ['Mensual', 'Bimestral', 'Trimestral', 'Cuatrimestral', 'Semestral', 'Anual', 'Dias']);
+            $table->integer('vigencia_dias')->nullable();
+            $table->date('vigencia_desde');
+            $table->date('vigencia_hasta');
+            $table->date('fecha_solicitud')->nullable();
+            $table->date('fecha_emision')->nullable();
+            $table->date('fecha_recepcion')->nullable();
+            $table->date('fecha_entrega_correo')->nullable();
+            $table->date('fecha_entrega_original')->nullable();
+            $table->date('fecha_entrega_email')->nullable();
+            $table->string('premio')->nullable();
+            $table->string('prima')->nullable();
+            $table->string('plan_pago')->nullable();
+            $table->integer('cantidad_cuotas')->nullable();
+            $table->string('medio_pago')->nullable();
+            $table->string('detalle_medio_pago')->nullable();
+            $table->integer('comision')->nullable();
+            $table->integer('descuento')->nullable();
+            $table->string('archivada')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('polizas');
+    }
+}
