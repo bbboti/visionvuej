@@ -22,5 +22,6 @@ Route::Resource('/clientes', 'ClienteController');
 Route::Resource('/administracion/companias', 'CompaniaController');
 Route::Resource('/administracion/organizadores', 'OrganizadorController');
 Route::Resource('/administracion/productores', 'ProductorController');
+Route::Resource('/localidades', 'LocalidadController');
 
 

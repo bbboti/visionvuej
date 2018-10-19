@@ -162,7 +162,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <label>Calle</label>
+                <label>Direccion</label>
                 <div class="form-group">
                     <div class="input-group mb-12">
                         <div class="input-group-prepend mb-9">
@@ -188,11 +188,9 @@
 
                 <div class="form-group">
                     <label>Localidad</label>
-                        <!-- <select name='localidad_id' class="form-control form-control-sm select2">
-                            {{foreach($localidades->all() as $localidad)}}
-                            <option value='{{ $localidad->id }}'>{{ $localidad->nombre . " / CP:" .$localidad->codigo_postal }}</option>
-                            {{endforeach}}
-                        </select> -->
+                        <select name='localidad_id' class="form-control form-control-sm">
+                            <option v-for="localidad in localidades" :key="localidad.id" value='localidad.id'>{{localidad.nombre}}  / CP: {{localidad.codigo_postal}}</option>
+                        </select>
                 </div>
 
                 
@@ -257,8 +255,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div>
-                        <select name='productor_id' class="form-control form-control-sm mb-1" >
-                            <!-- <option v-for="productor in productores" value="@{{ productor.nombre }}"> ejemplo</option> -->
+                        <select name='productor_id' class="form-control form-control-sm mb-1 selectbuscador" >
+                            <option v-for="productor in productores" :key="productor.id" value="productor.id">{{productor.apellido+" "+productor.nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -325,7 +323,7 @@ export default {
       clientes: {},
       cliente: {},
       productores: {},
-      productor:{},
+      localidades: {},
     };
   },
   methods: {
@@ -352,10 +350,29 @@ export default {
         .then(function(response) {
           self.clientes = response.data.data;
         });
+    },
+    cargarProductores() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/productores")
+        .then(function(response) {
+          self.productores = response.data.data;
+        });
+    },
+    cargarLocalidades() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/localidades")
+        .then(function(response) {
+            console.log(response.data.data);
+          self.localidades = response.data.data;
+        });
     }
   },
   created() {
     this.cargarClientes();
+    this.cargarProductores();
+    this.cargarLocalidades();
   }
 };
 </script>

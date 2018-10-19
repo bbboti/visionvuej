@@ -50330,8 +50330,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50339,7 +50337,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       clientes: {},
       cliente: {},
       productores: {},
-      productor: {}
+      localidades: {}
     };
   },
 
@@ -50363,10 +50361,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
         self.clientes = response.data.data;
       });
+    },
+    cargarProductores: function cargarProductores() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/productores").then(function (response) {
+        self.productores = response.data.data;
+      });
+    },
+    cargarLocalidades: function cargarLocalidades() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
+        console.log(response.data.data);
+        self.localidades = response.data.data;
+      });
     }
   },
   created: function created() {
     this.cargarClientes();
+    this.cargarProductores();
+    this.cargarLocalidades();
   }
 });
 
@@ -50466,17 +50479,100 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-header" }),
                 _vm._v(" "),
-                _vm._m(5),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", [_vm._v("Contacto")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("label", [_vm._v("Direccion")]),
+                      _vm._v(" "),
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Localidad")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control form-control-sm",
+                            attrs: { name: "localidad_id" }
+                          },
+                          _vm._l(_vm.localidades, function(localidad) {
+                            return _c(
+                              "option",
+                              {
+                                key: localidad.id,
+                                attrs: { value: "localidad.id" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(localidad.nombre) +
+                                    "  / CP: " +
+                                    _vm._s(localidad.codigo_postal)
+                                )
+                              ]
+                            )
+                          })
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", [_vm._v("Country / Barrio Cerrado")]),
+                      _vm._v(" "),
+                      _vm._m(7)
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(8)
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-header" }),
                 _vm._v(" "),
-                _vm._m(6),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", [_vm._v("Productor")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("div", [
+                          _c(
+                            "select",
+                            {
+                              staticClass:
+                                "form-control form-control-sm mb-1 selectbuscador",
+                              attrs: { name: "productor_id" }
+                            },
+                            _vm._l(_vm.productores, function(productor) {
+                              return _c(
+                                "option",
+                                {
+                                  key: productor.id,
+                                  attrs: { value: "productor.id" }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      productor.apellido +
+                                        " " +
+                                        productor.nombre
+                                    )
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-header" }),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(9),
                 _vm._v(" "),
-                _vm._m(8)
+                _vm._m(10)
               ]
             )
           ])
@@ -50772,166 +50868,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("h5", [_vm._v("Contacto")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("label", [_vm._v("Calle")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "input-group mb-12" }, [
-              _c("div", { staticClass: "input-group-prepend mb-9" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Nombre",
-                    id: "",
-                    name: "direccion"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-prepend mb-3" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Nro",
-                    id: "direccion_nro",
-                    name: "direccion_nro"
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "input-group mb-12" }, [
-              _c("div", { staticClass: "input-group-prepend mb-9" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Piso",
-                    id: "direccion_piso",
-                    name: "direccion_piso"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-prepend mb-3" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Depto",
-                    id: "direccion_depto",
-                    name: "direccion_depto"
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Localidad")])
-          ]),
-          _vm._v(" "),
-          _c("label", [_vm._v("Country / Barrio Cerrado")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "input-group mb-12" }, [
-              _c("div", { staticClass: "input-group-prepend mb-9" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Nombre",
-                    id: "barrio_cerrado",
-                    name: "barrio_cerrado"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-prepend mb-3" }, [
-                _c("input", {
-                  staticClass: "form-control form-control-sm",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Lote",
-                    id: "lote",
-                    name: "lote"
-                  }
-                })
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group mb-12" }, [
+        _c("div", { staticClass: "input-group-prepend mb-9" }, [
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Nombre",
+              id: "",
+              name: "direccion"
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Celular")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c("i", { staticClass: "fa fa-mobile-alt" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "text", name: "celular" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Telefono 1")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c("i", { staticClass: "fa fa-phone" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "text", name: "telefono_1" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Telefono 2")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c("i", { staticClass: "fa fa-phone" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "text", name: "telefono_2" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Observaciones")]),
-            _vm._v(" "),
-            _c("div", [
-              _c("textarea", {
-                staticClass: "form-control form-control-sm mb-1",
-                attrs: { rows: "3", placeholder: "", name: "observaciones_2" }
-              })
-            ])
-          ])
+        _c("div", { staticClass: "input-group-prepend mb-3" }, [
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Nro",
+              id: "direccion_nro",
+              name: "direccion_nro"
+            }
+          })
         ])
       ])
     ])
@@ -50940,19 +50900,130 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("h5", [_vm._v("Productor")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", [
-              _c("select", {
-                staticClass: "form-control form-control-sm mb-1",
-                attrs: { name: "productor_id" }
-              })
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group mb-12" }, [
+        _c("div", { staticClass: "input-group-prepend mb-9" }, [
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Piso",
+              id: "direccion_piso",
+              name: "direccion_piso"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-prepend mb-3" }, [
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Depto",
+              id: "direccion_depto",
+              name: "direccion_depto"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group mb-12" }, [
+        _c("div", { staticClass: "input-group-prepend mb-9" }, [
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Nombre",
+              id: "barrio_cerrado",
+              name: "barrio_cerrado"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-prepend mb-3" }, [
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Lote",
+              id: "lote",
+              name: "lote"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Celular")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group" }, [
+          _c("div", { staticClass: "input-group-prepend" }, [
+            _c("span", { staticClass: "input-group-text" }, [
+              _c("i", { staticClass: "fa fa-mobile-alt" })
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", name: "celular" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Telefono 1")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group" }, [
+          _c("div", { staticClass: "input-group-prepend" }, [
+            _c("span", { staticClass: "input-group-text" }, [
+              _c("i", { staticClass: "fa fa-phone" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", name: "telefono_1" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Telefono 2")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group" }, [
+          _c("div", { staticClass: "input-group-prepend" }, [
+            _c("span", { staticClass: "input-group-text" }, [
+              _c("i", { staticClass: "fa fa-phone" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", name: "telefono_2" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Observaciones")]),
+        _vm._v(" "),
+        _c("div", [
+          _c("textarea", {
+            staticClass: "form-control form-control-sm mb-1",
+            attrs: { rows: "3", placeholder: "", name: "observaciones_2" }
+          })
         ])
       ])
     ])

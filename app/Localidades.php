@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Companias;
+use App\Localidad;
 use Illuminate\Database\Eloquent\Model;
 
 class Localidades extends Model
