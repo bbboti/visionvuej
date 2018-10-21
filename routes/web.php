@@ -33,6 +33,10 @@ Route::get('/administracion/companias/create', function () {
     return view('layouts.master');
 });
 
+Route::get('/administracion/companias/{compania}/edit', function () {
+    return view('layouts.master');
+});
+
 Route::get('/administracion/organizadores', function () {
     return view('layouts.master');
 });

@@ -52,7 +52,6 @@ class ProductorController extends Controller
             'email' => 'required',
             'telefono_1' => 'required',
             'telefono_2' => 'required',
-            'activo' => 'required',
         ]);
 
         $productor = Productores::create([

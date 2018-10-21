@@ -146,12 +146,14 @@ export default {
   data() {
     return {
       productores: {},
-      productor: {}
+      productor: {
+              activo:true
+      },
     };
   },
   methods: {
     crearProductor() {
-      console.log(this.productor);
+//       console.log(this.productor);
       let self = this;
       axios
         .post(
@@ -161,6 +163,7 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.productor = {};
+          this.productor.activo = true;
           this.cargarProductores();
         })
         .catch(e => console.log(e));

@@ -30,7 +30,7 @@
                                             <td> {{compania.telefono_siniestros}} </td>
                                             <td> {{compania.activo}} </td>
                                             <td>
-                                                <router-link :to="`/administracion/companias/${compania.nombre}`" class="fa fa-edit"></router-link>
+                                                <router-link :to="`/administracion/companias/${compania.nombre}/edit`" class="fa fa-edit"></router-link>
                                                 <a href="" class="fa fa-trash"></a>
                                             </td>
                                         </tr>
@@ -56,7 +56,7 @@
         created() {
             let self = this
             axios.get('http://127.0.0.1:8000/api/administracion/companias').then(function(response){
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 self.companias = response.data.data;
             });
 

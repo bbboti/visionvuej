@@ -15,25 +15,25 @@
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Nombre</label>
                                                                 <div class="col-md-9 mb-1">
-                                                                        <input type="text" class="form-control " name="nombre" value="" v-model="compania.nombre">
+                                                                        <input type="text" class="form-control " name="nombre" v-model="compania.nombre">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Cuit</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="cuit" value="">
+                                                                        <input type="text" class="form-control mb-1" name="cuit" v-model="compania.cuit">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Direccion</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="direccion" value="">
+                                                                        <input type="text" class="form-control mb-1" name="direccion" v-model="compania.direccion">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Localidad</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="localidad_id" value="">
+                                                                        <input type="text" class="form-control mb-1" name="localidad_id" v-model="compania.localidad_id">
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -51,13 +51,13 @@
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Cod. Libros Rubricados</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="codigo_lr" value="">
+                                                                        <input type="text" class="form-control mb-1" name="codigo_lr" v-model="compania.codigo_lr">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="col-sm-9 control-label">Activo</label>
                                                                 <div class="col-sm-3 mb-1">
-                                                                        <input type="checkbox"  value="1" name="activo" checked>
+                                                                        <input type="checkbox"  value="1" name="activo" checked v-model="compania.activo">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
@@ -82,19 +82,19 @@
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Telefono</label>
                                                                 <div class="col-md-9 mb-1">
-                                                                        <input type="text" class="form-control " name="telefono_1" value="">
+                                                                        <input type="text" class="form-control " name="telefono_1" v-model="compania.telefono_1">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Telefono Grua</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="telefono_aux" value="">
+                                                                        <input type="text" class="form-control mb-1" name="telefono_aux" v-model="compania.telefono_aux">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Telefono Siniestros</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="telefono_siniestros" value="">
+                                                                        <input type="text" class="form-control mb-1" name="telefono_siniestros" v-model="compania.telefono_siniestros">
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -112,13 +112,13 @@
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Email Emision</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="email_emision" value="">
+                                                                        <input type="text" class="form-control mb-1" name="email_emision" v-model="compania.email_emision">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Email Siniestros</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="email_siniestros" value="">
+                                                                        <input type="text" class="form-control mb-1" name="email_siniestros" v-model="compania.email_siniestros">
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -306,18 +306,40 @@
 
 </template>
 <script>
-    export default {
-        data(){
-            return{
-                compania:{},
-                nombre:this.$route.params.nombre
-            }
-        },
-        created() {
-        //     let self = this
-            axios.get('http://127.0.0.1:8000/api/administracion/companias/'+ this.nombre).then(({data})=>(this.compania = data.data));
-
-        }
+export default {
+  data() {
+    return {
+      compania: {
+        nombre: "",
+        cuit: "",
+        direccion: "",
+        localidad_id: "",
+        codigo_lr: "",
+        activo: "",
+        telefono_1: "",
+        telefono_aux: "",
+        telefono_siniestros: "",
+        email_emision: "",
+        email_siniestros: ""
+      },
+      nombreCompania: this.$route.params.nombre
     };
-
+  },
+  methods: {
+    cargarCompania() {
+      let self = this;
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania
+        )
+        .then(response => {
+          self.compania = response.data.data[0];
+        //   console.log(self.compania[0]);
+        });
+    }
+  },
+  created() {
+    this.cargarCompania();
+  }
+};
 </script>

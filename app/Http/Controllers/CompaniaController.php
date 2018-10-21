@@ -92,15 +92,8 @@ class CompaniaController extends Controller
      */
     public function show($nombre)
     {
-        $compania = " SELECT * FROM Companias WHERE 'nombre'=$nombre ";
+        $compania = Companias::where('nombre', $nombre)->get();
         
-
-        // $compania = Companias::whereHas('nombre', function ($query) use ($nombre){
-        //     $query->where('nombre', 'like', $nombre);
-        // })->get();
-
-        // $compania=Companias::find($id);
-
         return new CompaniasResource($compania);
 
     }

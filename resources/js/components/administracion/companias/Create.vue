@@ -134,24 +134,19 @@
                         </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-<div class="col-md-15">
-
-
-
-
-
+</div>
+</div>
 </template>
 <script>
     export default {
         data(){
             return{
-                compania:{},
-                nombre:this.$route.params.nombre
+                    compania:{}
             }
         },
         created() {
         //     let self = this
-            axios.get('http://127.0.0.1:8000/api/administracion/companias/'+ this.nombre).then(({data})=>(this.compania = data.data));
+        //     axios.get('http://127.0.0.1:8000/api/administracion/companias/'+ this.nombre).then(({data})=>(this.compania = data.data));
 
         }
     };
