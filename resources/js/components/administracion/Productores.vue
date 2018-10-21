@@ -59,52 +59,66 @@
                                                 <div class="form-group">
                                                         <label for="nombre" class=" control-label">Nombre</label>
                                                         <div class="">
-                                                                <input type="text" v-model="productor.nombre" class="form-control" id="nombre" name="nombre">
+                                                                <input type="text" v-model="productor.nombre" class="form-control form-control-sm" id="nombre" name="nombre">
                                                         </div>
                                                 </div>
                                                 <div class="form-group">
                                                         <label for="apellido" class="control-label">Apellido</label>
                                                         <div class="">
-                                                                <input type="text" v-model="productor.apellido" class="form-control" id="apellido" name="apellido" placeholder="">
+                                                                <input type="text" v-model="productor.apellido" class="form-control form-control-sm" id="apellido" name="apellido" placeholder="">
                                                         </div>
                                                 </div>
                                                 <div class="form-group">
                                                         <label for="cuit" class="control-label">Cuit</label>
                                                         <div class="">
-                                                                <input type="text" v-model="productor.cuit" class="form-control" id="cuit" name="cuit" placeholder="">
+                                                                <input type="text" v-model="productor.cuit" class="form-control form-control-sm" id="cuit" name="cuit" placeholder="">
                                                         </div>
                                                         </div>
                                                 <div class="form-group">
                                                         <label for="matricula" class="control-label">Matricula</label>
                                                         <div class="">
-                                                                <input type="text" v-model="productor.matricula" class="form-control" name="matricula">
+                                                                <input type="text" v-model="productor.matricula" class="form-control form-control-sm" name="matricula">
                                                         </div>
                                                 </div>
 
                                         </div>
                                         <div class="col-md-6">
+                                        
                                                 <div class="form-group">
                                                         <label for="email" class="control-label">Email</label>
-                                                        <div class="">
-                                                                <input type="text" v-model="productor.email" class="form-control" id="email" name="email" placeholder="">
+                                                        <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                                                </div>
+                                                                <input name="email" v-model="productor.email" type="email" class="form-control form-control-sm" id="email" placeholder="Email">
                                                         </div>
                                                 </div>
+
                                                 <div class="form-group">
-                                                        <label for="telefono_1" class="control-label">Telefono</label>
-                                                        <div class="">
-                                                                <input type="text" v-model="productor.telefono_1" class="form-control" id="telefono_1" name="telefono_1" placeholder="">
+                                                        <label>Telefono</label>
+                                                        <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                        </div>
+                                                        <input type="text" v-model="productor.telefono_1" class="form-control form-control-sm" id="telefono_1" name="telefono_1" placeholder="Telefono">
                                                         </div>
                                                 </div>
+
+
+
                                                 <div class="form-group">
-                                                        <label for="telefono_2" class="control-label">Celular</label>
-                                                        <div class="">
-                                                                <input type="text" v-model="productor.telefono_2" class="form-control" id="telefono_2" name="telefono_2" placeholder="">
+                                                        <label>Celular</label>
+                                                        <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-mobile-alt"></i></span>
+                                                        </div>
+                                                        <input type="text" class="form-control form-control-sm" v-model="productor.telefono_2" id="telefono_2" name="telefono_2" placeholder="Celular">
                                                         </div>
                                                 </div>
                                                 <div class="form-group">
                                                         <label class="control-label">Activo</label>
                                                         <div class="">
-                                                            <input type="checkbox" v-model="productor.activo"  value="0" name="activo" checked>
+                                                            <input type="checkbox" v-model="productor.activo"  value="1" name="activo">
                                                         </div>
                                                 </div>  
                                         </div>
@@ -137,7 +151,6 @@ export default {
   },
   methods: {
     crearProductor() {
-      console.log("hola");
       console.log(this.productor);
       let self = this;
       axios

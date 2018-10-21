@@ -21,10 +21,15 @@ let routes = [
     meta: {title: 'Compañias'}
 },
 {
-    path: '/administracion/companias/:nombre',
-    component: require('./components/administracion/companias/edit.vue'),
+    path: '/administracion/companias/create',
+    component: require('./components/administracion/companias/Create.vue'),
     meta: {title: 'Compañias'}
 },
+// {
+//     path: '/administracion/companias/:nombre',
+//     component: require('./components/administracion/companias/editar.vue'),
+//     meta: {title: 'Compañias'}
+// },
 {
     path: '/administracion/organizadores',
     component: require('./components/administracion/Organizadores.vue'),

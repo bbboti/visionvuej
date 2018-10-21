@@ -29,6 +29,10 @@ Route::get('/administracion/companias', function () {
     return view('layouts.master');
 });
 
+Route::get('/administracion/companias/create', function () {
+    return view('layouts.master');
+});
+
 Route::get('/administracion/organizadores', function () {
     return view('layouts.master');
 });

@@ -3,7 +3,8 @@
         <p>Companias</p>
             <div class="box">
                 <div class="box-header">
-                    <a href="" class="btn btn-success ">Crear</a>
+
+                    <router-link to="/administracion/companias/create" class="btn btn-success ">Crear</router-link>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
