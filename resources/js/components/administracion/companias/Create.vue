@@ -1,152 +1,194 @@
 <template>
     <div>
-        <p>Companias</p>
+
+        <h4>Crear Compania</h4>
      
         <div class="content">
+                        <form @submit.prevent="crearCompania">
+
                 <div class="row">
 <!-- ARREGLO BLOQUE -->
                         <div class="col-md-6">
-                                <div class="box box-primary">
-                                        <div class="box-header with-border">
-                                                <h3 class="box-title">COMPANIA</h3>
-                                        </div>
                                         <div class="box-body">
                                                 <div class="col-md-12">
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Nombre</label>
                                                                 <div class="col-md-9 mb-1">
-                                                                        <input type="text" class="form-control " name="nombre" value="" v-model="compania.nombre">
+                                                                        <input type="text" class="form-control form-control-sm" name="nombre" value="" v-model="compania.nombre">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Cuit</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="cuit" value="">
+                                                                        <input type="text" class="form-control mb-1 form-control-sm" name="cuit" value="" v-model="compania.cuit">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Direccion</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="direccion" value="">
+                                                                        <input type="text" class="form-control mb-1 form-control-sm" name="direccion" value="" v-model="compania.direccion">
                                                                 </div>
                                                         </div>
+
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Localidad</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="localidad_id" value="">
+                                                                <select name='localidad_id' class="form-control form-control-sm" value='localidad_id' v-model="compania.localidad_id" >
+                                                                        <option v-for="localidad in localidades" :key="localidad.id" v-bind:value='localidad.id' >{{localidad.nombre}}  / CP: {{localidad.codigo_postal}}</option>
+                                                                </select>
                                                                 </div>
                                                         </div>
+                                        
                                                 </div>
                                         </div>
-                                        <div class="box-footer"></div>
-                                </div>
                         </div>
                         <div class="col-md-6">
-                                <div class="box box-primary">
-                                        <div class="box-header with-border">
-                                                <h3 class="box-title"></h3>
-                                        </div>
                                         <div class="box-body">
                                                 <div class="col-md-12">
                                                         <div class="form-group">
-                                                                <label class="control-label col-sm-3">Cod. Libros Rubricados</label>
+                                                                <label class="control-label col-sm-9">Cod. Libros Rubricados</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="codigo_lr" value="">
+                                                                        <input type="text" class="form-control mb-1 form-control-sm" name="codigo_lr" value="" v-model="compania.codigo_lr" >
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="col-sm-9 control-label">Color Principal</label>
-                                                                <div class="col-sm-3 mb-1">
-                                                                        <input type="text" class="form-control mb-1" name="color">
+                                                                <div class="col-md-9 input-group my-colorpicker2">
+                                                                        <input type="text" class="form-control mb-1 form-control-sm" name="color" v-model="compania.color" >
+                                                                        <div class="input-group-append">
+                                                                                <span class="input-group-text form-control-sm"><i class="fa fa-square"></i></span>
+                                                                        </div>
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
-                                                                <label class="col-sm-9 control-label">Activo</label>
-                                                                <div class="col-sm-3 mb-1">
-                                                                        <input type="checkbox"  value="1" name="activo" checked>
+                                                                <label class="col-sm-9 control-label">Activa</label>
+                                                                <div class="col-md-9">
+                                                                        <input type="checkbox" v-model="compania.activo"  value="1" name="activo" checked>
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
-                                                                <label for="foto_registro" class="col-sm-3 control-label">Logo</label>
-                                                                <div class="col-sm-9">
-                                                                        <input type="file" class="form-control" id="" name="logo">
+                                                                <label for="logo" class="col-sm-3 control-label">Logo</label>
+                                                                <div class="col-md-9">
+                                                                        <input type="file" class="form-control form-control-sm" id="" name="logo">
                                                                 </div>
                                                         </div>
                                                 </div>
-                                        <div class="box-footer"></div>
                                         </div>
-                                </div>
                         </div>
 <!-- SEGUNDO BLOQUE -->
-                        <div class="col-md-6">
-                                <div class="box box-primary">
-                                        <div class="box-header with-border">
-                                                <h3 class="box-title">Telefonos</h3>
-                                        </div>
+
+
+<!-- ARREGLO BLOQUE -->
+                <div class="card-body">
+                        <h5>Informacion de Contacto</h5>
+                <div class="row">
+                <div class="col-md-6">
                                         <div class="box-body">
                                                 <div class="col-md-12">
+
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Telefono</label>
-                                                                <div class="col-md-9 mb-1">
-                                                                        <input type="text" class="form-control " name="telefono_1" value="">
+                                                                <div class="input-group col-md-9 mb-1">
+                                                                        <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="fa fa-mobile-alt"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control form-control-sm" name="telefono_1" v-model="compania.telefono_1">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="control-label col-sm-3">Telefono Grua</label>
-                                                                <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="telefono_aux" value="">
+                                                                <div class="input-group col-md-9 mb-1">
+                                                                        <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control form-control-sm" name="telefono_aux" v-model="compania.telefono_aux">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
-                                                                <label class="control-label col-sm-3">Telefono Siniestros</label>
-                                                                <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="telefono_siniestros" value="">
+                                                                <label class="control-label col-sm-6">Telefono Siniestros</label>
+                                                                <div class="input-group col-md-9 mb-1">
+                                                                        <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control form-control-sm" name="telefono_siniestros" v-model="compania.telefono_siniestros">
                                                                 </div>
                                                         </div>
                                                 </div>
                                         </div>
-                                        <div class="box-footer"></div>
-                                </div>
                         </div>
                         <div class="col-md-6">
-                                <div class="box box-primary">
-                                        <div class="box-header with-border">
-                                                <h3 class="box-title">Emails</h3>
-                                        </div>
                                         <div class="box-body">
                                                 <div class="col-md-12">
                                                         <div class="form-group">
-                                                                <label class="control-label col-sm-3">Email Emision</label>
-                                                                <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="email_emision" value="">
+                                                                <label class="control-label col-sm-6">Email Emision</label>
+                                                                <div class="input-group col-md-9 mb-1">
+                                                                        <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control form-control-sm" name="email_emision" v-model="compania.email_emision">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
-                                                                <label class="control-label col-sm-3">Email Siniestros</label>
-                                                                <div class="col-md-9">
-                                                                        <input type="text" class="form-control mb-1" name="email_siniestros" value="">
+                                                                <label class="control-label col-sm-6">Email Siniestros</label>
+                                                                <div class="input-group col-md-9 mb-1">
+                                                                        <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control form-control-sm" name="email_siniestros" v-model="compania.email_siniestros">
                                                                 </div>
                                                         </div>
                                                 </div>
                                         </div>
-                                        <div class="box-footer"></div>
-                                </div>
                         </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-</div>
+                </div>
+
+                        
+<!-- SEGUNDO BLOQUE -->
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+        </div>
 </div>
 </template>
 <script>
     export default {
         data(){
             return{
-                    compania:{}
-            }
+                    compania:{
+                            activo:true
+                    },
+                    localidades:{},
+            };
+        },
+        methods:{
+                crearCompania() {
+                        let self = this;
+                        axios
+                        .post(
+                                "http://127.0.0.1:8000/api/administracion/companias",
+                                self.compania
+                        )
+                        .then(() =>{
+                        this.compania = {};
+                        this.compania.activo = true;
+                        router.push("http://127.0.0.1:8000/administracion/companias")                        
+                        })
+                        .catch(e=> console.log(e));
+                },
+                cargarLocalidades() {
+                        let self = this;
+                        axios
+                        .get("http://127.0.0.1:8000/api/localidades")
+                                .then(function(response) {
+                                console.log(response.data.data);
+                                self.localidades = response.data.data;
+                        });
+                }
+                        
         },
         created() {
-        //     let self = this
-        //     axios.get('http://127.0.0.1:8000/api/administracion/companias/'+ this.nombre).then(({data})=>(this.compania = data.data));
+                    this.cargarLocalidades();
 
         }
     };

@@ -15,18 +15,18 @@ class Companias extends Migration
     {
         Schema::create('companias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('cuit');
-            $table->string('direccion');
-            $table->string('localidad_id');
-            $table->string('telefono_1');
-            $table->string('telefono_aux');
-            $table->string('telefono_siniestros');
-            $table->string('email_emision');
-            $table->string('email_siniestros');
-            $table->integer('codigo_lr');
+            $table->string('nombre')->nullable();
+            $table->string('cuit')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('localidad_id')->nullable();
+            $table->string('telefono_1')->nullable();
+            $table->string('telefono_aux')->nullable();
+            $table->string('telefono_siniestros')->nullable();
+            $table->string('email_emision')->nullable();
+            $table->string('email_siniestros')->nullable();
+            $table->integer('codigo_lr')->nullable();
             $table->string('logo')->nullable();
-            $table->string('activo');
+            $table->string('activo')->nullable();
             $table->string('color')->nullable();
             $table->timestamps();
         });

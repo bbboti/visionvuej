@@ -23,5 +23,8 @@ Route::Resource('/administracion/companias', 'CompaniaController');
 Route::Resource('/administracion/organizadores', 'OrganizadorController');
 Route::Resource('/administracion/productores', 'ProductorController');
 Route::Resource('/localidades', 'LocalidadController');
+Route::Resource('/codigoorganizador', 'CodigoOrganizadorController');
+Route::Resource('/codigoproductor', 'CodigoProductorController');
+Route::Resource('/cobertura', 'CoberturaController');
 
 

@@ -115,7 +115,7 @@
                                                 <div class="form-group">
                                                         <label class="control-label">Activo</label>
                                                         <div class="">
-                                                            <input type="checkbox" v-model="organizador.activo"  value="0" name="activo" >
+                                                            <input type="checkbox" v-model="organizador.activo"  value="1" name="activo" >
                                                         </div>
                                                 </div>  
                                         </div>
@@ -140,12 +140,14 @@ export default {
   data() {
     return {
       organizadores: {},
-      organizador: {}
+      organizador: {
+              activo:true
+      }
     };
   },
   methods: {
     crearOrganizador() {
-      console.log(this.organizador);
+//       console.log(this.organizador);
       let self = this;
       axios
         .post(
@@ -155,6 +157,7 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.organizador = {};
+          this.organizador.activo = true;
           this.cargarOrganizadores();
         })
         .catch(e => console.log(e));

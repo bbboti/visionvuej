@@ -45,7 +45,7 @@
         </div>
 
   <!-- modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <form @submit.prevent="crearCliente">
@@ -61,7 +61,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Tipo de Persona </label>
-                  <select class="form-control form-control-sm select2" style="width: 100%;" name='condicion_fiscal' v-model="cliente.condicion_fiscal">
+                  <select class="form-control form-control-sm select2" style="width: 100%;" name='condicion_fiscal' v-model="cliente.tipo_persona">
                         <option selected="selected">Persona Fisica</option>
                         <option>Persona Juridica</option>
                   </select>
@@ -91,17 +91,15 @@
                             <input type="text" class="form-control form-control-sm" id="nro_dni" name="nro_dni" placeholder="Nro" v-model="cliente.nro_dni">
                     </div>
 
-                    <label>Sexo</label>
-
                 <div class="form-group">
                     <div class="form-check form-check-inline">
                     <label class="form-check-label"> Masculino  
-                        <input class="form-check-input" type="radio" name="sexo" value="masculino"> 
+                        <input class="form-check-input" type="radio" id="masculino" name="sexo" v-model="cliente.sexo" value='M' > 
                     </label>
                     </div>
                     <div class="form-check form-check-inline">
                     <label class="form-check-label"> Femenino 
-                        <input class="form-check-input" type="radio" name="sexo" value="femenino"> 
+                        <input class="form-check-input" type="radio" id="femenino" name="sexo" v-model="cliente.sexo" value='F' > 
                     </label>
                     </div>
                 </div>
@@ -130,14 +128,14 @@
                         <label>CUIT</label>
                             <input type="text" class="form-control form-control-sm mb-1" name="cuit" v-model="cliente.cuit">
                     </div>
-
+                    <label>Email</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                         </div>
                             <input name="email" type="email" class="form-control form-control-sm" placeholder="Email" v-model="cliente.email">
                     </div>
-
+                    <label>Email Alternativo</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope"></i></span>
@@ -189,7 +187,7 @@
                 <div class="form-group">
                     <label>Localidad</label>
                         <select name='localidad_id' class="form-control form-control-sm" v-model="cliente.localidad_id">
-                            <option v-for="localidad in localidades" :key="localidad.id" value='localidad.id' >{{localidad.nombre}}  / CP: {{localidad.codigo_postal}}</option>
+                            <option v-for="localidad in localidades" :key="localidad.id" v-bind:value='localidad.id' >{{localidad.nombre}}  / CP: {{localidad.codigo_postal}}</option>
                         </select>
                 </div>
 
@@ -256,7 +254,7 @@
                 <div class="form-group">
                     <div>
                         <select name='productor_id' class="form-control form-control-sm mb-1 selectbuscador" v-model="cliente.productor_id">
-                            <option v-for="productor in productores" :key="productor.id" value="productor.id">{{productor.apellido+" "+productor.nombre}}</option>
+                            <option v-for="productor in productores" :key="productor.id" v-bind:value="productor.id">{{productor.apellido+" "+productor.nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -331,8 +329,7 @@ export default {
   },
   methods: {
     crearCliente() {
-      console.log("hola");
-      console.log(this.cliente);
+    //   console.log(this.cliente);
       let self = this;
       axios
         .post(
