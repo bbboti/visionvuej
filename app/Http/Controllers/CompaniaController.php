@@ -100,25 +100,9 @@ class CompaniaController extends Controller
     public function show($nombre)
     {
         $compania = Companias::where('nombre', $nombre)->get();
-        $codigo_organizador = CodigoOrganizador::all();
-        // $codigo_organizador = CodigoOrganizador::where('compania_id', $id)->get();
-
-        // $coberturas = Coberturas::whereHas('companias', function ($query) use ($id) {
-        //     $query->where('compania_id', 'like', $id);
-        // })->get();
-
-        // $codigo_organizadores = CodigoOrganizador::whereHas('companias', function ($query) use ($id) {
-        //     $query->where('compania_id', 'like', $id);
-        // })->get();
-
-        // $codigo_productores = CodigoProductor::whereHas('companias', function ($query) use ($id) {
-        //     $query->where('compania_id', 'like', $id);
-        // })->get();
+       
         
         return new CompaniasResource($compania);
-
-
-
 
     }
 
@@ -130,22 +114,7 @@ class CompaniaController extends Controller
      */
     public function edit($id)
     {
-        // $companias = Companias::find($id);
-        // $productores = Productores::All();
-        // $localidades = Localidades::All();
-        // $organizadores = Organizadores::All();
-
-        // $coberturas = Coberturas::whereHas('companias', function ($query) use ($id) {
-        //     $query->where('compania_id', 'like', $id);
-        // })->get();
-
-        // $codigo_organizadores = CodigoOrganizador::whereHas('companias', function ($query) use ($id) {
-        //     $query->where('compania_id', 'like', $id);
-        // })->get();
-
-        // $codigo_productores = Codigoproductor::whereHas('companias', function ($query) use ($id) {
-        //     $query->where('compania_id', 'like', $id);
-        // })->get();
+    
 
     }
 

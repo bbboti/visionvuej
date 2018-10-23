@@ -31,7 +31,7 @@
                                             <td> {{productor.telefono_2}} </td>
                                             <td> {{productor.activo}} </td>
                                             <td>
-                                                <a href="" class="fa fa-edit"></a>
+                                                <a @click.prevent="modoEdicion(productor.id)" class="fa fa-edit"></a>
                                                 <a href="" class="fa fa-trash"></a>
                                             </td>
                                         </tr>
@@ -125,8 +125,9 @@
                                         </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Editar</button>
             </div>
             </form>
             </div>
@@ -147,8 +148,16 @@ export default {
     return {
       productores: {},
       productor: {
+              nombre:"",
+              apellido:"",
+              cuit:"",
+              matricula:"",
+              email:"",
+              telefono_1: "",
+              telefono_2: "",
               activo:true
       },
+      modoEditar: false,
     };
   },
   methods: {
@@ -167,6 +176,16 @@ export default {
           this.cargarProductores();
         })
         .catch(e => console.log(e));
+    },
+    modoEdicion(id){
+        this.modoEditar = true,
+        $("#modal").modal("show");
+        let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/productores/" + id)
+        .then(function(response) {
+          self.productor = response.data.data;})
+          .catch(e=>console.log(e));
     },
     cargarProductores() {
       let self = this;

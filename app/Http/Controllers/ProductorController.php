@@ -77,7 +77,9 @@ class ProductorController extends Controller
      */
     public function show($id)
     {
-        //
+        $productor = Productores::findOrFail($id);
+
+        return new ProductoresResource($productor);
     }
 
     /**
