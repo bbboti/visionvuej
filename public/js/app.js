@@ -55548,7 +55548,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         email: "",
         telefono_1: "",
         telefono_2: "",
-        activo: true
+        activo: ""
       },
       modoEditar: false
     };
@@ -55569,13 +55569,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return console.log(e);
       });
     },
+    vaciarForm: function vaciarForm() {
+      this.productor = {};
+    },
+    updateProductor: function updateProductor(id) {
+      var _this2 = this;
+
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/administracion/productores/" + id, this.productor).then(function () {
+        $("#modal").modal("hide");
+        _this2.cargarProductores();
+        console.log('listo!');
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
     modoEdicion: function modoEdicion(id) {
       this.modoEditar = true, $("#modal").modal("show");
       var self = this;
-      axios.get("http://127.0.0.1:8000/api/productores/" + id).then(function (response) {
+      axios.get("http://127.0.0.1:8000/api/administracion/productores/" + id).then(function (response) {
         self.productor = response.data.data;
       }).catch(function (e) {
         return console.log(e);
+      });
+    },
+    borrarProductor: function borrarProductor(id) {
+      var _this3 = this;
+
+      axios.delete("http://127.0.0.1:8000/api/administracion/productores/" + id).then(function () {
+        _this3.cargarProductores();
+        console.log('borado!');
       });
     },
     cargarProductores: function cargarProductores() {
@@ -55602,7 +55625,26 @@ var render = function() {
     _c("p", [_vm._v("Productores")]),
     _vm._v(" "),
     _c("div", { staticClass: "box" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "box-header" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-success",
+            attrs: {
+              href: "",
+              "data-toggle": "modal",
+              "data-target": "#modal"
+            },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.vaciarForm()
+              }
+            }
+          },
+          [_vm._v("Crear")]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "box-body" }, [
         _c("div", { staticClass: "row" }, [
@@ -55618,7 +55660,7 @@ var render = function() {
                 }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -55645,9 +55687,9 @@ var render = function() {
                           _vm._v(" " + _vm._s(productor.telefono_2) + " ")
                         ]),
                         _vm._v(" "),
-                        _c("td", [
-                          _vm._v(" " + _vm._s(productor.activo) + " ")
-                        ]),
+                        productor.activo == 1
+                          ? _c("td", [_vm._v("SI")])
+                          : _c("td", [_vm._v("NO")]),
                         _vm._v(" "),
                         _c("td", [
                           _c("a", {
@@ -55662,7 +55704,12 @@ var render = function() {
                           _vm._v(" "),
                           _c("a", {
                             staticClass: "fa fa-trash",
-                            attrs: { href: "" }
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.borrarProductor(productor.id)
+                              }
+                            }
                           })
                         ])
                       ]
@@ -55700,12 +55747,14 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.crearProductor($event)
+                      _vm.modoEditar
+                        ? _vm.updateProductor(_vm.productor.id)
+                        : _vm.crearProductor
                     }
                   }
                 },
                 [
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "row" }, [
@@ -55893,7 +55942,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(3),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -55932,7 +55981,7 @@ var render = function() {
                           _c("label", [_vm._v("Telefono")]),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(4),
+                            _vm._m(3),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -55971,7 +56020,7 @@ var render = function() {
                           _c("label", [_vm._v("Celular")]),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(5),
+                            _vm._m(4),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -56021,14 +56070,14 @@ var render = function() {
                                   expression: "productor.activo"
                                 }
                               ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "1",
-                                name: "activo"
-                              },
+                              attrs: { type: "checkbox", name: "activo" },
                               domProps: {
+                                value: _vm.productor.activo,
                                 checked: Array.isArray(_vm.productor.activo)
-                                  ? _vm._i(_vm.productor.activo, "1") > -1
+                                  ? _vm._i(
+                                      _vm.productor.activo,
+                                      _vm.productor.activo
+                                    ) > -1
                                   : _vm.productor.activo
                               },
                               on: {
@@ -56037,7 +56086,7 @@ var render = function() {
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
-                                    var $$v = "1",
+                                    var $$v = _vm.productor.activo,
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
@@ -56072,15 +56121,6 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Cerrar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
                         directives: [
                           {
                             name: "show",
@@ -56109,7 +56149,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Editar")]
+                      [_vm._v("Guardar")]
                     )
                   ])
                 ]
@@ -56122,21 +56162,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success",
-          attrs: { href: "", "data-toggle": "modal", "data-target": "#modal" }
-        },
-        [_vm._v("Crear")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

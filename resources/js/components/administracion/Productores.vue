@@ -3,7 +3,7 @@
         <p>Productores</p>
             <div class="box">
                 <div class="box-header">
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal">Crear</a>
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -29,10 +29,11 @@
                                             <td> {{productor.cuit}} </td>
                                             <td> {{productor.email}} </td>
                                             <td> {{productor.telefono_2}} </td>
-                                            <td> {{productor.activo}} </td>
+                                            <td v-if="productor.activo == 1">SI</td>
+                                            <td v-else>NO</td>
                                             <td>
                                                 <a @click.prevent="modoEdicion(productor.id)" class="fa fa-edit"></a>
-                                                <a href="" class="fa fa-trash"></a>
+                                                <a @click.prevent="borrarProductor(productor.id)" class="fa fa-trash"></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -46,7 +47,7 @@
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="crearProductor">
+        <form @submit.prevent="modoEditar ? updateProductor(productor.id) : crearProductor">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Productor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -118,16 +119,15 @@
                                                 <div class="form-group">
                                                         <label class="control-label">Activo</label>
                                                         <div class="">
-                                                            <input type="checkbox" v-model="productor.activo"  value="1" name="activo">
+                                                            <input type="checkbox" v-model="productor.activo"  :value="productor.activo" name="activo">
                                                         </div>
                                                 </div>  
                                         </div>
                                         </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
-                <button type="submit" v-show="modoEditar" class="btn btn-primary">Editar</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
             </div>
             </form>
             </div>
@@ -155,7 +155,7 @@ export default {
               email:"",
               telefono_1: "",
               telefono_2: "",
-              activo:true
+              activo:"",
       },
       modoEditar: false,
     };
@@ -177,15 +177,35 @@ export default {
         })
         .catch(e => console.log(e));
     },
+    vaciarForm(){
+        this.productor = {}
+    },
+    updateProductor(id){
+        let self = this;
+      axios
+      .put("http://127.0.0.1:8000/api/administracion/productores/" + id, this.productor)
+      .then(()=>{   
+            $("#modal").modal("hide");
+            this.cargarProductores();
+          console.log('listo!')
+      }).catch(e=>(console.log(e)))
+    },
     modoEdicion(id){
         this.modoEditar = true,
         $("#modal").modal("show");
         let self = this;
       axios
-        .get("http://127.0.0.1:8000/api/productores/" + id)
+        .get("http://127.0.0.1:8000/api/administracion/productores/" + id)
         .then(function(response) {
           self.productor = response.data.data;})
           .catch(e=>console.log(e));
+    },
+    borrarProductor(id){
+        axios.delete("http://127.0.0.1:8000/api/administracion/productores/" + id)
+        .then(()=>{
+            this.cargarProductores();
+            console.log('borado!')
+        })
     },
     cargarProductores() {
       let self = this;

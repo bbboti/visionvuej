@@ -38,11 +38,11 @@ class ProductorController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request['activo'] == 1) {
-            $activo = "SI"; 
-        } else {
-           $activo = "NO";
-        }
+        // if ($request['activo'] == 1) {
+        //     $activo = "SI"; 
+        // } else {
+        //    $activo = "NO";
+        // }
         
         $this->validate($request, [
             'nombre' => 'required',
@@ -62,7 +62,7 @@ class ProductorController extends Controller
             'email' => $request->input('email'),
             'telefono_1' => $request->input('telefono_1'),
             'telefono_2' => $request->input('telefono_2'),
-            'activo' => $activo,
+            'activo' => $request->input('activo'),
         ]);
 
         return (['message' => 'guardado']);
@@ -101,8 +101,24 @@ class ProductorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        // if ($request['activo'] == 1) {
+        //     $activo = "SI"; 
+        // } else {
+        //    $activo = "NO";
+        // }
+
+        $productor = Productores::find($id);
+        $productor->update([
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'cuit' => $request->input('cuit'),
+            'matricula' => $request->input('matricula'),
+            'email' => $request->input('email'),
+            'telefono_1' => $request->input('telefono_1'),
+            'telefono_2' => $request->input('telefono_2'),
+            'activo' => $request->input('activo'),
+        ]);
     }
 
     /**
@@ -113,6 +129,10 @@ class ProductorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $productor = Productores::find($id);
+
+        $productor->delete();
+
+        return ['message'=>'Eliminado'];
     }
 }
