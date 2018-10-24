@@ -50335,14 +50335,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       clientes: {},
-      cliente: {},
       productores: {},
-      localidades: {}
+      localidades: {},
+      cliente: {
+        tipo_persona: "",
+        nombre: "",
+        apellido: "",
+        razon_social: "",
+        tipo_doc: "",
+        nro_dni: "",
+        sexo: "",
+        nacimiento: "",
+        condicion_fiscal: "",
+        cuit: "",
+        registro: "",
+        vencimiento_registro: "",
+        email: "",
+        email_alt: "",
+        direccion: "",
+        direccion_nro: "",
+        direccion_piso: "",
+        direccion_depto: "",
+        localidad_id: "",
+        barrio_cerrado: "",
+        lote: "",
+        celular: "",
+        telefono_1: "",
+        telefono_2: "",
+        img_registro: "",
+        observaciones_1: "",
+        obeservaciones_2: "",
+        productor_id: ""
+      },
+      modoEditar: false
     };
   },
 
@@ -50358,6 +50389,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.cargarClientes();
       }).catch(function (e) {
         return console.log(e);
+      });
+    },
+    vaciarForm: function vaciarForm() {
+      this.cliente = {};
+    },
+    updateCliente: function updateCliente(id) {
+      var _this2 = this;
+
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/clientes/" + id, this.cliente).then(function () {
+        $("#modal").modal("hide");
+        _this2.cargarClientes();
+        console.log('listo!');
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    modoEdicion: function modoEdicion(id) {
+      this.modoEditar = true, $("#modal").modal("show");
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes/" + id).then(function (response) {
+        self.cliente = response.data.data;
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    borrarCliente: function borrarCliente(id) {
+      var _this3 = this;
+
+      axios.delete("http://127.0.0.1:8000/api/clientes/" + id).then(function () {
+        _this3.cargarClientes();
+        console.log('borado!');
       });
     },
     cargarClientes: function cargarClientes() {
@@ -50399,7 +50462,26 @@ var render = function() {
     _c("p", [_vm._v("Clientes")]),
     _vm._v(" "),
     _c("div", { staticClass: "box" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "box-header" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-success",
+            attrs: {
+              href: "",
+              "data-toggle": "modal",
+              "data-target": "#modal"
+            },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.vaciarForm()
+              }
+            }
+          },
+          [_vm._v("Crear")]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "box-body" }, [
         _c("div", { staticClass: "row" }, [
@@ -50415,7 +50497,7 @@ var render = function() {
                 }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -50440,7 +50522,27 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(cliente.productor_id) + " ")]),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _c("td", [
+                          _c("a", {
+                            staticClass: "fa fa-edit",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.modoEdicion(cliente.id)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("a", {
+                            staticClass: "fa fa-trash",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.borrarCliente(cliente.id)
+                              }
+                            }
+                          })
+                        ])
                       ]
                     )
                   })
@@ -50473,12 +50575,14 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.crearCliente($event)
+                    _vm.modoEditar
+                      ? _vm.updateCliente(_vm.cliente.id)
+                      : _vm.crearCliente
                   }
                 }
               },
               [
-                _vm._m(3),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "row" }, [
@@ -50789,7 +50893,7 @@ var render = function() {
                         _c("label", [_vm._v("Fecha de Nacimiento")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(4),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -50905,7 +51009,7 @@ var render = function() {
                       _c("label", [_vm._v("Email")]),
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group mb-3" }, [
-                        _vm._m(5),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -50941,7 +51045,7 @@ var render = function() {
                       _c("label", [_vm._v("Email Alternativo")]),
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group mb-3" }, [
-                        _vm._m(6),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -51315,7 +51419,7 @@ var render = function() {
                         _c("label", [_vm._v("Celular")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(7),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -51349,7 +51453,7 @@ var render = function() {
                         _c("label", [_vm._v("Telefono 1")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(8),
+                          _vm._m(6),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -51383,7 +51487,7 @@ var render = function() {
                         _c("label", [_vm._v("Telefono 2")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(9),
+                          _vm._m(7),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -51560,7 +51664,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(10)
+                      _vm._m(8)
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-6" }, [
@@ -51568,7 +51672,7 @@ var render = function() {
                         _c("label", [_vm._v("Vencimiento")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(11),
+                          _vm._m(9),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -51613,7 +51717,41 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(12)
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.modoEditar,
+                          expression: "!modoEditar"
+                        }
+                      ],
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Crear")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.modoEditar,
+                          expression: "modoEditar"
+                        }
+                      ],
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Guardar")]
+                  )
+                ])
               ]
             )
           ])
@@ -51623,25 +51761,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success ",
-          attrs: {
-            href: "",
-            "data-toggle": "modal",
-            "data-target": ".bd-example-modal-lg"
-          }
-        },
-        [_vm._v("Crear")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51668,19 +51787,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "fa fa-edit", attrs: { href: "" } }),
-      _vm._v(" "),
-      _c("a", { staticClass: "fa fa-trash", attrs: { href: "" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h5", { staticClass: "modal-title", attrs: { id: "modalLabel" } }, [
-        _vm._v("Crear Cliente")
+        _vm._v("Cliente")
       ]),
       _vm._v(" "),
       _c(
@@ -51801,18 +51910,6 @@ var staticRenderFns = [
       _c("span", { staticClass: "input-group-text" }, [
         _c("i", { staticClass: "fa fa-calendar" })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Crear")]
-      )
     ])
   }
 ]
@@ -53367,6 +53464,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -53385,7 +53529,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         email_siniestros: ""
       },
       codigo_organizadores: {},
-      codigo_organizador: {},
+      codigo_organizador: {
+        codigo_organizador: "",
+        organizador_id: "",
+        compania_id: ""
+      },
       codigo_productor: {},
       codigo_productores: {},
       cobertura: {},
@@ -53728,15 +53876,14 @@ var render = function() {
                               expression: "compania.activo"
                             }
                           ],
-                          attrs: {
-                            type: "checkbox",
-                            value: "1",
-                            name: "activo",
-                            checked: ""
-                          },
+                          attrs: { type: "checkbox", name: "activo" },
                           domProps: {
+                            value: _vm.compania.activo,
                             checked: Array.isArray(_vm.compania.activo)
-                              ? _vm._i(_vm.compania.activo, "1") > -1
+                              ? _vm._i(
+                                  _vm.compania.activo,
+                                  _vm.compania.activo
+                                ) > -1
                               : _vm.compania.activo
                           },
                           on: {
@@ -53745,7 +53892,7 @@ var render = function() {
                                 $$el = $event.target,
                                 $$c = $$el.checked ? true : false
                               if (Array.isArray($$a)) {
-                                var $$v = "1",
+                                var $$v = _vm.compania.activo,
                                   $$i = _vm._i($$a, $$v)
                                 if ($$el.checked) {
                                   $$i < 0 &&
@@ -54033,7 +54180,30 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "box box-primary" }, [
-          _vm._m(7),
+          _c("div", { staticClass: "box-header with-border" }, [
+            _c("h5", { staticClass: "box-title" }, [
+              _vm._v("Codigos de Organizador")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-success",
+                attrs: {
+                  href: "",
+                  "data-toggle": "modal",
+                  "data-target": "#modalcodigoorganizador"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.vaciarForm()
+                  }
+                }
+              },
+              [_vm._v("Crear")]
+            )
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "box-body" }, [
             _c("div", { staticClass: "row" }, [
@@ -54050,7 +54220,7 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._m(8),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -54089,7 +54259,7 @@ var render = function() {
                               _vm._v(_vm._s(codigo_organizador.activo))
                             ]),
                             _vm._v(" "),
-                            _vm._m(9, true)
+                            _vm._m(8, true)
                           ]
                         )
                       })
@@ -54103,6 +54273,325 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "box-footer" })
       ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalcodigoorganizador",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.modoEditar
+                          ? _vm.updateCodigo_organizador(
+                              _vm.codigo_organizador.id
+                            )
+                          : _vm.crearCodigo_organizador
+                      }
+                    }
+                  },
+                  [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "nombre" }
+                              },
+                              [_vm._v("Organizadores")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.codigo_organizador.id,
+                                      expression: "codigo_organizador.id"
+                                    }
+                                  ],
+                                  staticClass: "form-control form-control-sm",
+                                  attrs: {
+                                    name: "codigo_organizador_id",
+                                    value: "codigo_organizador_id"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.codigo_organizador,
+                                        "id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.codigo_organizadores, function(
+                                  codigo_organizador
+                                ) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: codigo_organizador.id,
+                                      domProps: { value: codigo_organizador.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(codigo_organizador.apellido) +
+                                          " " +
+                                          _vm._s(codigo_organizador.nombre) +
+                                          " (Matricula:" +
+                                          _vm._s(codigo_organizador.matricula) +
+                                          ") "
+                                      )
+                                    ]
+                                  )
+                                })
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "control-label",
+                                attrs: { for: "apellido" }
+                              },
+                              [_vm._v("Compañia")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.codigo_organizador.compania_id,
+                                    expression: "codigo_organizador.compania_id"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "text",
+                                  id: "compania_id",
+                                  name: "compania_id",
+                                  placeholder: ""
+                                },
+                                domProps: {
+                                  value: _vm.codigo_organizador.compania_id
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.codigo_organizador,
+                                      "compania_id",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "control-label",
+                                attrs: { for: "cuit" }
+                              },
+                              [_vm._v("Codigo Organizador")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.codigo_organizador.codigo_organizador,
+                                    expression:
+                                      "codigo_organizador.codigo_organizador"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "text",
+                                  id: "codigo_organizador",
+                                  name: "codigo_organizador",
+                                  placeholder: ""
+                                },
+                                domProps: {
+                                  value:
+                                    _vm.codigo_organizador.codigo_organizador
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.codigo_organizador,
+                                      "codigo_organizador",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { staticClass: "control-label" }, [
+                              _vm._v("Activo")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.codigo_organizador.activo,
+                                    expression: "codigo_organizador.activo"
+                                  }
+                                ],
+                                attrs: { type: "checkbox", name: "activo" },
+                                domProps: {
+                                  value: _vm.codigo_organizador.activo,
+                                  checked: Array.isArray(
+                                    _vm.codigo_organizador.activo
+                                  )
+                                    ? _vm._i(
+                                        _vm.codigo_organizador.activo,
+                                        _vm.codigo_organizador.activo
+                                      ) > -1
+                                    : _vm.codigo_organizador.activo
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = _vm.codigo_organizador.activo,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = _vm.codigo_organizador.activo,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.codigo_organizador,
+                                            "activo",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.codigo_organizador,
+                                            "activo",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(
+                                        _vm.codigo_organizador,
+                                        "activo",
+                                        $$c
+                                      )
+                                    }
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.modoEditar,
+                              expression: "!modoEditar"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Crear")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.modoEditar,
+                              expression: "modoEditar"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "box box-primary" }, [
@@ -54322,33 +54811,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h5", { staticClass: "box-title" }, [
-        _vm._v("Codigos de Organizador")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success pull-right",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#crearcodigoorganizador"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                        Crear\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", { attrs: { role: "row" } }, [
         _c("th", [_vm._v("Apellido")]),
@@ -54373,6 +54835,29 @@ var staticRenderFns = [
       _c("a", { staticClass: "fa fa-edit", attrs: { href: "" } }),
       _vm._v(" "),
       _c("a", { staticClass: "fa fa-trash", attrs: { href: "" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "modalLabel" } }, [
+        _vm._v("Productor")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
@@ -54691,14 +55176,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       organizadores: {},
       organizador: {
-        activo: true
-      }
+        nombre: "",
+        apellido: "",
+        cuit: "",
+        matricula: "",
+        email: "",
+        telefono_1: "",
+        telefono_2: "",
+        activo: ""
+      },
+      modoEditar: false
     };
   },
 
@@ -54715,6 +55209,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.cargarOrganizadores();
       }).catch(function (e) {
         return console.log(e);
+      });
+    },
+    vaciarForm: function vaciarForm() {
+      this.organizador = {};
+    },
+    updateOrganizador: function updateOrganizador(id) {
+      var _this2 = this;
+
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/administracion/organizadores/" + id, this.organizador).then(function () {
+        $("#modal").modal("hide");
+        _this2.cargarOrganizadores();
+        console.log('listo!');
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    modoEdicion: function modoEdicion(id) {
+      this.modoEditar = true, $("#modal").modal("show");
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/organizadores/" + id).then(function (response) {
+        self.organizador = response.data.data;
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    borrarOrganizador: function borrarOrganizador(id) {
+      var _this3 = this;
+
+      axios.delete("http://127.0.0.1:8000/api/administracion/organizadores/" + id).then(function () {
+        _this3.cargarOrganizadores();
+        console.log('borado!');
       });
     },
     cargarOrganizadores: function cargarOrganizadores() {
@@ -54741,7 +55267,26 @@ var render = function() {
     _c("p", [_vm._v("Organizadores")]),
     _vm._v(" "),
     _c("div", { staticClass: "box" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "box-header" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-success",
+            attrs: {
+              href: "",
+              "data-toggle": "modal",
+              "data-target": "#modal"
+            },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.vaciarForm()
+              }
+            }
+          },
+          [_vm._v("Crear")]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "box-body" }, [
         _c("div", { staticClass: "row" }, [
@@ -54757,7 +55302,7 @@ var render = function() {
                 }
               },
               [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -54788,11 +55333,31 @@ var render = function() {
                           _vm._v(" " + _vm._s(organizador.telefono_2) + " ")
                         ]),
                         _vm._v(" "),
-                        _c("td", [
-                          _vm._v(" " + _vm._s(organizador.activo) + " ")
-                        ]),
+                        organizador.activo == 1
+                          ? _c("td", [_vm._v("SI")])
+                          : _c("td", [_vm._v("NO")]),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _c("td", [
+                          _c("a", {
+                            staticClass: "fa fa-edit",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.modoEdicion(organizador.id)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("a", {
+                            staticClass: "fa fa-trash",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.borrarOrganizador(organizador.id)
+                              }
+                            }
+                          })
+                        ])
                       ]
                     )
                   })
@@ -54828,12 +55393,14 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.crearOrganizador($event)
+                      _vm.modoEditar
+                        ? _vm.updateOrganizador(_vm.organizador.id)
+                        : _vm.crearOrganizador
                     }
                   }
                 },
                 [
-                  _vm._m(3),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "row" }, [
@@ -55021,7 +55588,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(4),
+                            _vm._m(2),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -55060,7 +55627,7 @@ var render = function() {
                           _c("label", [_vm._v("Telefono")]),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(5),
+                            _vm._m(3),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -55099,7 +55666,7 @@ var render = function() {
                           _c("label", [_vm._v("Celular")]),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group" }, [
-                            _vm._m(6),
+                            _vm._m(4),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -55149,14 +55716,14 @@ var render = function() {
                                   expression: "organizador.activo"
                                 }
                               ],
-                              attrs: {
-                                type: "checkbox",
-                                value: "1",
-                                name: "activo"
-                              },
+                              attrs: { type: "checkbox", name: "activo" },
                               domProps: {
+                                value: _vm.organizador.activo,
                                 checked: Array.isArray(_vm.organizador.activo)
-                                  ? _vm._i(_vm.organizador.activo, "1") > -1
+                                  ? _vm._i(
+                                      _vm.organizador.activo,
+                                      _vm.organizador.activo
+                                    ) > -1
                                   : _vm.organizador.activo
                               },
                               on: {
@@ -55165,7 +55732,7 @@ var render = function() {
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
-                                    var $$v = "1",
+                                    var $$v = _vm.organizador.activo,
                                       $$i = _vm._i($$a, $$v)
                                     if ($$el.checked) {
                                       $$i < 0 &&
@@ -55196,7 +55763,41 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(7)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.modoEditar,
+                            expression: "!modoEditar"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Crear")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.modoEditar,
+                            expression: "modoEditar"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  ])
                 ]
               )
             ])
@@ -55207,21 +55808,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success ",
-          attrs: { href: "", "data-toggle": "modal", "data-target": "#modal" }
-        },
-        [_vm._v("Crear")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -55242,16 +55828,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Edicion")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "fa fa-edit", attrs: { href: "" } }),
-      _vm._v(" "),
-      _c("a", { staticClass: "fa fa-trash", attrs: { href: "" } })
     ])
   },
   function() {
@@ -55305,27 +55881,6 @@ var staticRenderFns = [
       _c("span", { staticClass: "input-group-text" }, [
         _c("i", { staticClass: "fa fa-mobile-alt" })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Crear")]
-      )
     ])
   }
 ]
@@ -55391,9 +55946,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //

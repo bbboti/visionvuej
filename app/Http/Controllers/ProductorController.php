@@ -37,13 +37,7 @@ class ProductorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // if ($request['activo'] == 1) {
-        //     $activo = "SI"; 
-        // } else {
-        //    $activo = "NO";
-        // }
-        
+    {        
         $this->validate($request, [
             'nombre' => 'required',
             'apellido' => 'required',
@@ -102,12 +96,6 @@ class ProductorController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        // if ($request['activo'] == 1) {
-        //     $activo = "SI"; 
-        // } else {
-        //    $activo = "NO";
-        // }
-
         $productor = Productores::find($id);
         $productor->update([
             'nombre' => $request->input('nombre'),

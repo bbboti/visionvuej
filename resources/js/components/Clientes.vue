@@ -3,7 +3,7 @@
         <p>Clientes</p>
             <div class="box">
                 <div class="box-header">
-                    <a href="" class="btn btn-success " data-toggle="modal" data-target=".bd-example-modal-lg">Crear</a>
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -32,8 +32,8 @@
                                             <td>{{cliente.productor_id}} </td> 
                                             <!-- ver tema de mostrar la relacion -->
                                             <td>
-                                                <a href="" class="fa fa-edit"></a>
-                                                <a href="" class="fa fa-trash"></a>
+                                                <a @click.prevent="modoEdicion(cliente.id)" class="fa fa-edit"></a>
+                                                <a @click.prevent="borrarCliente(cliente.id)" class="fa fa-trash"></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -48,9 +48,9 @@
 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <form @submit.prevent="crearCliente">
+        <form @submit.prevent="modoEditar ? updateCliente(cliente.id) : crearCliente">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Crear Cliente</h5>
+        <h5 class="modal-title" id="modalLabel">Cliente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -306,7 +306,8 @@
 
     </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
             </div>
             </form>
             </div>
@@ -322,9 +323,39 @@ export default {
   data() {
     return {
       clientes: {},
-      cliente: {},
       productores: {},
       localidades: {},
+      cliente: {
+          tipo_persona:"",
+          nombre:"",
+          apellido:"",
+          razon_social:"",
+          tipo_doc:"",
+          nro_dni:"",
+          sexo:"",
+          nacimiento:"",
+          condicion_fiscal:"",
+          cuit:"",
+          registro:"",
+          vencimiento_registro:"",
+          email:"",
+          email_alt:"",
+          direccion:"",
+          direccion_nro:"",
+          direccion_piso:"",
+          direccion_depto:"",
+          localidad_id:"",
+          barrio_cerrado:"",
+          lote:"",
+          celular:"",
+          telefono_1:"",
+          telefono_2:"",
+          img_registro:"",
+          observaciones_1:"",
+          obeservaciones_2:"",
+          productor_id:"",
+      },
+    modoEditar: false,
     };
   },
   methods: {
@@ -342,6 +373,36 @@ export default {
           this.cargarClientes();
         })
         .catch(e => console.log(e));
+    },
+    vaciarForm(){
+        this.cliente = {}
+    },
+    updateCliente(id){
+        let self = this;
+      axios
+      .put("http://127.0.0.1:8000/api/clientes/" + id, this.cliente)
+      .then(()=>{   
+            $("#modal").modal("hide");
+            this.cargarClientes();
+          console.log('listo!')
+      }).catch(e=>(console.log(e)))
+    },
+    modoEdicion(id){
+        this.modoEditar = true,
+        $("#modal").modal("show");
+        let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/clientes/" + id)
+        .then(function(response) {
+          self.cliente = response.data.data;})
+          .catch(e=>console.log(e));
+    },
+    borrarCliente(id){
+        axios.delete("http://127.0.0.1:8000/api/clientes/" + id)
+        .then(()=>{
+            this.cargarClientes();
+            console.log('borado!')
+        })
     },
     cargarClientes() {
       let self = this;

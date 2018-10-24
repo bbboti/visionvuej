@@ -118,7 +118,9 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Clientes::findOrFail($id);
+
+        return new ClientesResource($cliente);
     }
 
     /**
@@ -141,7 +143,38 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cliente = Clientes::find($id);
+
+        $cliente->update([
+            'tipo_persona' => $request->input('tipo_persona'),
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'razon_social' => $request->input('razon_social'),
+            'tipo_doc' => $request->input('tipo_doc'),
+            'nro_dni' => $request->input('nro_dni'),
+            'sexo' => $request->input('sexo'),
+            'nacimiento' => $request->input('nacimiento'),
+            'condicion_fiscal' => $request->input('condicion_fiscal'),
+            'cuit' => $request->input('cuit'),
+            'registro' => $request->input('registro'),
+            'vencimiento_registro' => $request->input('vencimiento_registro'),
+            'email' => $request->input('email'),
+            'email_alt' => $request->input('email_alt'),
+            'direccion' => $request->input('direccion'),
+            'direccion_nro' => $request->input('direccion_nro'),
+            'direccion_piso' => $request->input('direccion_piso'),
+            'direccion_depto' => $request->input('direccion_depto'),
+            'localidad_id' => $request->input('localidad_id'),
+            'barrio_cerrado' => $request->input('barrio_cerrado'),
+            'lote' => $request->input('lote'),
+            'celular' => $request->input('celular'),
+            'telefono_1' => $request->input('telefono_1'),
+            'telefono_2' => $request->input('telefono_2'),
+            'img_registro' => "ejemplo",
+            'observaciones_1' => $request->input('observaciones_1'),
+            'observaciones_2' => $request->input('observaciones_2'),
+            'productor_id' => $request->input('productor_id'),
+        ]);
     }
 
     /**
@@ -152,6 +185,10 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cliente = Clientes::find($id);
+
+        $cliente->delete();
+
+        return ['message'=>'Eliminado'];
     }
 }

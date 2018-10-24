@@ -50,25 +50,7 @@ class CompaniaController extends Controller
      */
     public function store(Request $request)
     {
-        
-        if ($request['activo'] == 1) {
-            $activo = "SI"; 
-        } else {
-           $activo = "NO";
-        }
-
         $this->validate($request, [
-            // 'nombre' => 'required',
-            // 'cuit' => 'required',
-            // 'direccion' => 'required',
-            // 'localidad_id' => 'required',
-            // 'telefono_1' => 'required',
-            // 'telefono_aux' => 'required',
-            // 'telefono_siniestros' => 'required',
-            // 'codigo_lr' => 'required',
-            // 'email_emision' => 'required',
-            // 'email_siniestros' => 'required',
-            // 'color' => 'color',
         ]);
 
         $compania = Companias::create([
@@ -82,7 +64,7 @@ class CompaniaController extends Controller
             'codigo_lr' => $request->input('codigo_lr'),
             'email_emision' => $request->input('email_emision'),
             'email_siniestros' => $request->input('email_siniestros'),
-            'activo' => $activo,
+            'activo' => $request->input('activo'),
             'color' => $request->input('color'),
             // 'logo' => $request->input('logo'),
         ]);
@@ -100,7 +82,7 @@ class CompaniaController extends Controller
     public function show($nombre)
     {
         $compania = Companias::where('nombre', $nombre)->get();
-       
+        $codigo_organizador = CodigoOrganizador::all();
         
         return new CompaniasResource($compania);
 

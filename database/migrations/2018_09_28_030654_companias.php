@@ -26,7 +26,7 @@ class Companias extends Migration
             $table->string('email_siniestros')->nullable();
             $table->integer('codigo_lr')->nullable();
             $table->string('logo')->nullable();
-            $table->string('activo')->nullable();
+            $table->boolean('activo')->nullable();
             $table->string('color')->nullable();
             $table->timestamps();
         });

@@ -63,7 +63,7 @@
                                                         <div class="form-group">
                                                                 <label class="col-sm-9 control-label">Activa</label>
                                                                 <div class="col-md-9">
-                                                                        <input type="checkbox" v-model="compania.activo"  value="1" name="activo" checked>
+                                                                        <input type="checkbox" v-model="compania.activo"  :value="compania.activo" name="activo">
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
@@ -164,9 +164,7 @@
                 <div class="box box-primary">
                         <div class="box-header with-border">
                                 <h5 class="box-title">Codigos de Organizador</h5>
-                                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#crearcodigoorganizador">
-                                        Crear
-                                </button>
+                                <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcodigoorganizador" @click.prevent="vaciarForm()">Crear</a>
                         </div>
                         <!-- Button trigger modal -->
 
@@ -209,8 +207,57 @@
                         <div class="box-footer"></div>
         </div>
         <!-- Modal -->
-        <!-- aca poner modal de codigo organizador -->
-        <!--  //Modal -->
+    <!-- modal Codigo Organizador -->
+<div class="modal fade" id="modalcodigoorganizador" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form @submit.prevent="modoEditar ? updateCodigo_organizador(codigo_organizador.id) : crearCodigo_organizador">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Productor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                                        <div class="row">
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                        <label for="nombre" class=" control-label">Organizadores</label>
+                                                        <div class="">
+                                                                <select name='codigo_organizador_id' class="form-control form-control-sm" value='codigo_organizador_id' v-model="codigo_organizador.id">
+                                                                        <option v-for="codigo_organizador in codigo_organizadores" :key="codigo_organizador.id" v-bind:value="codigo_organizador.id">{{codigo_organizador.apellido}} {{codigo_organizador.nombre}} (Matricula:{{codigo_organizador.matricula}}) </option>
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="apellido" class="control-label">Compañia</label>
+                                                        <div class="">
+                                                                <input type="text" v-model="codigo_organizador.compania_id" class="form-control form-control-sm" id="compania_id" name="compania_id" placeholder="">
+                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="cuit" class="control-label">Codigo Organizador</label>
+                                                        <div class="">
+                                                                <input type="text" v-model="codigo_organizador.codigo_organizador" class="form-control form-control-sm" id="codigo_organizador" name="codigo_organizador" placeholder="">
+                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label class="control-label">Activo</label>
+                                                        <div class="">
+                                                            <input type="checkbox" v-model="codigo_organizador.activo"  :value="codigo_organizador.activo" name="activo">
+                                                        </div>
+                                                </div> 
+                                        </div>
+                                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
+            </div>
+            </form>
+            </div>
+        </div>
+        </div>
         <!-- FIN!!! // Codigo Organizadores -->
 
 
@@ -353,7 +400,11 @@ export default {
         email_siniestros: ""
       },
       codigo_organizadores:{},
-      codigo_organizador:{},
+      codigo_organizador:{
+              codigo_organizador:"",
+              organizador_id:"",
+              compania_id:"",
+      },
       codigo_productor:{},
       codigo_productores:{},
       cobertura:{},

@@ -39,12 +39,6 @@ class OrganizadorController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request['activo'] == 1) {
-            $activo = "SI"; 
-        } else {
-           $activo = "NO";
-        }
-
         $this->validate($request, [
             'nombre' => 'required',
             'apellido' => 'required',
@@ -63,7 +57,7 @@ class OrganizadorController extends Controller
             'email' => $request->input('email'),
             'telefono_1' => $request->input('telefono_1'),
             'telefono_2' => $request->input('telefono_2'),
-            'activo' => $activo,
+            'activo' => $request->input('activo'),
         ]);
 
         return (['message' => 'guardado']);
@@ -77,7 +71,9 @@ class OrganizadorController extends Controller
      */
     public function show($id)
     {
-        //
+        $organizador = Organizadores::findOrFail($id);
+
+        return new OrganizadoresResource($organizador);
     }
 
     /**
@@ -100,7 +96,17 @@ class OrganizadorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $organizador = Organizadores::find($id);
+        $organizador->update([
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'cuit' => $request->input('cuit'),
+            'matricula' => $request->input('matricula'),
+            'email' => $request->input('email'),
+            'telefono_1' => $request->input('telefono_1'),
+            'telefono_2' => $request->input('telefono_2'),
+            'activo' => $request->input('activo'),
+        ]);
     }
 
     /**
@@ -111,6 +117,10 @@ class OrganizadorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $organizador = Organizadores::find($id);
+        
+        $organizador->delete();
+
+        return ['message'=> 'Eliminado'];
     }
 }

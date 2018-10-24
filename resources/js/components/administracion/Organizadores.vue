@@ -3,7 +3,7 @@
         <p>Organizadores</p>
             <div class="box">
                 <div class="box-header">
-                    <a href="" class="btn btn-success " data-toggle="modal" data-target="#modal">Crear</a>
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -29,10 +29,11 @@
                                             <td> {{organizador.cuit}} </td>
                                             <td> {{organizador.email}} </td>
                                             <td> {{organizador.telefono_2}} </td>
-                                            <td> {{organizador.activo}} </td>
+                                            <td v-if="organizador.activo == 1">SI</td>
+                                            <td v-else>NO</td>
                                             <td>
-                                                <a href="" class="fa fa-edit"></a>
-                                                <a href="" class="fa fa-trash"></a>
+                                                <a @click.prevent="modoEdicion(organizador.id)" class="fa fa-edit"></a>
+                                                <a @click.prevent="borrarOrganizador(organizador.id)" class="fa fa-trash"></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -46,7 +47,7 @@
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="crearOrganizador">
+        <form @submit.prevent="modoEditar ? updateOrganizador(organizador.id) : crearOrganizador">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Organizador</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -115,15 +116,15 @@
                                                 <div class="form-group">
                                                         <label class="control-label">Activo</label>
                                                         <div class="">
-                                                            <input type="checkbox" v-model="organizador.activo"  value="1" name="activo" >
+                                                            <input type="checkbox" v-model="organizador.activo"  :value="organizador.activo" name="activo" >
                                                         </div>
                                                 </div>  
                                         </div>
                                         </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
             </div>
             </form>
             </div>
@@ -141,8 +142,16 @@ export default {
     return {
       organizadores: {},
       organizador: {
-              activo:true
-      }
+              nombre:"",
+              apellido:"",
+              cuit:"",
+              matricula:"",
+              email:"",
+              telefono_1: "",
+              telefono_2: "",
+              activo:"",
+      },
+      modoEditar:false,
     };
   },
   methods: {
@@ -161,6 +170,36 @@ export default {
           this.cargarOrganizadores();
         })
         .catch(e => console.log(e));
+    },
+vaciarForm(){
+        this.organizador = {}
+    },
+    updateOrganizador(id){
+        let self = this;
+      axios
+      .put("http://127.0.0.1:8000/api/administracion/organizadores/" + id, this.organizador)
+      .then(()=>{   
+            $("#modal").modal("hide");
+            this.cargarOrganizadores();
+          console.log('listo!')
+      }).catch(e=>(console.log(e)))
+    },
+    modoEdicion(id){
+        this.modoEditar = true,
+        $("#modal").modal("show");
+        let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/organizadores/" + id)
+        .then(function(response) {
+          self.organizador = response.data.data;})
+          .catch(e=>console.log(e));
+    },
+    borrarOrganizador(id){
+        axios.delete("http://127.0.0.1:8000/api/administracion/organizadores/" + id)
+        .then(()=>{
+            this.cargarOrganizadores();
+            console.log('borado!')
+        })
     },
     cargarOrganizadores() {
       let self = this;
