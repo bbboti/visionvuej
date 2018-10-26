@@ -52110,7 +52110,9 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(" " + _vm._s(compania.activo) + " ")]),
+                        compania.activo == 1
+                          ? _c("td", [_vm._v("SI")])
+                          : _c("td", [_vm._v("NO")]),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -52381,13 +52383,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
         data: function data() {
                 return {
-                        compania: {
-                                activo: true
-                        },
+                        compania: {},
                         localidades: {}
                 };
         },
@@ -52687,60 +52692,70 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { staticClass: "col-sm-9 control-label" }, [
-                      _vm._v("Activa")
+                      _vm._v("Estado de Compañia")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-9" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.compania.activo,
-                            expression: "compania.activo"
-                          }
-                        ],
-                        attrs: {
-                          type: "checkbox",
-                          value: "1",
-                          name: "activo",
-                          checked: ""
-                        },
-                        domProps: {
-                          checked: Array.isArray(_vm.compania.activo)
-                            ? _vm._i(_vm.compania.activo, "1") > -1
-                            : _vm.compania.activo
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.compania.activo,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = "1",
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  _vm.$set(
-                                    _vm.compania,
-                                    "activo",
-                                    $$a.concat([$$v])
-                                  )
-                              } else {
-                                $$i > -1 &&
-                                  _vm.$set(
-                                    _vm.compania,
-                                    "activo",
-                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                  )
-                              }
-                            } else {
-                              _vm.$set(_vm.compania, "activo", $$c)
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 input-group form-check" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.compania.activo,
+                              expression: "compania.activo"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: { type: "radio", value: "1" },
+                          domProps: {
+                            checked: _vm._q(_vm.compania.activo, "1")
+                          },
+                          on: {
+                            change: function($event) {
+                              _vm.$set(_vm.compania, "activo", "1")
                             }
                           }
-                        }
-                      })
-                    ])
+                        }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "form-check-label" }, [
+                          _vm._v("Activo")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-9 input-group form-check" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.compania.activo,
+                              expression: "compania.activo"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: { type: "radio", value: "0" },
+                          domProps: {
+                            checked: _vm._q(_vm.compania.activo, "0")
+                          },
+                          on: {
+                            change: function($event) {
+                              _vm.$set(_vm.compania, "activo", "0")
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "form-check-label" }, [
+                          _vm._v("Inactivo")
+                        ])
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
                   _vm._m(1)
@@ -53127,6 +53142,138 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53513,80 +53660,265 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      compania: {
-        nombre: "",
-        cuit: "",
-        direccion: "",
-        localidad_id: "",
-        codigo_lr: "",
-        activo: "",
-        telefono_1: "",
-        telefono_aux: "",
-        telefono_siniestros: "",
-        email_emision: "",
-        email_siniestros: ""
-      },
-      codigo_organizadores: {},
-      codigo_organizador: {
-        codigo_organizador: "",
-        organizador_id: "",
-        compania_id: ""
-      },
-      codigo_productor: {},
-      codigo_productores: {},
-      cobertura: {},
-      coberturas: {},
-      localidades: {},
-      nombreCompania: this.$route.params.nombre
-    };
-  },
+        data: function data() {
+                return {
+                        compania: {
+                                nombre: "",
+                                cuit: "",
+                                direccion: "",
+                                localidad_id: "",
+                                codigo_lr: "",
+                                activo: "",
+                                telefono_1: "",
+                                telefono_aux: "",
+                                telefono_siniestros: "",
+                                email_emision: "",
+                                email_siniestros: "",
+                                id: ""
+                        },
+                        modoEditarCodigo_Organizador: false,
+                        codigo_organizadores: {},
+                        codigo_organizador: {
+                                codigo_organizador: "",
+                                organizador_id: "",
+                                compania_id: "",
+                                activo: ""
+                        },
+                        modoEditarCodigo_Productor: false,
+                        codigo_productores: {},
+                        codigo_productor: {
+                                codigo_productor: "",
+                                codigo_organizador_id: "",
+                                productor_id: "",
+                                compania_id: "",
+                                activo: ""
+                        },
+                        modoEditarCobertura: false,
+                        coberturas: {},
+                        cobertura: {
+                                nombre: "",
+                                compania_id: "",
+                                antiguedad: "",
+                                todo_riesgo: "",
+                                franquicia: "",
+                                activa: "",
+                                ajuste: "",
+                                detalle: ""
+                        },
+                        organizadores: {},
+                        organizador: {},
+                        productores: {},
+                        productor: {},
+                        localidades: {},
+                        nombreCompania: this.$route.params.nombre
+                };
+        },
 
-  methods: {
-    cargarCompania: function cargarCompania() {
-      var self = this;
-      axios.get("http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania).then(function (response) {
-        self.compania = response.data.data[0];
-        //   console.log(self.compania[0]);
-      });
-    },
-    cargarLocalidades: function cargarLocalidades() {
-      var self = this;
-      axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
-        console.log(response.data.data);
-        self.localidades = response.data.data;
-      });
-    },
-    cargarCodigo_Organizador: function cargarCodigo_Organizador() {
-      var self = this;
-      axios.get("http://127.0.0.1:8000/api/codigoorganizador").then(function (response) {
-        console.log(response.data.data);
-        self.codigo_organizadores = response.data.data;
-      });
-    },
-    cargarCodigo_Productor: function cargarCodigo_Productor() {
-      var self = this;
-      axios.get("http://127.0.0.1:8000/api/codigoproductor").then(function (response) {
-        console.log(response.data.data);
-        self.codigo_productores = response.data.data;
-      });
-    },
-    cargarCobertura: function cargarCobertura() {
-      var self = this;
-      axios.get("http://127.0.0.1:8000/api/cobertura").then(function (response) {
-        console.log(response.data.data);
-        self.coberturas = response.data.data;
-      });
-    }
-  },
-  created: function created() {
-    this.cargarCompania();
-    this.cargarLocalidades();
-    this.cargarCodigo_Organizador();
-    this.cargarCodigo_Productor();
-    this.cargarCobertura();
-  }
+        methods: _defineProperty({
+                cargarCompania: function cargarCompania() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania).then(function (response) {
+                                self.compania = response.data.data[0];
+                        });
+                },
+                cargarLocalidades: function cargarLocalidades() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
+                                self.localidades = response.data.data;
+                        });
+                },
+                vaciarForm: function vaciarForm() {
+                        this.codigo_organizador = {};
+                        this.codigo_productor = {};
+                        this.compania.activo = 1;
+                },
+
+
+                // FUNCIONES CODIGO ORGANIZADOR //
+                cargarCodigo_Organizador: function cargarCodigo_Organizador() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/codigoorganizador").then(function (response) {
+                                self.codigo_organizadores = response.data.data;
+                        });
+                },
+                crearCodigo_Organizador: function crearCodigo_Organizador() {
+                        var _this = this;
+
+                        var self = this;
+                        axios.post("http://127.0.0.1:8000/api/codigoorganizador", self.codigo_organizador).then(function () {
+                                $("#modalcodigoorganizador").modal("hide");
+                                _this.codigo_organizador = {};
+                                _this.codigo_organizador.activo = true;
+                                _this.cargarCodigo_Organizador();
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                updateCodigo_Organizador: function updateCodigo_Organizador(id) {
+                        var _this2 = this;
+
+                        var self = this;
+                        axios.put("http://127.0.0.1:8000/api/codigoorganizador/" + id, this.codigo_organizador).then(function () {
+                                $("#modalcodigoorganizador").modal("hide");
+                                _this2.cargarCodigo_Organizador();
+                                console.log('listo!');
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                editarCodigo_Organizador: function editarCodigo_Organizador(id) {
+                        this.modoEditarCodigo_Organizador = true, $("#modalcodigoorganizador").modal("show");
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function (response) {
+                                self.codigo_organizador = response.data.data;
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                borrarCodigo_Organizador: function borrarCodigo_Organizador(id) {
+                        var _this3 = this;
+
+                        axios.delete("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function () {
+                                _this3.cargarCodigo_Organizador();
+                                console.log('borado!');
+                        });
+                },
+
+
+                // FIN - FUNCIONES CODIGO ORGANIZADOR // 
+
+                // FUNCIONES CODIGO PRODUCTOR //
+                cargarCodigo_Productor: function cargarCodigo_Productor() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/codigoproductor").then(function (response) {
+                                self.codigo_productores = response.data.data;
+                        });
+                },
+                crearCodigo_Productor: function crearCodigo_Productor() {
+                        var _this4 = this;
+
+                        var self = this;
+                        axios.post("http://127.0.0.1:8000/api/codigoproductor", self.codigo_productor).then(function () {
+                                $("#modalcodigoproductor").modal("hide");
+                                _this4.codigo_productor = {};
+                                _this4.codigo_productor.activo = true;
+                                _this4.cargarCodigo_Productor();
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                updateCodigo_Productor: function updateCodigo_Productor(id) {
+                        var _this5 = this;
+
+                        var self = this;
+                        axios.put("http://127.0.0.1:8000/api/codigoproductor/" + id, this.codigo_productor).then(function () {
+                                $("#modalcodigoproductor").modal("hide");
+                                _this5.cargarCodigo_Productor();
+                                console.log('listo!');
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                editarCodigo_Productor: function editarCodigo_Productor(id) {
+                        this.modoEditarCodigo_Oroductor = true, $("#modalcodigoproductor").modal("show");
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function (response) {
+                                self.codigo_productor = response.data.data;
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                borrarCodigo_Productor: function borrarCodigo_Productor(id) {
+                        var _this6 = this;
+
+                        axios.delete("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function () {
+                                _this6.cargarCodigo_Productor();
+                                console.log('borado!');
+                        });
+                },
+
+                // FIN - FUNCIONES CODIGO PRODUCTOR
+
+                // FUNCIONES COBERTURAS //
+                cargarCobertura: function cargarCobertura() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/cobertura").then(function (response) {
+                                self.coberturas = response.data.data;
+                        });
+                },
+                crearCobertura: function crearCobertura() {
+                        var _this7 = this;
+
+                        var self = this;
+                        axios.post("http://127.0.0.1:8000/api/cobertura", self.cobertura).then(function () {
+                                $("#modalcobertura").modal("hide");
+                                _this7.cobertura = {};
+                                _this7.cobertura.activo = true;
+                                _this7.cargarCobertura();
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                updateCobertura: function updateCobertura(id) {
+                        var _this8 = this;
+
+                        var self = this;
+                        axios.put("http://127.0.0.1:8000/api/cobertura/" + id, this.cobertura).then(function () {
+                                $("#modalcobertura").modal("hide");
+                                _this8.cargarCobertura();
+                                console.log('listo!');
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                editarCobertura: function editarCobertura(id) {
+                        this.modoEditarCobertura = true, $("#modalcobertura").modal("show");
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/cobertura/" + id).then(function (response) {
+                                self.cobertura = response.data.data;
+                        }).catch(function (e) {
+                                return console.log(e);
+                        });
+                },
+                borrarCobertura: function borrarCobertura(id) {
+                        var _this9 = this;
+
+                        axios.delete("http://127.0.0.1:8000/api/cobertura/" + id).then(function () {
+                                _this9.cargarCobertura();
+                                console.log('borado!');
+                        });
+                },
+
+                //FIN - FUNCIONES COBERTURAS //
+
+                cargarOrganizadores: function cargarOrganizadores() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/administracion/organizadores").then(function (response) {
+                                self.organizadores = response.data.data;
+                        });
+                },
+                cargarProductores: function cargarProductores() {
+                        var self = this;
+                        axios.get("http://127.0.0.1:8000/api/administracion/productores").then(function (response) {
+                                self.productores = response.data.data;
+                        });
+                }
+        }, "cargarCobertura", function cargarCobertura() {
+                var self = this;
+                axios.get("http://127.0.0.1:8000/api/cobertura").then(function (response) {
+                        // console.log(response.data.data);
+                        self.coberturas = response.data.data;
+                });
+        }),
+        created: function created() {
+                this.cargarCompania();
+                this.cargarLocalidades();
+                this.cargarCodigo_Organizador();
+                this.cargarCodigo_Productor();
+                this.cargarCobertura();
+                this.cargarOrganizadores();
+                this.cargarProductores();
+        }
 });
 
 /***/ }),
@@ -53863,61 +54195,70 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { staticClass: "col-sm-9 control-label" }, [
-                        _vm._v("Activa")
+                        _vm._v("Estado de Compañia")
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-9" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.compania.activo,
-                              expression: "compania.activo"
-                            }
-                          ],
-                          attrs: { type: "checkbox", name: "activo" },
-                          domProps: {
-                            value: _vm.compania.activo,
-                            checked: Array.isArray(_vm.compania.activo)
-                              ? _vm._i(
-                                  _vm.compania.activo,
-                                  _vm.compania.activo
-                                ) > -1
-                              : _vm.compania.activo
-                          },
-                          on: {
-                            change: function($event) {
-                              var $$a = _vm.compania.activo,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = _vm.compania.activo,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      _vm.compania,
-                                      "activo",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      _vm.compania,
-                                      "activo",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
-                                }
-                              } else {
-                                _vm.$set(_vm.compania, "activo", $$c)
+                      _c(
+                        "div",
+                        { staticClass: "col-md-9 input-group form-check" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.compania.activo,
+                                expression: "compania.activo"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", value: "1" },
+                            domProps: {
+                              checked: _vm._q(_vm.compania.activo, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(_vm.compania, "activo", "1")
                               }
                             }
-                          }
-                        })
-                      ])
+                          }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-check-label" }, [
+                            _vm._v("Activo")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-md-9 input-group form-check" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.compania.activo,
+                                expression: "compania.activo"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", value: "0" },
+                            domProps: {
+                              checked: _vm._q(_vm.compania.activo, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(_vm.compania, "activo", "0")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-check-label" }, [
+                            _vm._v("Inactivo")
+                          ])
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _vm._m(1)
@@ -54236,9 +54577,7 @@ var render = function() {
                           },
                           [
                             _c("td", [
-                              _vm._v(
-                                _vm._s(codigo_organizador.codigo_organizador)
-                              )
+                              _vm._v(_vm._s(codigo_organizador.apellido))
                             ]),
                             _vm._v(" "),
                             _c("td", [
@@ -54255,11 +54594,35 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(codigo_organizador.activo))
-                            ]),
+                            codigo_organizador.activo == 1
+                              ? _c("td", [_vm._v("SI")])
+                              : _c("td", [_vm._v("NO")]),
                             _vm._v(" "),
-                            _vm._m(8, true)
+                            _c("td", [
+                              _c("a", {
+                                staticClass: "fa fa-edit",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.editarCodigo_Organizador(
+                                      codigo_organizador.id
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("a", {
+                                staticClass: "fa fa-trash",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.borrarCodigo_Organizador(
+                                      codigo_organizador.id
+                                    )
+                                  }
+                                }
+                              })
+                            ])
                           ]
                         )
                       })
@@ -54298,20 +54661,20 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        _vm.modoEditar
+                        _vm.modoEditarCodigo_Organizador
                           ? _vm.updateCodigo_organizador(
                               _vm.codigo_organizador.id
                             )
-                          : _vm.crearCodigo_organizador
+                          : _vm.crearCodigo_Organizador()
                       }
                     }
                   },
                   [
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "col-md-9" }, [
                           _c("div", { staticClass: "form-group" }, [
                             _c(
                               "label",
@@ -54330,15 +54693,14 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.codigo_organizador.id,
-                                      expression: "codigo_organizador.id"
+                                      value:
+                                        _vm.codigo_organizador.organizador_id,
+                                      expression:
+                                        "codigo_organizador.organizador_id"
                                     }
                                   ],
                                   staticClass: "form-control form-control-sm",
-                                  attrs: {
-                                    name: "codigo_organizador_id",
-                                    value: "codigo_organizador_id"
-                                  },
+                                  attrs: { name: "organizador_id" },
                                   on: {
                                     change: function($event) {
                                       var $$selectedVal = Array.prototype.filter
@@ -54354,7 +54716,7 @@ var render = function() {
                                         })
                                       _vm.$set(
                                         _vm.codigo_organizador,
-                                        "id",
+                                        "organizador_id",
                                         $event.target.multiple
                                           ? $$selectedVal
                                           : $$selectedVal[0]
@@ -54362,74 +54724,29 @@ var render = function() {
                                     }
                                   }
                                 },
-                                _vm._l(_vm.codigo_organizadores, function(
-                                  codigo_organizador
+                                _vm._l(_vm.organizadores, function(
+                                  organizador
                                 ) {
                                   return _c(
                                     "option",
                                     {
-                                      key: codigo_organizador.id,
-                                      domProps: { value: codigo_organizador.id }
+                                      key: organizador.id,
+                                      domProps: { value: organizador.id }
                                     },
                                     [
                                       _vm._v(
-                                        _vm._s(codigo_organizador.apellido) +
+                                        " " +
+                                          _vm._s(organizador.apellido) +
                                           " " +
-                                          _vm._s(codigo_organizador.nombre) +
+                                          _vm._s(organizador.nombre) +
                                           " (Matricula:" +
-                                          _vm._s(codigo_organizador.matricula) +
+                                          _vm._s(organizador.matricula) +
                                           ") "
                                       )
                                     ]
                                   )
                                 })
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "control-label",
-                                attrs: { for: "apellido" }
-                              },
-                              [_vm._v("Compañia")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", {}, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.codigo_organizador.compania_id,
-                                    expression: "codigo_organizador.compania_id"
-                                  }
-                                ],
-                                staticClass: "form-control form-control-sm",
-                                attrs: {
-                                  type: "text",
-                                  id: "compania_id",
-                                  name: "compania_id",
-                                  placeholder: ""
-                                },
-                                domProps: {
-                                  value: _vm.codigo_organizador.compania_id
-                                },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.codigo_organizador,
-                                      "compania_id",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
                             ])
                           ]),
                           _vm._v(" "),
@@ -54482,68 +54799,71 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { staticClass: "control-label" }, [
-                              _vm._v("Activo")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", {}, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.codigo_organizador.activo,
-                                    expression: "codigo_organizador.activo"
-                                  }
-                                ],
-                                attrs: { type: "checkbox", name: "activo" },
-                                domProps: {
+                          _c("div", { staticClass: "form-check" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
                                   value: _vm.codigo_organizador.activo,
-                                  checked: Array.isArray(
-                                    _vm.codigo_organizador.activo
-                                  )
-                                    ? _vm._i(
-                                        _vm.codigo_organizador.activo,
-                                        _vm.codigo_organizador.activo
-                                      ) > -1
-                                    : _vm.codigo_organizador.activo
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a = _vm.codigo_organizador.activo,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = _vm.codigo_organizador.activo,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            _vm.codigo_organizador,
-                                            "activo",
-                                            $$a.concat([$$v])
-                                          )
-                                      } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            _vm.codigo_organizador,
-                                            "activo",
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
-                                      }
-                                    } else {
-                                      _vm.$set(
-                                        _vm.codigo_organizador,
-                                        "activo",
-                                        $$c
-                                      )
-                                    }
-                                  }
+                                  expression: "codigo_organizador.activo"
                                 }
-                              })
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "1" },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.codigo_organizador.activo,
+                                  "1"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(
+                                    _vm.codigo_organizador,
+                                    "activo",
+                                    "1"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _vm._v("Activo")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-check" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.codigo_organizador.activo,
+                                  expression: "codigo_organizador.activo"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "0" },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.codigo_organizador.activo,
+                                  "0"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(
+                                    _vm.codigo_organizador,
+                                    "activo",
+                                    "0"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _vm._v("Inactivo")
                             ])
                           ])
                         ])
@@ -54558,8 +54878,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: !_vm.modoEditar,
-                              expression: "!modoEditar"
+                              value: !_vm.modoEditarCodigo_Organizador,
+                              expression: "!modoEditarCodigo_Organizador"
                             }
                           ],
                           staticClass: "btn btn-primary",
@@ -54575,8 +54895,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: _vm.modoEditar,
-                              expression: "modoEditar"
+                              value: _vm.modoEditarCodigo_Organizador,
+                              expression: "modoEditarCodigo_Organizador"
                             }
                           ],
                           staticClass: "btn btn-primary",
@@ -54595,7 +54915,468 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "box box-primary" }, [
-          _vm._m(10),
+          _c("div", { staticClass: "box-header with-border" }, [
+            _c("h5", { staticClass: "box-title" }, [
+              _vm._v("Codigos de Productores")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-success",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#modalcodigoproductor"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.vaciarForm()
+                  }
+                }
+              },
+              [_vm._v("Crear")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-body" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-sm table-bordered table-hover dataTable",
+                    attrs: {
+                      id: "example2",
+                      role: "grid",
+                      "aria-describedby": "example2_info"
+                    }
+                  },
+                  [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.codigo_productores, function(
+                        codigo_productor
+                      ) {
+                        return _c(
+                          "tr",
+                          {
+                            key: codigo_productor.id,
+                            staticClass: "odd",
+                            attrs: { role: "row" }
+                          },
+                          [
+                            _c("td", [_vm._v("apellido productor")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("nombre productor")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("matricula productor")]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(codigo_productor.codigo_productor))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v("codigo organizador del productor")
+                            ]),
+                            _vm._v(" "),
+                            codigo_productor.activo == 1
+                              ? _c("td", [_vm._v("SI")])
+                              : _c("td", [_vm._v("NO")]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("a", {
+                                staticClass: "fa fa-edit",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.editarCodigo_Productor(
+                                      codigo_productor.id
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("a", {
+                                staticClass: "fa fa-trash",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.borrarCodigo_Productor(
+                                      codigo_productor.id
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]
+                        )
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalcodigoproductor",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.modoEditarCodigo_Productor
+                          ? _vm.updateCodigo_Productor(_vm.codigo_productor.id)
+                          : _vm.crearCodigo_Productor()
+                      }
+                    }
+                  },
+                  [
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "nombre" }
+                              },
+                              [_vm._v("Productores")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.codigo_productor.productor_id,
+                                      expression:
+                                        "codigo_productor.productor_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control form-control-sm",
+                                  attrs: { name: "productor_id" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.codigo_productor,
+                                        "productor_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.productores, function(productor) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: productor.id,
+                                      domProps: { value: productor.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        " " +
+                                          _vm._s(productor.apellido) +
+                                          " " +
+                                          _vm._s(productor.nombre) +
+                                          " (Matricula:" +
+                                          _vm._s(productor.matricula) +
+                                          ") "
+                                      )
+                                    ]
+                                  )
+                                })
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "nombre" }
+                              },
+                              [_vm._v("Codigo Organizador")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value:
+                                        _vm.codigo_productor
+                                          .codigo_organizador_id,
+                                      expression:
+                                        "codigo_productor.codigo_organizador_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control form-control-sm",
+                                  attrs: { name: "codigo_organizador_id" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.codigo_productor,
+                                        "codigo_organizador_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.codigo_organizadores, function(
+                                  codigo_organizador
+                                ) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: codigo_organizador.id,
+                                      domProps: { value: codigo_organizador.id }
+                                    },
+                                    [_vm._v(" ejemplo ")]
+                                  )
+                                })
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "control-label",
+                                attrs: { for: "cuit" }
+                              },
+                              [_vm._v("Codigo Productor")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value:
+                                      _vm.codigo_productor.codigo_productor,
+                                    expression:
+                                      "codigo_productor.codigo_productor"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "text",
+                                  id: "codigo_productor",
+                                  name: "codigo_productor",
+                                  placeholder: ""
+                                },
+                                domProps: {
+                                  value: _vm.codigo_productor.codigo_productor
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.codigo_productor,
+                                      "codigo_productor",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-check" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.codigo_productor.activa,
+                                  expression: "codigo_productor.activa"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "1" },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.codigo_productor.activa,
+                                  "1"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(_vm.codigo_productor, "activa", "1")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _vm._v("Activo")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-check" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.codigo_productor.activa,
+                                  expression: "codigo_productor.activa"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "0" },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.codigo_productor.activa,
+                                  "0"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(_vm.codigo_productor, "activa", "0")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _vm._v("Inactivo")
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.modoEditarCodigo_Productor,
+                              expression: "!modoEditarCodigo_Productor"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Crear")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.modoEditarCodigo_Productor,
+                              expression: "modoEditarCodigo_Productor"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "box box-primary" }, [
+          _c("div", { staticClass: "box-header with-border" }, [
+            _c("h5", { staticClass: "box-title" }, [_vm._v("Coberturas")]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-success",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#modalcobertura"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.vaciarForm()
+                  }
+                }
+              },
+              [_vm._v("Crear")]
+            )
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "box-body" }, [
             _c("div", { staticClass: "row" }, [
@@ -54616,79 +55397,6 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.codigo_productores, function(
-                        codigo_productor
-                      ) {
-                        return _c(
-                          "tr",
-                          {
-                            key: codigo_productor.id,
-                            staticClass: "odd",
-                            attrs: { role: "row" }
-                          },
-                          [
-                            _c("td", [
-                              _vm._v(_vm._s(codigo_productor.codigo_productor))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(codigo_productor.codigo_organizador_id)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(codigo_productor.productor_id))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(codigo_productor.organizador_id))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(codigo_productor.compania_id))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(codigo_productor.activo))]),
-                            _vm._v(" "),
-                            _vm._m(12, true)
-                          ]
-                        )
-                      })
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-footer" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "box box-primary" }, [
-          _vm._m(13),
-          _vm._v(" "),
-          _c("div", { staticClass: "box-body" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-12" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-sm table-bordered table-hover dataTable",
-                    attrs: {
-                      id: "example2",
-                      role: "grid",
-                      "aria-describedby": "example2_info"
-                    }
-                  },
-                  [
-                    _vm._m(14),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
                       _vm._l(_vm.coberturas, function(cobertura) {
                         return _c(
                           "tr",
@@ -54702,15 +55410,39 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(cobertura.antiguedad))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(cobertura.todo_riesgo))]),
+                            cobertura.todo_riesgo == 1
+                              ? _c("td", [_vm._v("SI")])
+                              : _c("td", [_vm._v("NO")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(cobertura.franquicia))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(cobertura.ajuste))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(cobertura.activa))]),
+                            cobertura.activa == 1
+                              ? _c("td", [_vm._v("SI")])
+                              : _c("td", [_vm._v("NO")]),
                             _vm._v(" "),
-                            _vm._m(15, true)
+                            _c("td", [
+                              _c("a", {
+                                staticClass: "fa fa-edit",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.editarCobertura(cobertura.id)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("a", {
+                                staticClass: "fa fa-trash",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.borrarCobertura(cobertura.id)
+                                  }
+                                }
+                              })
+                            ])
                           ]
                         )
                       })
@@ -54723,7 +55455,447 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "box-footer" })
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modalcobertura",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.modoEditarCobertura
+                          ? _vm.updateCobertura(_vm.cobertura.id)
+                          : _vm.crearCobertura()
+                      }
+                    }
+                  },
+                  [
+                    _vm._m(12),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-9" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "nombre" }
+                              },
+                              [_vm._v("Nombre Cobertura")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cobertura.nombre,
+                                    expression: "cobertura.nombre"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "text",
+                                  id: "nombre",
+                                  name: "nombre"
+                                },
+                                domProps: { value: _vm.cobertura.nombre },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.cobertura,
+                                      "nombre",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "antiguedad" }
+                              },
+                              [_vm._v("Antiguedad (En Años)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cobertura.antiguedad,
+                                    expression: "cobertura.antiguedad"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "number",
+                                  id: "antiguedad",
+                                  name: "antiguedad"
+                                },
+                                domProps: { value: _vm.cobertura.antiguedad },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.cobertura,
+                                      "antiguedad",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "todo_riesgo" }
+                              },
+                              [_vm._v("Todo Riesgo")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cobertura.todo_riesgo,
+                                    expression: "cobertura.todo_riesgo"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "checkbox",
+                                  id: "todo_riesgo",
+                                  name: "todo_riesgo"
+                                },
+                                domProps: {
+                                  checked: Array.isArray(
+                                    _vm.cobertura.todo_riesgo
+                                  )
+                                    ? _vm._i(_vm.cobertura.todo_riesgo, null) >
+                                      -1
+                                    : _vm.cobertura.todo_riesgo
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = _vm.cobertura.todo_riesgo,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            _vm.cobertura,
+                                            "todo_riesgo",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            _vm.cobertura,
+                                            "todo_riesgo",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(
+                                        _vm.cobertura,
+                                        "todo_riesgo",
+                                        $$c
+                                      )
+                                    }
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "franquicia" }
+                              },
+                              [_vm._v("Franquicia")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cobertura.franquicia,
+                                    expression: "cobertura.franquicia"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "text",
+                                  id: "franquicia",
+                                  name: "franquicia"
+                                },
+                                domProps: { value: _vm.cobertura.franquicia },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.cobertura,
+                                      "franquicia",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "ajuste" }
+                              },
+                              [_vm._v("Ajuste")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.cobertura.ajuste,
+                                      expression: "cobertura.ajuste"
+                                    }
+                                  ],
+                                  staticClass: "form-control form-control-sm",
+                                  attrs: { name: "ajuste" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.cobertura,
+                                        "ajuste",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", [_vm._v(" 0 % ")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v(" 10 % ")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v(" 20 % ")]),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v(" 30 % ")])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: " control-label",
+                                attrs: { for: "detalle" }
+                              },
+                              [_vm._v("Detalle")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cobertura.detalle,
+                                    expression: "cobertura.detalle"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                attrs: {
+                                  type: "textarea",
+                                  id: "detalle",
+                                  name: "detalle"
+                                },
+                                domProps: { value: _vm.cobertura.detalle },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.cobertura,
+                                      "detalle",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-check" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.cobertura.activa,
+                                  expression: "cobertura.activa"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "1" },
+                              domProps: {
+                                checked: _vm._q(_vm.cobertura.activa, "1")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(_vm.cobertura, "activa", "1")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _vm._v("Activa")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-check" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.cobertura.activa,
+                                  expression: "cobertura.activa"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "0" },
+                              domProps: {
+                                checked: _vm._q(_vm.cobertura.activa, "0")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.$set(_vm.cobertura, "activa", "0")
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "form-check-label" }, [
+                              _vm._v("Inactiva")
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.modoEditarCobertura,
+                              expression: "!modoEditarCobertura"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Crear")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.modoEditarCobertura,
+                              expression: "modoEditarCobertura"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      )
     ])
   ])
 }
@@ -54831,19 +56003,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "fa fa-edit", attrs: { href: "" } }),
-      _vm._v(" "),
-      _c("a", { staticClass: "fa fa-trash", attrs: { href: "" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h5", { staticClass: "modal-title", attrs: { id: "modalLabel" } }, [
-        _vm._v("Productor")
+        _vm._v("Codigo Organizador")
       ]),
       _vm._v(" "),
       _c(
@@ -54864,33 +56026,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h5", { staticClass: "box-title" }, [
-        _vm._v("Codigos de Productores")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success pull-right",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#crearcodigoproductor"
-          }
-        },
-        [
-          _vm._v(
-            "\n                                                Crear\n                                        "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", { attrs: { role: "row" } }, [
         _c("th", [_vm._v("Apellido")]),
@@ -54899,9 +56034,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Matricula")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Cod. Organizador")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Cod. Productor")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cod. Organizador")]),
         _vm._v(" "),
         _c("th", [_vm._v("Activo")]),
         _vm._v(" "),
@@ -54913,34 +56048,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "fa fa-edit", attrs: { href: "" } }),
-      _vm._v(" "),
-      _c("a", { staticClass: "fa fa-trash", attrs: { href: "" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header with-border" }, [
-      _c("h5", { staticClass: "box-title" }, [_vm._v("Coberturas")]),
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "modalLabel" } }, [
+        _vm._v("Codigo Productor")
+      ]),
       _vm._v(" "),
       _c(
         "button",
         {
-          staticClass: "btn btn-success pull-right",
+          staticClass: "close",
           attrs: {
             type: "button",
-            "data-toggle": "modal",
-            "data-target": "#crearcobertura"
+            "data-dismiss": "modal",
+            "aria-label": "Close"
           }
         },
-        [
-          _vm._v(
-            "\n                                Crear\n                        "
-          )
-        ]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   },
@@ -54970,10 +56093,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "fa fa-edit" }),
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "modalLabel" } }, [
+        _vm._v("Cobertura")
+      ]),
       _vm._v(" "),
-      _c("a", { staticClass: "fa fa-trash", attrs: { href: "" } })
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
@@ -55177,6 +56313,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -55213,6 +56351,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     vaciarForm: function vaciarForm() {
       this.organizador = {};
+      this.organizador.activo = 1;
     },
     updateOrganizador: function updateOrganizador(id) {
       var _this2 = this;
@@ -55701,62 +56840,57 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { staticClass: "control-label" }, [
-                            _vm._v("Activo")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", {}, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.organizador.activo,
-                                  expression: "organizador.activo"
-                                }
-                              ],
-                              attrs: { type: "checkbox", name: "activo" },
-                              domProps: {
+                        _c("div", { staticClass: "form-check" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
                                 value: _vm.organizador.activo,
-                                checked: Array.isArray(_vm.organizador.activo)
-                                  ? _vm._i(
-                                      _vm.organizador.activo,
-                                      _vm.organizador.activo
-                                    ) > -1
-                                  : _vm.organizador.activo
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.organizador.activo,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = _vm.organizador.activo,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.organizador,
-                                          "activo",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.organizador,
-                                          "activo",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.organizador, "activo", $$c)
-                                  }
-                                }
+                                expression: "organizador.activo"
                               }
-                            })
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", value: "1" },
+                            domProps: {
+                              checked: _vm._q(_vm.organizador.activo, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(_vm.organizador, "activo", "1")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-check-label" }, [
+                            _vm._v("Activo")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.organizador.activo,
+                                expression: "organizador.activo"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", value: "0" },
+                            domProps: {
+                              checked: _vm._q(_vm.organizador.activo, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(_vm.organizador, "activo", "0")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-check-label" }, [
+                            _vm._v("Inactivo")
                           ])
                         ])
                       ])
@@ -56087,6 +57221,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -56123,6 +57259,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     vaciarForm: function vaciarForm() {
       this.productor = {};
+      this.productor.activo = 1;
     },
     updateProductor: function updateProductor(id) {
       var _this2 = this;
@@ -56301,7 +57438,7 @@ var render = function() {
                       $event.preventDefault()
                       _vm.modoEditar
                         ? _vm.updateProductor(_vm.productor.id)
-                        : _vm.crearProductor
+                        : _vm.crearProductor()
                     }
                   }
                 },
@@ -56607,62 +57744,57 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { staticClass: "control-label" }, [
-                            _vm._v("Activo")
-                          ]),
-                          _vm._v(" "),
-                          _c("div", {}, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.productor.activo,
-                                  expression: "productor.activo"
-                                }
-                              ],
-                              attrs: { type: "checkbox", name: "activo" },
-                              domProps: {
+                        _c("div", { staticClass: "form-check" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
                                 value: _vm.productor.activo,
-                                checked: Array.isArray(_vm.productor.activo)
-                                  ? _vm._i(
-                                      _vm.productor.activo,
-                                      _vm.productor.activo
-                                    ) > -1
-                                  : _vm.productor.activo
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.productor.activo,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = _vm.productor.activo,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.productor,
-                                          "activo",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.productor,
-                                          "activo",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.productor, "activo", $$c)
-                                  }
-                                }
+                                expression: "productor.activo"
                               }
-                            })
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", value: "1" },
+                            domProps: {
+                              checked: _vm._q(_vm.productor.activo, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(_vm.productor, "activo", "1")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-check-label" }, [
+                            _vm._v("Activo")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-check" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.productor.activo,
+                                expression: "productor.activo"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "radio", value: "0" },
+                            domProps: {
+                              checked: _vm._q(_vm.productor.activo, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.$set(_vm.productor, "activo", "0")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-check-label" }, [
+                            _vm._v("Inactivo")
                           ])
                         ])
                       ])

@@ -61,10 +61,15 @@
                                                                 </div>
                                                         </div>
                                                         <div class="form-group">
-                                                                <label class="col-sm-9 control-label">Activa</label>
-                                                                <div class="col-md-9">
-                                                                        <input type="checkbox" v-model="compania.activo"  value="1" name="activo" checked>
+                                                                <label class="col-sm-9 control-label">Estado de Compañia</label>
+                                                                <div class="col-md-9 input-group form-check">
+                                                                        <input class="form-check-input" type="radio" value=1 v-model="compania.activo">
+                                                                        <label class="form-check-label">Activo</label>
                                                                 </div>
+                                                                <div class="col-md-9 input-group form-check">
+                                                                        <input class="form-check-input" type="radio" value=0 v-model="compania.activo">
+                                                                        <label class="form-check-label">Inactivo</label>
+                                                                </div> 
                                                         </div>
                                                         <div class="form-group">
                                                                 <label for="logo" class="col-sm-3 control-label">Logo</label>
@@ -156,7 +161,7 @@
         data(){
             return{
                     compania:{
-                            activo:true
+                            
                     },
                     localidades:{},
             };

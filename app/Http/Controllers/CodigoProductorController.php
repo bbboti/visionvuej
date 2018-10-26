@@ -16,4 +16,57 @@ class CodigoProductorController extends Controller
 
         return CodigoProductorsResource::collection($codigo_productores);
     }
+    public function show($compania_id)
+    {
+        $codigo_productores = CodigoProductor::where('compania_id', $compania_id)->get();
+
+        return CodigoProductorsResource::collection($codigo_productores);
+    }
+
+    public function store(Request $request)
+    {        
+        $this->validate($request, [
+
+        ]);
+
+        $codigo_productores = CodigoProductor::create([
+            'codigo_productor' => $request->input('codigo_productor'),
+            'codigo_organizador_id' => $request->input('codigo_organizador_id'),
+            'productor_id' => $request->input('productor_id'),
+            'compania_id' => $request->input('compania_id'),
+            'activo' => $request->input('activo'),
+        ]);
+
+        return (['message' => 'guardado']);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $codigo_productores = CodigoProductor::find($id);
+        $codigo_productores->update([
+            'codigo_productor' => $request->input('codigo_productor'),
+            'codigo_organizador_id' => $request->input('codigo_organizador_id'),
+            'productor_id' => $request->input('productor_id'),
+            'compania_id' => $request->input('compania_id'),
+            'activo' => $request->input('activo'),
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $codigo_productores = CodigoProductor::find($id);
+        
+        $codigo_productores->delete();
+
+        return ['message'=> 'Eliminado'];
+    }
+
+
+
+
+
+
+
+
 }

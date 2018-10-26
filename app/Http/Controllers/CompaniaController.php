@@ -83,6 +83,7 @@ class CompaniaController extends Controller
     {
         $compania = Companias::where('nombre', $nombre)->get();
         $codigo_organizador = CodigoOrganizador::all();
+        $codigo_productor = CodigoProductor::all();
         
         return new CompaniasResource($compania);
 

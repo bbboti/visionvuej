@@ -15,12 +15,11 @@ class CodigoProductors extends Migration
     {
         Schema::create('codigo_productors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo_productor');
+            $table->string('codigo_productor')->nullable();
             $table->integer('codigo_organizador_id')->nullable();
-            $table->integer('productor_id');
-            $table->integer('organizador_id')->nullable();
-            $table->integer('compania_id');
-            $table->string('activo');
+            $table->integer('productor_id')->nullable();
+            $table->integer('compania_id')->nullable();
+            $table->boolean('activo')->nullable();
             $table->timestamps();
         });
     }

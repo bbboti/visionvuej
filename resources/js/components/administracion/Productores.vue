@@ -47,7 +47,7 @@
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="modoEditar ? updateProductor(productor.id) : crearProductor">
+        <form @submit.prevent="modoEditar ? updateProductor(productor.id) : crearProductor()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Productor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -116,12 +116,14 @@
                                                         <input type="text" class="form-control form-control-sm" v-model="productor.telefono_2" id="telefono_2" name="telefono_2" placeholder="Celular">
                                                         </div>
                                                 </div>
-                                                <div class="form-group">
-                                                        <label class="control-label">Activo</label>
-                                                        <div class="">
-                                                            <input type="checkbox" v-model="productor.activo"  :value="productor.activo" name="activo">
-                                                        </div>
-                                                </div>  
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value=1 v-model="productor.activo">
+                                                    <label class="form-check-label">Activo</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value=0 v-model="productor.activo">
+                                                    <label class="form-check-label">Inactivo</label>
+                                                </div> 
                                         </div>
                                         </div>
             </div>
@@ -152,7 +154,7 @@ export default {
               email:"",
               telefono_1: "",
               telefono_2: "",
-              activo:"",
+              activo: "",
       },
       modoEditar: false,
     };
@@ -176,6 +178,7 @@ export default {
     },
     vaciarForm(){
         this.productor = {}
+        this.productor.activo = 1;
     },
     updateProductor(id){
         let self = this;

@@ -15,14 +15,14 @@ class Coberturas extends Migration
     {
         Schema::create('coberturas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('compania_id');
-            $table->string('antiguedad');
-            $table->string('todo_riesgo');
+            $table->string('nombre')->nullable();
+            $table->string('compania_id')->nullable();
+            $table->string('antiguedad')->nullable();
+            $table->boolean('todo_riesgo')->nullable();
             $table->string('franquicia')->nullable();
-            $table->string('activa');
-            $table->string('ajuste');
-            $table->string('detalle');
+            $table->boolean('activa')->nullable();
+            $table->string('ajuste')->nullable();
+            $table->string('detalle')->nullable();
             $table->timestamps();
         });
     }

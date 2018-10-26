@@ -20,8 +20,8 @@ class Organizadores extends Migration
             $table->string('cuit')->nullable();
             $table->integer('matricula')->nullable();
             $table->string('email')->nullable();
-            $table->integer('telefono_1')->nullable();
-            $table->integer('telefono_2')->nullable();
+            $table->string('telefono_1')->nullable();
+            $table->string('telefono_2')->nullable();
             $table->boolean('activo')->nullable();
             $table->timestamps();
         });

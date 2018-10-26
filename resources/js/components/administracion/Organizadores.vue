@@ -113,11 +113,13 @@
                                                         <input type="text" class="form-control form-control-sm" v-model="organizador.telefono_2" id="telefono_2" name="telefono_2" placeholder="Celular">
                                                         </div>
                                                 </div>
-                                                <div class="form-group">
-                                                        <label class="control-label">Activo</label>
-                                                        <div class="">
-                                                            <input type="checkbox" v-model="organizador.activo"  :value="organizador.activo" name="activo" >
-                                                        </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value=1 v-model="organizador.activo">
+                                                    <label class="form-check-label">Activo</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value=0 v-model="organizador.activo">
+                                                    <label class="form-check-label">Inactivo</label>
                                                 </div>  
                                         </div>
                                         </div>
@@ -171,8 +173,9 @@ export default {
         })
         .catch(e => console.log(e));
     },
-vaciarForm(){
+    vaciarForm(){
         this.organizador = {}
+        this.organizador.activo = 1;
     },
     updateOrganizador(id){
         let self = this;

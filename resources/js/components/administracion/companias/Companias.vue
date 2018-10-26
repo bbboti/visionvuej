@@ -28,8 +28,8 @@
                                             <td> {{compania.telefono_1}} </td>
                                             <td> {{compania.telefono_aux}} </td>
                                             <td> {{compania.telefono_siniestros}} </td>
-                                            <td> {{compania.activo}} </td>
-                                            <td>
+                                            <td v-if="compania.activo == 1">SI</td>
+                                            <td v-else>NO</td>                                            <td>
                                                 <router-link :to="`/administracion/companias/${compania.nombre}/edit`" class="fa fa-edit"></router-link>
                                                 <a href="" class="fa fa-trash"></a>
                                             </td>
