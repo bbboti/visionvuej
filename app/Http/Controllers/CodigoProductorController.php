@@ -12,15 +12,15 @@ class CodigoProductorController extends Controller
 {
     public function index()
     {
-        $codigo_productores = CodigoProductor::all();
+        $codigo_productores = CodigoProductor::with(['productores', 'codigo_organizador'])->get();
 
         return CodigoProductorsResource::collection($codigo_productores);
     }
-    public function show($compania_id)
+    public function show($id)
     {
-        $codigo_productores = CodigoProductor::where('compania_id', $compania_id)->get();
+        $codigo_productores = CodigoProductor::findOrFail($id);
 
-        return CodigoProductorsResource::collection($codigo_productores);
+        return new CodigoProductorsResource($codigo_productores);
     }
 
     public function store(Request $request)

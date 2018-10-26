@@ -18,11 +18,11 @@ class CoberturaController extends Controller
     }
 
 
-    public function show($compania_id)
+    public function show($id)
     {
-        $coberturas = Coberturas::where('compania_id', $compania_id)->get();
+        $coberturas = Coberturas::findOrFail($id);
 
-        return CoberturasResource::collection($coberturas);
+        return new CoberturasResource($coberturas);
     }
 
     public function store(Request $request)

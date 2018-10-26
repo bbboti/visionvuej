@@ -110,7 +110,21 @@ class CompaniaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $compania = Companias::find($id);
+        $compania->update([
+            'nombre' => $request->input('nombre'),
+            'cuit' => $request->input('cuit'),
+            'direccion' => $request->input('direccion'),
+            'localidad_id' => $request->input('localidad_id'),
+            'telefono_1' => $request->input('telefono_1'),
+            'telefono_aux' => $request->input('telefono_aux'),
+            'telefono_siniestros' => $request->input('telefono_siniestros'),
+            'codigo_lr' => $request->input('codigo_lr'),
+            'email_emision' => $request->input('email_emision'),
+            'email_siniestros' => $request->input('email_siniestros'),
+            'activo' => $request->input('activo'),
+            'color' => $request->input('color'),
+        ]);
     }
 
     /**
@@ -121,6 +135,10 @@ class CompaniaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $compania = Companias::find($id);
+
+        $compania->delete();
+
+        return ['message'=>'Eliminado'];
     }
 }

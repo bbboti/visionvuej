@@ -53650,14 +53650,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
         data: function data() {
@@ -53715,12 +53707,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
 
         methods: _defineProperty({
+
+                // FUNCIONES COMPANIA //
+
+
                 cargarCompania: function cargarCompania() {
                         var self = this;
                         axios.get("http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania).then(function (response) {
                                 self.compania = response.data.data[0];
                         });
                 },
+                updateCompania: function updateCompania() {
+                        var _this = this;
+
+                        var self = this;
+                        axios.put("http://127.0.0.1:8000/api/administracion/companias/" + this.compania.id, this.compania).then(function () {
+                                console.log("update ok");
+                                window.location.replace('http://127.0.0.1:8000/administracion/companias/' + _this.compania.nombre + "/edit");
+                        });
+                },
+
+
+                //FIN - FUNCIONES COMPANIA // 
+
                 cargarLocalidades: function cargarLocalidades() {
                         var self = this;
                         axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
@@ -53730,6 +53739,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 vaciarForm: function vaciarForm() {
                         this.codigo_organizador = {};
                         this.codigo_productor = {};
+                        this.cobertura = {};
                         this.compania.activo = 1;
                 },
 
@@ -53742,25 +53752,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         });
                 },
                 crearCodigo_Organizador: function crearCodigo_Organizador() {
-                        var _this = this;
+                        var _this2 = this;
 
                         var self = this;
+                        self.codigo_organizador.compania_id = self.compania.id;
                         axios.post("http://127.0.0.1:8000/api/codigoorganizador", self.codigo_organizador).then(function () {
                                 $("#modalcodigoorganizador").modal("hide");
-                                _this.codigo_organizador = {};
-                                _this.codigo_organizador.activo = true;
-                                _this.cargarCodigo_Organizador();
+                                _this2.codigo_organizador = {};
+                                _this2.codigo_organizador.activo = true;
+                                _this2.cargarCodigo_Organizador();
                         }).catch(function (e) {
                                 return console.log(e);
                         });
                 },
                 updateCodigo_Organizador: function updateCodigo_Organizador(id) {
-                        var _this2 = this;
+                        var _this3 = this;
 
                         var self = this;
                         axios.put("http://127.0.0.1:8000/api/codigoorganizador/" + id, this.codigo_organizador).then(function () {
                                 $("#modalcodigoorganizador").modal("hide");
-                                _this2.cargarCodigo_Organizador();
+                                _this3.cargarCodigo_Organizador();
                                 console.log('listo!');
                         }).catch(function (e) {
                                 return console.log(e);
@@ -53776,10 +53787,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         });
                 },
                 borrarCodigo_Organizador: function borrarCodigo_Organizador(id) {
-                        var _this3 = this;
+                        var _this4 = this;
 
                         axios.delete("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function () {
-                                _this3.cargarCodigo_Organizador();
+                                _this4.cargarCodigo_Organizador();
                                 console.log('borado!');
                         });
                 },
@@ -53795,32 +53806,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         });
                 },
                 crearCodigo_Productor: function crearCodigo_Productor() {
-                        var _this4 = this;
+                        var _this5 = this;
 
                         var self = this;
+                        self.codigo_productor.compania_id = self.compania.id;
                         axios.post("http://127.0.0.1:8000/api/codigoproductor", self.codigo_productor).then(function () {
                                 $("#modalcodigoproductor").modal("hide");
-                                _this4.codigo_productor = {};
-                                _this4.codigo_productor.activo = true;
-                                _this4.cargarCodigo_Productor();
+                                _this5.codigo_productor = {};
+                                _this5.codigo_productor.activo = true;
+                                _this5.cargarCodigo_Productor();
                         }).catch(function (e) {
                                 return console.log(e);
                         });
                 },
                 updateCodigo_Productor: function updateCodigo_Productor(id) {
-                        var _this5 = this;
+                        var _this6 = this;
 
                         var self = this;
                         axios.put("http://127.0.0.1:8000/api/codigoproductor/" + id, this.codigo_productor).then(function () {
                                 $("#modalcodigoproductor").modal("hide");
-                                _this5.cargarCodigo_Productor();
+                                _this6.cargarCodigo_Productor();
                                 console.log('listo!');
                         }).catch(function (e) {
                                 return console.log(e);
                         });
                 },
                 editarCodigo_Productor: function editarCodigo_Productor(id) {
-                        this.modoEditarCodigo_Oroductor = true, $("#modalcodigoproductor").modal("show");
+                        this.modoEditarCodigo_Productor = true, $("#modalcodigoproductor").modal("show");
                         var self = this;
                         axios.get("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function (response) {
                                 self.codigo_productor = response.data.data;
@@ -53829,10 +53841,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         });
                 },
                 borrarCodigo_Productor: function borrarCodigo_Productor(id) {
-                        var _this6 = this;
+                        var _this7 = this;
 
                         axios.delete("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function () {
-                                _this6.cargarCodigo_Productor();
+                                _this7.cargarCodigo_Productor();
                                 console.log('borado!');
                         });
                 },
@@ -53847,25 +53859,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         });
                 },
                 crearCobertura: function crearCobertura() {
-                        var _this7 = this;
+                        var _this8 = this;
 
                         var self = this;
+                        self.cobertura.compania_id = self.compania.id;
                         axios.post("http://127.0.0.1:8000/api/cobertura", self.cobertura).then(function () {
                                 $("#modalcobertura").modal("hide");
-                                _this7.cobertura = {};
-                                _this7.cobertura.activo = true;
-                                _this7.cargarCobertura();
+                                _this8.cobertura = {};
+                                _this8.cobertura.activo = true;
+                                _this8.cargarCobertura();
                         }).catch(function (e) {
                                 return console.log(e);
                         });
                 },
                 updateCobertura: function updateCobertura(id) {
-                        var _this8 = this;
+                        var _this9 = this;
 
                         var self = this;
                         axios.put("http://127.0.0.1:8000/api/cobertura/" + id, this.cobertura).then(function () {
                                 $("#modalcobertura").modal("hide");
-                                _this8.cargarCobertura();
+                                _this9.cargarCobertura();
                                 console.log('listo!');
                         }).catch(function (e) {
                                 return console.log(e);
@@ -53875,16 +53888,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         this.modoEditarCobertura = true, $("#modalcobertura").modal("show");
                         var self = this;
                         axios.get("http://127.0.0.1:8000/api/cobertura/" + id).then(function (response) {
+                                console.log(response.data.data);
                                 self.cobertura = response.data.data;
                         }).catch(function (e) {
                                 return console.log(e);
                         });
                 },
                 borrarCobertura: function borrarCobertura(id) {
-                        var _this9 = this;
+                        var _this10 = this;
 
                         axios.delete("http://127.0.0.1:8000/api/cobertura/" + id).then(function () {
-                                _this9.cargarCobertura();
+                                _this10.cargarCobertura();
                                 console.log('borado!');
                         });
                 },
@@ -53940,7 +53954,7 @@ var render = function() {
             on: {
               submit: function($event) {
                 $event.preventDefault()
-                return _vm.crearCompania($event)
+                _vm.updateCompania()
               }
             }
           },
@@ -54577,15 +54591,25 @@ var render = function() {
                           },
                           [
                             _c("td", [
-                              _vm._v(_vm._s(codigo_organizador.apellido))
+                              _vm._v(
+                                _vm._s(
+                                  codigo_organizador.organizadores.apellido
+                                )
+                              )
                             ]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v(_vm._s(codigo_organizador.organizador_id))
+                              _vm._v(
+                                _vm._s(codigo_organizador.organizadores.nombre)
+                              )
                             ]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v(_vm._s(codigo_organizador.compania_id))
+                              _vm._v(
+                                _vm._s(
+                                  codigo_organizador.organizadores.matricula
+                                )
+                              )
                             ]),
                             _vm._v(" "),
                             _c("td", [
@@ -54662,7 +54686,7 @@ var render = function() {
                       submit: function($event) {
                         $event.preventDefault()
                         _vm.modoEditarCodigo_Organizador
-                          ? _vm.updateCodigo_organizador(
+                          ? _vm.updateCodigo_Organizador(
                               _vm.codigo_organizador.id
                             )
                           : _vm.crearCodigo_Organizador()
@@ -54969,18 +54993,35 @@ var render = function() {
                             attrs: { role: "row" }
                           },
                           [
-                            _c("td", [_vm._v("apellido productor")]),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(codigo_productor.productores.apellido)
+                              )
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("nombre productor")]),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(codigo_productor.productores.nombre)
+                              )
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("matricula productor")]),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(codigo_productor.productores.matricula)
+                              )
+                            ]),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(_vm._s(codigo_productor.codigo_productor))
                             ]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v("codigo organizador del productor")
+                              _vm._v(
+                                _vm._s(
+                                  codigo_productor.codigo_organizador
+                                    .codigo_organizador
+                                )
+                              )
                             ]),
                             _vm._v(" "),
                             codigo_productor.activo == 1
@@ -55254,21 +55295,21 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.codigo_productor.activa,
-                                  expression: "codigo_productor.activa"
+                                  value: _vm.codigo_productor.activo,
+                                  expression: "codigo_productor.activo"
                                 }
                               ],
                               staticClass: "form-check-input",
                               attrs: { type: "radio", value: "1" },
                               domProps: {
                                 checked: _vm._q(
-                                  _vm.codigo_productor.activa,
+                                  _vm.codigo_productor.activo,
                                   "1"
                                 )
                               },
                               on: {
                                 change: function($event) {
-                                  _vm.$set(_vm.codigo_productor, "activa", "1")
+                                  _vm.$set(_vm.codigo_productor, "activo", "1")
                                 }
                               }
                             }),
@@ -55284,21 +55325,21 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.codigo_productor.activa,
-                                  expression: "codigo_productor.activa"
+                                  value: _vm.codigo_productor.activo,
+                                  expression: "codigo_productor.activo"
                                 }
                               ],
                               staticClass: "form-check-input",
                               attrs: { type: "radio", value: "0" },
                               domProps: {
                                 checked: _vm._q(
-                                  _vm.codigo_productor.activa,
+                                  _vm.codigo_productor.activo,
                                   "0"
                                 )
                               },
                               on: {
                                 change: function($event) {
-                                  _vm.$set(_vm.codigo_productor, "activa", "0")
+                                  _vm.$set(_vm.codigo_productor, "activo", "0")
                                 }
                               }
                             }),

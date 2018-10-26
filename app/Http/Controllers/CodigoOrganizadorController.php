@@ -12,16 +12,16 @@ class CodigoOrganizadorController extends Controller
 {
     public function index()
     {
-        $codigo_organizadores = CodigoOrganizador::all();
+        $codigo_organizadores = CodigoOrganizador::with('organizadores')->get();
 
         return CodigoOrganizadorsResource::collection($codigo_organizadores);
     }
 
-    public function show($compania_id)
+    public function show($id)
     {
-        $codigo_organizadores = CodigoOrganizador::where('compania_id', $compania_id)->get();
+        $codigo_organizadores = CodigoOrganizador::findOrFail($id);
 
-        return CodigoOrganizadorsResource::collection($codigo_organizadores);
+        return new CodigoOrganizadorsResource($codigo_organizadores);
     }
 
     public function store(Request $request)

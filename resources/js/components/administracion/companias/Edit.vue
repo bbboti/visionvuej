@@ -4,7 +4,7 @@
              <div class="col-md-12">
 
         <div class="content">
-                        <form @submit.prevent="crearCompania">
+                        <form @submit.prevent="updateCompania()">
 
                 <div class="row">
 <!-- ARREGLO BLOQUE -->
@@ -191,9 +191,9 @@
                                                                 </thead>
                                                                 <tbody>
                                                                                 <tr v-for="codigo_organizador in codigo_organizadores" :key="codigo_organizador.id" role="row" class="odd">
-                                                                                <td>{{codigo_organizador.apellido}}</td>
-                                                                                <td>{{codigo_organizador.organizador_id}}</td>
-                                                                                <td>{{codigo_organizador.compania_id}}</td> 
+                                                                                <td>{{codigo_organizador.organizadores.apellido}}</td>
+                                                                                <td>{{codigo_organizador.organizadores.nombre}}</td>
+                                                                                <td>{{codigo_organizador.organizadores.matricula}}</td> 
                                                                                 <td>{{codigo_organizador.codigo_organizador}}</td>
                                                                                 <td v-if="codigo_organizador.activo == 1">SI</td>
                                                                                 <td v-else>NO</td>   
@@ -216,7 +216,7 @@
 <div class="modal fade" id="modalcodigoorganizador" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="modoEditarCodigo_Organizador ? updateCodigo_organizador(codigo_organizador.id) : crearCodigo_Organizador()">
+        <form @submit.prevent="modoEditarCodigo_Organizador ? updateCodigo_Organizador(codigo_organizador.id) : crearCodigo_Organizador()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Codigo Organizador</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -290,11 +290,11 @@
                                                                         </thead>
                                                                         <tbody>
                                                                                 <tr v-for="codigo_productor in codigo_productores" :key="codigo_productor.id" role="row" class="odd">
-                                                                                        <td>apellido productor</td>
-                                                                                        <td>nombre productor</td>
-                                                                                        <td>matricula productor</td>
+                                                                                        <td>{{codigo_productor.productores.apellido}}</td>
+                                                                                        <td>{{codigo_productor.productores.nombre}}</td>
+                                                                                        <td>{{codigo_productor.productores.matricula}}</td>
                                                                                         <td>{{codigo_productor.codigo_productor}}</td>
-                                                                                        <td>codigo organizador del productor</td>
+                                                                                        <td>{{codigo_productor.codigo_organizador.codigo_organizador}}</td>
                                                                                         <td v-if="codigo_productor.activo == 1">SI</td>
                                                                                         <td v-else>NO</td>                                
                                                                                         <td>
@@ -347,11 +347,11 @@
                                                         </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value=1 v-model="codigo_productor.activa">
+                                                    <input class="form-check-input" type="radio" value=1 v-model="codigo_productor.activo">
                                                     <label class="form-check-label">Activo</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value=0 v-model="codigo_productor.activa">
+                                                    <input class="form-check-input" type="radio" value=0 v-model="codigo_productor.activo">
                                                     <label class="form-check-label">Inactivo</label>
                                                 </div>
                                         </div>
@@ -503,14 +503,6 @@
         </div>
 
 
-
-
-
-
-
-
-
-
 </template>
 <script>
 export default {
@@ -568,6 +560,10 @@ export default {
         };
   },
   methods: {
+
+// FUNCIONES COMPANIA //
+
+
         cargarCompania() {
         let self = this;
         axios
@@ -578,6 +574,19 @@ export default {
                 self.compania = response.data.data[0];
                 });
         },
+
+
+        updateCompania(){
+                let self = this;
+                axios.put("http://127.0.0.1:8000/api/administracion/companias/"+this.compania.id, this.compania)
+                .then(()=>{
+                        console.log("update ok")
+                window.location.replace('http://127.0.0.1:8000/administracion/companias/'+this.compania.nombre + "/edit")
+                })
+        },
+
+//FIN - FUNCIONES COMPANIA // 
+        
         cargarLocalidades() {
         let self = this;
         axios
@@ -587,8 +596,9 @@ export default {
                 });
         },
         vaciarForm(){
-                this.codigo_organizador = {}
-                this.codigo_productor = {}
+                this.codigo_organizador = {};
+                this.codigo_productor = {};
+                this.cobertura = {};
                 this.compania.activo = 1;
         },
 
@@ -603,6 +613,7 @@ export default {
         },
         crearCodigo_Organizador() {
         let self = this;
+        self.codigo_organizador.compania_id = self.compania.id;
         axios
         .post("http://127.0.0.1:8000/api/codigoorganizador",self.codigo_organizador)
         .then(() => {
@@ -656,6 +667,7 @@ export default {
         },
         crearCodigo_Productor() {
         let self = this;
+        self.codigo_productor.compania_id = self.compania.id;
         axios
         .post("http://127.0.0.1:8000/api/codigoproductor",self.codigo_productor)
         .then(() => {
@@ -677,7 +689,7 @@ export default {
         }).catch(e=>(console.log(e)))
         },
         editarCodigo_Productor(id){
-        this.modoEditarCodigo_Oroductor = true,
+        this.modoEditarCodigo_Productor = true,
         $("#modalcodigoproductor").modal("show");
         let self = this;
         axios
@@ -707,6 +719,7 @@ export default {
         },
         crearCobertura() {
         let self = this;
+        self.cobertura.compania_id = self.compania.id;
         axios
         .post("http://127.0.0.1:8000/api/cobertura",self.cobertura)
         .then(() => {
@@ -734,6 +747,7 @@ export default {
         axios
         .get("http://127.0.0.1:8000/api/cobertura/" + id)
         .then(function(response) {
+                console.log(response.data.data);
           self.cobertura = response.data.data;})
           .catch(e=>console.log(e));
         },

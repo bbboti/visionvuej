@@ -12,10 +12,6 @@ class CodigoProductor extends Model
 {
     protected $guarded = [];
 
-    public function organizadores() {
-        return $this->belongsTo(Organizadores::class, 'organizador_id');
-    }
-
     public function productores() {
         return $this->belongsTo(Productores::class, 'productor_id');
      }
