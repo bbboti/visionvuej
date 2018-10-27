@@ -50335,7 +50335,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -50381,7 +50380,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     crearCliente: function crearCliente() {
       var _this = this;
 
-      //   console.log(this.cliente);
       var self = this;
       axios.post("http://127.0.0.1:8000/api/clientes", self.cliente).then(function () {
         $("#modal").modal("hide");
@@ -50438,7 +50436,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     cargarLocalidades: function cargarLocalidades() {
       var self = this;
       axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
-        console.log(response.data.data);
         self.localidades = response.data.data;
       });
     }
@@ -50520,7 +50517,14 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(cliente.email) + " ")]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(cliente.productor_id) + " ")]),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(cliente.productores.apellido) +
+                              " " +
+                              _vm._s(cliente.productores.nombre) +
+                              " "
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           _c("a", {
@@ -50577,7 +50581,7 @@ var render = function() {
                     $event.preventDefault()
                     _vm.modoEditar
                       ? _vm.updateCliente(_vm.cliente.id)
-                      : _vm.crearCliente
+                      : _vm.crearCliente()
                   }
                 }
               },

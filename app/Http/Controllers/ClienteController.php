@@ -18,9 +18,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Clientes::all();
-        $productores = Productores::all();
-        $localidades = Localidades::all();
+        $clientes = Clientes::with('productores')->get();
+        // $localidades = Localidades::all();
 
         return ClientesResource::collection($clientes);
     }

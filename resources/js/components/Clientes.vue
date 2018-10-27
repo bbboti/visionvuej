@@ -29,8 +29,7 @@
                                             <td>{{cliente.nro_dni}} </td>
                                             <td>{{cliente.celular}} </td>
                                             <td>{{cliente.email}} </td>
-                                            <td>{{cliente.productor_id}} </td> 
-                                            <!-- ver tema de mostrar la relacion -->
+                                            <td>{{cliente.productores.apellido}} {{cliente.productores.nombre}} </td> 
                                             <td>
                                                 <a @click.prevent="modoEdicion(cliente.id)" class="fa fa-edit"></a>
                                                 <a @click.prevent="borrarCliente(cliente.id)" class="fa fa-trash"></a>
@@ -48,7 +47,7 @@
 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <form @submit.prevent="modoEditar ? updateCliente(cliente.id) : crearCliente">
+        <form @submit.prevent="modoEditar ? updateCliente(cliente.id) : crearCliente()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Cliente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -360,7 +359,6 @@ export default {
   },
   methods: {
     crearCliente() {
-    //   console.log(this.cliente);
       let self = this;
       axios
         .post(
@@ -425,7 +423,6 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/localidades")
         .then(function(response) {
-            console.log(response.data.data);
           self.localidades = response.data.data;
         });
     }
