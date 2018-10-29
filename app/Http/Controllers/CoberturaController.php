@@ -25,6 +25,15 @@ class CoberturaController extends Controller
         return new CoberturasResource($coberturas);
     }
 
+    public function indexFiltrado($compania_id)
+    {
+        $coberturas = Coberturas::where('compania_id', $compania_id)->get();
+
+
+        return CoberturasResource::collection($coberturas);
+    }
+
+
     public function store(Request $request)
     {        
         $this->validate($request, [

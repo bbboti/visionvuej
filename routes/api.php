@@ -26,5 +26,8 @@ Route::Resource('/localidades', 'LocalidadController');
 Route::Resource('/codigoorganizador', 'CodigoOrganizadorController');
 Route::Resource('/codigoproductor', 'CodigoProductorController');
 Route::Resource('/cobertura', 'CoberturaController');
+Route::get('/codigoorganizador/compania/{id}', 'CodigoOrganizadorController@indexFiltrado');
+Route::get('/codigoproductor/compania/{id}', 'CodigoProductorController@indexFiltrado');
+Route::get('/cobertura/compania/{id}', 'CoberturaController@indexFiltrado');
 
 

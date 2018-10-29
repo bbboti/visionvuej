@@ -171,14 +171,15 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.productor = {};
-          this.productor.activo = true;
+        //   this.productor.activo = 1;
           this.cargarProductores();
         })
         .catch(e => console.log(e));
     },
     vaciarForm(){
         this.productor = {}
-        this.productor.activo = 1;
+        this.modoEditar = false;
+        // this.productor.activo = 1;
     },
     updateProductor(id){
         let self = this;

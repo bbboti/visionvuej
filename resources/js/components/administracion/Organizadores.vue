@@ -47,7 +47,7 @@
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="modoEditar ? updateOrganizador(organizador.id) : crearOrganizador">
+        <form @submit.prevent="modoEditar ? updateOrganizador(organizador.id) : crearOrganizador()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Organizador</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -168,14 +168,16 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.organizador = {};
-          this.organizador.activo = true;
+        //   this.organizador.activo = 1;
           this.cargarOrganizadores();
         })
         .catch(e => console.log(e));
     },
     vaciarForm(){
-        this.organizador = {}
-        this.organizador.activo = 1;
+        this.organizador = {};
+        this.modoEditar = false;
+
+        // this.organizador.activo = 1;
     },
     updateOrganizador(id){
         let self = this;

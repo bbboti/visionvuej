@@ -24,6 +24,15 @@ class CodigoOrganizadorController extends Controller
         return new CodigoOrganizadorsResource($codigo_organizadores);
     }
 
+
+    public function indexFiltrado($compania_id)
+    {
+        $codigo_organizadores = CodigoOrganizador::with('organizadores')->where('compania_id', $compania_id)->get();
+
+
+        return CodigoOrganizadorsResource::collection($codigo_organizadores);
+    }
+
     public function store(Request $request)
     {        
         $this->validate($request, [

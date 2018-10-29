@@ -168,7 +168,7 @@
         <div class="col-md-12">
                 <div class="box box-primary">
                         <div class="box-header with-border">
-                                <h5 class="box-title">Codigos de Organizador</h5>
+                                <h5 class="box-title">Codigos de Organizadores</h5>
                                 <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcodigoorganizador" @click.prevent="vaciarForm()">Crear</a>
                         </div>
                         <!-- Button trigger modal -->
@@ -216,7 +216,7 @@
 <div class="modal fade" id="modalcodigoorganizador" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="modoEditarCodigo_Organizador ? updateCodigo_Organizador(codigo_organizador.id) : crearCodigo_Organizador()">
+        <form @submit.prevent="modoEditar ? updateCodigo_Organizador(codigo_organizador.id) : crearCodigo_Organizador()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Codigo Organizador</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -252,8 +252,8 @@
                                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" v-show="!modoEditarCodigo_Organizador" class="btn btn-primary">Crear</button>
-                <button type="submit" v-show="modoEditarCodigo_Organizador" class="btn btn-primary">Guardar</button>
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
             </div>
             </form>
             </div>
@@ -267,7 +267,7 @@
                         <div class="box box-primary">
                                 <div class="box-header with-border">
                                         <h5 class="box-title">Codigos de Productores</h5>
-                                        <a  class="btn btn-success" data-toggle="modal" data-target="#modalcodigoproductor" @click.prevent="vaciarForm()" >Crear</a>
+                                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcodigoproductor" @click.prevent="vaciarForm()" >Crear</a>
                                 </div>
                                 <!-- Button trigger modal -->
                                 
@@ -314,7 +314,7 @@
 <div class="modal fade" id="modalcodigoproductor" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="modoEditarCodigo_Productor ? updateCodigo_Productor(codigo_productor.id) : crearCodigo_Productor()">
+        <form @submit.prevent="modoEditar ? updateCodigo_Productor(codigo_productor.id) : crearCodigo_Productor()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Codigo Productor</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -336,7 +336,7 @@
                                                         <label for="nombre" class=" control-label">Codigo Organizador</label>
                                                         <div class="">
                                                                 <select name='codigo_organizador_id' class="form-control form-control-sm"  v-model="codigo_productor.codigo_organizador_id">
-                                                                        <option v-for="codigo_organizador in codigo_organizadores" :key="codigo_organizador.id" v-bind:value="codigo_organizador.id"> ejemplo </option>
+                                                                        <option v-for="codigo_organizador in codigo_organizadores" :key="codigo_organizador.id" v-bind:value="codigo_organizador.id"> {{codigo_organizador.organizadores.apellido}} {{codigo_organizador.organizadores.nombre}} (Codigo Org: {{codigo_organizador.codigo_organizador}}) </option>
                                                                 </select>
                                                         </div>
                                                 </div>
@@ -358,8 +358,8 @@
                                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" v-show="!modoEditarCodigo_Productor" class="btn btn-primary">Crear</button>
-                <button type="submit" v-show="modoEditarCodigo_Productor" class="btn btn-primary">Guardar</button>
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
             </div>
             </form>
             </div>
@@ -375,7 +375,7 @@
         <div class="box box-primary">
                 <div class="box-header with-border">
                         <h5 class="box-title">Coberturas</h5>
-                        <a  class="btn btn-success" data-toggle="modal" data-target="#modalcobertura" @click.prevent="vaciarForm()">Crear</a>
+                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcobertura" @click.prevent="vaciarForm()">Crear</a>
                 </div>
                 <!-- Button trigger modal -->
                 
@@ -425,7 +425,7 @@
 <div class="modal fade" id="modalcobertura" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form @submit.prevent="modoEditarCobertura ? updateCobertura(cobertura.id) : crearCobertura()">
+        <form @submit.prevent="modoEditar ? updateCobertura(cobertura.id) : crearCobertura()">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Cobertura</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -488,8 +488,8 @@
                                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" v-show="!modoEditarCobertura" class="btn btn-primary">Crear</button>
-                <button type="submit" v-show="modoEditarCobertura" class="btn btn-primary">Guardar</button>
+                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
             </div>
             </form>
             </div>
@@ -522,7 +522,7 @@ export default {
                 email_siniestros: "",
                 id:""
         },
-        modoEditarCodigo_Organizador:false,
+        modoEditar:false,
         codigo_organizadores:{},
         codigo_organizador:{
                 codigo_organizador:"",
@@ -530,7 +530,6 @@ export default {
                 compania_id: "",
                 activo:"",
         },
-        modoEditarCodigo_Productor:false,
         codigo_productores:{},
         codigo_productor:{
                 codigo_productor:"",
@@ -539,7 +538,6 @@ export default {
                 compania_id: "",
                 activo:"",
         },
-        modoEditarCobertura:false,
         coberturas:{},
         cobertura:{
                 nombre:"",
@@ -572,9 +570,29 @@ export default {
                 )
                 .then(response => {
                 self.compania = response.data.data[0];
+                axios
+                .get("http://127.0.0.1:8000/api/codigoorganizador/compania/" + self.compania.id)
+                .then(response =>{
+                        self.codigo_organizadores = response.data.data;
+                }).catch((err)=>{
+                        console.log(err);
+                });
+                axios
+                .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + self.compania.id)
+                .then(response =>{
+                        self.codigo_productores = response.data.data;
+                }).catch((err)=>{
+                        console.log(err);
+                });
+                axios
+                .get("http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id)
+                .then(response =>{
+                        self.coberturas = response.data.data;
+                }).catch((err)=>{
+                        console.log(err);
+                });
                 });
         },
-
 
         updateCompania(){
                 let self = this;
@@ -596,6 +614,7 @@ export default {
                 });
         },
         vaciarForm(){
+                this.modoEditar = false
                 this.codigo_organizador = {};
                 this.codigo_productor = {};
                 this.cobertura = {};
@@ -635,7 +654,7 @@ export default {
         }).catch(e=>(console.log(e)))
         },
         editarCodigo_Organizador(id){
-        this.modoEditarCodigo_Organizador = true,
+        this.modoEditar = true,
         $("#modalcodigoorganizador").modal("show");
         let self = this;
         axios
@@ -689,7 +708,7 @@ export default {
         }).catch(e=>(console.log(e)))
         },
         editarCodigo_Productor(id){
-        this.modoEditarCodigo_Productor = true,
+        this.modoEditar = true,
         $("#modalcodigoproductor").modal("show");
         let self = this;
         axios
@@ -741,7 +760,7 @@ export default {
         }).catch(e=>(console.log(e)))
         },
         editarCobertura(id){
-        this.modoEditarCobertura = true,
+        this.modoEditar = true,
         $("#modalcobertura").modal("show");
         let self = this;
         axios
@@ -795,8 +814,8 @@ export default {
   created() {
     this.cargarCompania();
     this.cargarLocalidades();
-    this.cargarCodigo_Organizador();
-    this.cargarCodigo_Productor();
+//     this.cargarCodigo_Organizador();
+//     this.cargarCodigo_Productor();
     this.cargarCobertura();
     this.cargarOrganizadores();
     this.cargarProductores();
