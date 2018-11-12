@@ -13,7 +13,7 @@ class EstadoPoliza extends Migration
      */
     public function up()
     {
-        Schema::create('estado_poliza', function (Blueprint $table) {
+        Schema::create('estado_polizas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->timestamps();
@@ -27,6 +27,6 @@ class EstadoPoliza extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estado_poliza');
+        Schema::dropIfExists('estado_polizas');
     }
 }

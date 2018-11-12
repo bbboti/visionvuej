@@ -16,7 +16,7 @@ class PolizaController extends Controller
      */
     public function index()
     {
-        $polizas = Polizas::all();
+        $polizas = Polizas::with(['codigo_productor', 'estado_polizas', 'clientes', 'companias'])->get();
 
         return PolizasResource::collection($polizas);
     }

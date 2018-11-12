@@ -2,6 +2,12 @@
 
 namespace App;
 
+use App\Companias;
+use App\Clientes;
+use App\CodigoProductor;
+use App\TipoRiesgo;
+use App\EstadoPoliza;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Polizas extends Model
@@ -13,16 +19,20 @@ class Polizas extends Model
         return $this->belongsTo(Companias::class, 'compania_id');
     }
     
-
     public function clientes() {
         return $this->belongsTo(Clientes::class, 'cliente_id');
     }
 
-    public function codigoProductor() {
-        return $this->belongsTo(Codigoproductor::class, 'codigo_productor_id');
+    public function codigo_productor() {
+        return $this->belongsTo(CodigoProductor::class, 'codigo_productor_id');
     }
 
     public function tipoRiesgo() {
         return $this->belongsTo(TipoRiesgo::class, 'tipo_riesgo_id');
     }
+
+    public function estado_polizas() {
+        return $this->belongsTo(EstadoPoliza::class, 'estado_poliza_id');
+    }
+
 }

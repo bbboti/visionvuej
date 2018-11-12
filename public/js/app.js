@@ -58152,17 +58152,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            polizas: {}
+            polizas: {},
+            companias: {},
+            codigo_productor: {},
+            productor: {}
         };
     },
     created: function created() {
         var self = this;
         axios.get('http://127.0.0.1:8000/api/polizas').then(function (response) {
-            // console.log(response.data.data);
             self.polizas = response.data.data;
         });
     }
@@ -58202,7 +58215,7 @@ var render = function() {
             _c(
               "table",
               {
-                staticClass: "table table-bordered table-hover dataTable",
+                staticClass: "table-sm table-bordered table-hover dataTable ",
                 attrs: {
                   id: "example2",
                   role: "grid",
@@ -58228,15 +58241,29 @@ var render = function() {
                         _c("td", [_vm._v(" petente ")]),
                         _vm._v(" "),
                         _c("td", [
-                          _vm._v(" " + _vm._s(poliza.compania_id) + " ")
+                          _vm._v(" " + _vm._s(poliza.companias.nombre) + " ")
                         ]),
                         _vm._v(" "),
                         _c("td", [
-                          _vm._v(" " + _vm._s(poliza.codigo_productor_id) + " ")
+                          _vm._v(
+                            " " +
+                              _vm._s(poliza.codigo_productor.codigo_productor) +
+                              " "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("td", [
-                          _vm._v(" " + _vm._s(poliza.cliente_id) + " ")
+                          _c("a", {
+                            staticClass: "fa fa-user",
+                            attrs: { href: "" }
+                          }),
+                          _vm._v(
+                            "  " +
+                              _vm._s(poliza.clientes.apellido) +
+                              " " +
+                              _vm._s(poliza.clientes.nombre) +
+                              "  "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("td", [
@@ -58252,12 +58279,59 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", [
-                          _vm._v(" " + _vm._s(poliza.estado_poliza_id) + " ")
+                          _vm._v(
+                            " " + _vm._s(poliza.estado_polizas.nombre) + " "
+                          )
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(" entrega ")]),
+                        poliza.fecha_recepcion !== null &&
+                        poliza.fecha_entrega_original === null &&
+                        poliza.fecha_entrega_correo === null &&
+                        poliza.fecha_entrega_email === null
+                          ? _c("td", [_vm._v("Recibida")])
+                          : poliza.fecha_recepcion !== null &&
+                            poliza.fecha_entrega_original !== null &&
+                            poliza.fecha_entrega_correo === null &&
+                            poliza.fecha_entrega_email === null
+                            ? _c("td", [_vm._v("Entregada")])
+                            : poliza.fecha_recepcion !== null &&
+                              poliza.fecha_entrega_original === null &&
+                              poliza.fecha_entrega_correo !== null &&
+                              poliza.fecha_entrega_email === null
+                              ? _c("td", [_vm._v("Correo")])
+                              : poliza.fecha_recepcion !== null &&
+                                poliza.fecha_entrega_original === null &&
+                                poliza.fecha_entrega_correo === null &&
+                                poliza.fecha_entrega_email !== null
+                                ? _c("td", [_vm._v("Email")])
+                                : poliza.fecha_recepcion !== null &&
+                                  poliza.fecha_entrega_original !== null &&
+                                  poliza.fecha_entrega_correo !== null &&
+                                  poliza.fecha_entrega_email === null
+                                  ? _c("td", [_vm._v("Entregada / Correo")])
+                                  : poliza.fecha_recepcion !== null &&
+                                    poliza.fecha_entrega_original !== null &&
+                                    poliza.fecha_entrega_correo === null &&
+                                    poliza.fecha_entrega_email !== null
+                                    ? _c("td", [_vm._v("Entregada / Email")])
+                                    : poliza.fecha_recepcion !== null &&
+                                      poliza.fecha_entrega_original === null &&
+                                      poliza.fecha_entrega_correo !== null &&
+                                      poliza.fecha_entrega_email !== null
+                                      ? _c("td", [_vm._v("Correo / Email")])
+                                      : poliza.fecha_recepcion !== null &&
+                                        poliza.fecha_entrega_original !==
+                                          null &&
+                                        poliza.fecha_entrega_correo !== null &&
+                                        poliza.fecha_entrega_email !== null
+                                        ? _c("td", [
+                                            _vm._v("Entregada / Correo / Email")
+                                          ])
+                                        : _c("td", [_vm._v("No recibida")]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(" forma ")]),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.medio_pago) + " ")
+                        ]),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -58270,6 +58344,21 @@ var render = function() {
                                   poliza.numero +
                                   "/edit"
                               }
+                            }),
+                            _vm._v(" "),
+                            _c("a", {
+                              staticClass: "fa fa-car",
+                              attrs: { href: "" }
+                            }),
+                            _vm._v(" "),
+                            _c("a", {
+                              staticClass: "fa fa-folder-plus",
+                              attrs: { href: "" }
+                            }),
+                            _vm._v(" "),
+                            _c("a", {
+                              staticClass: "fa fa-car-crash",
+                              attrs: { href: "" }
                             }),
                             _vm._v(" "),
                             _c("a", {
@@ -58316,7 +58405,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Entrega")]),
+        _c("th", [_vm._v("Envio")]),
         _vm._v(" "),
         _c("th", [_vm._v("Forma de Pago")]),
         _vm._v(" "),
