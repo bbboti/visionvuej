@@ -55,10 +55,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-header">POLIZAS</li>
           <li class="nav-item">
-              <a href="#" class="nav-link">
-                  <i class="nav-icon fa fa-car"></i>
-                  <span>Automotor</span>
-              </a>
+              <router-link to="/polizas/automotor" class="nav-link">
+                <i class="nav-icon fa fa-car"></i>
+                <p>Automotor</p>
+              </router-link>
           </li>
           <li class="nav-item has-treeview">
               <a href="#" class="nav-link">

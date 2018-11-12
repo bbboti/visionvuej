@@ -14031,6 +14031,10 @@ var routes = [{
     path: '/administracion/productores',
     component: __webpack_require__(57),
     meta: { title: 'Productores' }
+}, {
+    path: '/polizas/automotor',
+    component: __webpack_require__(77),
+    meta: { title: 'Polizas Automotor' }
 }];
 
 // router.beforeEach((to, from, next) => {
@@ -50341,6 +50345,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       clientes: {},
       productores: {},
+      productor: {},
       localidades: {},
       cliente: {
         tipo_persona: "",
@@ -58018,6 +58023,316 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(78)
+/* template */
+var __vue_template__ = __webpack_require__(79)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/polizas/Automotor.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c5aa128", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c5aa128", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            polizas: {}
+        };
+    },
+    created: function created() {
+        var self = this;
+        axios.get('http://127.0.0.1:8000/api/polizas').then(function (response) {
+            // console.log(response.data.data);
+            self.polizas = response.data.data;
+        });
+    }
+});
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("p", [_vm._v("Polizas Automotor")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "box" }, [
+      _c(
+        "div",
+        { staticClass: "box-header" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-success ",
+              attrs: { to: "/polizas/create" }
+            },
+            [_vm._v("Crear")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-bordered table-hover dataTable",
+                attrs: {
+                  id: "example2",
+                  role: "grid",
+                  "aria-describedby": "example2_info"
+                }
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.polizas, function(poliza) {
+                    return _c(
+                      "tr",
+                      {
+                        key: poliza.id,
+                        staticClass: "odd",
+                        attrs: { role: "row" }
+                      },
+                      [
+                        _c("td", [_vm._v(" " + _vm._s(poliza.numero) + " ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" petente ")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.compania_id) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.codigo_productor_id) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.cliente_id) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.tipo_vigencia) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.vigencia_desde) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.vigencia_hasta) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(" " + _vm._s(poliza.estado_poliza_id) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" entrega ")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(" forma ")]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c("router-link", {
+                              staticClass: "fa fa-edit",
+                              attrs: {
+                                to:
+                                  "/polizas/automotor/" +
+                                  poliza.numero +
+                                  "/edit"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("a", {
+                              staticClass: "fa fa-trash",
+                              attrs: { href: "" }
+                            })
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  })
+                )
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", { attrs: { role: "row" } }, [
+        _c("th", [_vm._v("Poliza Nro")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Patente")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Compañia")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Productor")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cliente")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Vigencia")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("V. Desde")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("V. Hasta")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Estado")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Entrega")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Forma de Pago")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Edicion")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c5aa128", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
