@@ -373,8 +373,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </footer>
                     </div>
                     <!-- ./wrapper -->
+            </div>
+    </div>
 
-                    <script src="/js/app.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 
 </html>
