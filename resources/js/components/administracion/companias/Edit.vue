@@ -564,7 +564,7 @@ export default {
 
         cargarCompania() {
         let self = this;
-        axios
+                axios
                 .get(
                 "http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania
                 )

@@ -9,8 +9,7 @@
                 <div class="box-body">
                         <div class="row">
                             <div class="col-12">
-                                <table id="example2" class="table-sm table-bordered table-hover dataTable " role="grid"
-                                    aria-describedby="example2_info">
+                                <table id="example2" class="table-sm table-bordered table-hover dataTable " role="grid" aria-describedby="example2_info">
                                     <thead class="thead-light">
                                         <tr role="row">
                                             <th>Poliza Nro</th>
