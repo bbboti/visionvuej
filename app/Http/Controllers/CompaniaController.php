@@ -23,8 +23,6 @@ class CompaniaController extends Controller
         $companias = Companias::all();
         $localidades = Localidades::all();
 
-
-
         return CompaniasResource::collection($companias);
     }
 
