@@ -6,6 +6,7 @@ use App\Companias;
 use App\Productores;
 use App\Organizadores;
 use App\CodigoOrganizador;
+use App\Polizas;
 use Illuminate\Database\Eloquent\Model;
 
 class CodigoProductor extends Model
@@ -22,5 +23,9 @@ class CodigoProductor extends Model
 
     public function codigo_organizador() {
         return $this->belongsTo(CodigoOrganizador::class, 'codigo_organizador_id');
+    }
+
+    public function polizas(){
+    return $this->hasMany(Polizas::class, 'codigo_productor_id', 'id');
     }
 }

@@ -32,4 +32,9 @@ class Companias extends Model
     {
     return $this->hasMany(Coberturas::class, 'compania_id', 'id');
     }
+
+    public function polizas()
+    {
+    return $this->hasMany(Polizas::class, 'compania_id', 'id');
+    }
 }

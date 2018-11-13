@@ -17,10 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/', 'HomeController@index')->name('home');
-
-// Route::Resource('administrador/companias', 'CompaniasController');
-
 Route::get('/clientes', function () {
     return view('layouts.master');
 });
@@ -45,9 +41,12 @@ Route::get('/administracion/productores', function () {
     return view('layouts.master');
 });
 
+Route::get('/polizas/automotor', function () {
+    return view('layouts.master');
+});
 
-// Route::get('administracion/companias/edit', function () {
-//     return view('layouts.master');
-// });
+Route::get('/polizas/create', function () {
+    return view('layouts.master');
+});
 
 

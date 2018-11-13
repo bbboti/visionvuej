@@ -40,6 +40,11 @@ let routes = [
     component: require('./components/administracion/Productores.vue'),
     meta: {title: 'Productores'}
 },
+{
+    path: '/polizas/automotor',
+    component: require('./components/polizas/Automotor.vue'),
+    meta: {title: 'Polizas Automotor'}
+},
 
 
 ]

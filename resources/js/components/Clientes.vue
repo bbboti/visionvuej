@@ -323,6 +323,7 @@ export default {
     return {
       clientes: {},
       productores: {},
+      productor: {},
       localidades: {},
       cliente: {
           tipo_persona:"",
