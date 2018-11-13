@@ -58434,9 +58434,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(82)
+var __vue_script__ = __webpack_require__(81)
 /* template */
-var __vue_template__ = __webpack_require__(81)
+var __vue_template__ = __webpack_require__(82)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -58476,6 +58476,279 @@ module.exports = Component.exports
 
 /***/ }),
 /* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      poliza: {},
+      cliente: {},
+      clientes: [],
+      companias: [],
+      compania: {},
+      tipo_riesgos: [],
+      codigo_productores: [],
+      codigo_productor: {}
+    };
+  },
+
+  methods: {
+    cargarClientes: function cargarClientes() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
+        self.clientes = response.data.data;
+      });
+    },
+    cargarTipo_Riesgos: function cargarTipo_Riesgos() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
+        self.tipo_riesgos = response.data.data;
+      });
+    },
+    cargarCompanias: function cargarCompanias() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
+        self.companias = response.data.data;
+      });
+    },
+    cargarCodigos_Productor: function cargarCodigos_Productor() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + companiaid).then(function (response) {
+        self.codigo_productores = response.data.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  },
+
+  created: function created() {
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+    this.cargarCodigos_Productor();
+  }
+});
+
+/***/ }),
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -59162,280 +59435,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-4d6f54a6", module.exports)
   }
 }
-
-/***/ }),
-/* 82 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            poliza: {},
-            cliente: {},
-            clientes: {},
-            companias: {},
-            compania: {},
-            tipo_riesgos: {},
-            codigo_productores: {},
-            codigo_productor: {}
-        };
-    },
-
-    methods: {
-        cargarClientes: function cargarClientes() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
-                self.clientes = response.data.data;
-            });
-        },
-        cargarTipo_Riesgos: function cargarTipo_Riesgos() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
-                self.tipo_riesgos = response.data.data;
-            });
-        },
-        cargarCompanias: function cargarCompanias() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
-                self.companias = response.data.data;
-            });
-        },
-        cargarCodigos_Productor: function cargarCodigos_Productor() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + companiaid).then(function (response) {
-                self.codigo_productores = response.data.data;
-            }).catch(function (err) {
-                console.log(err);
-            });
-        }
-    },
-
-    created: function created() {
-        this.cargarClientes();
-        this.cargarTipo_Riesgos();
-        this.cargarCompanias();
-        this.cargarCodigos_Productor();
-    }
-});
 
 /***/ })
 /******/ ]);
