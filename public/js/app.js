@@ -53155,8 +53155,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -53665,301 +53663,305 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-        data: function data() {
-                return {
-                        compania: {
-                                nombre: "",
-                                cuit: "",
-                                direccion: "",
-                                localidad_id: "",
-                                codigo_lr: "",
-                                activo: "",
-                                telefono_1: "",
-                                telefono_aux: "",
-                                telefono_siniestros: "",
-                                email_emision: "",
-                                email_siniestros: "",
-                                id: ""
-                        },
-                        modoEditar: false,
-                        codigo_organizadores: {},
-                        codigo_organizador: {
-                                codigo_organizador: "",
-                                organizador_id: "",
-                                compania_id: "",
-                                activo: ""
-                        },
-                        codigo_productores: {},
-                        codigo_productor: {
-                                codigo_productor: "",
-                                codigo_organizador_id: "",
-                                productor_id: "",
-                                compania_id: "",
-                                activo: ""
-                        },
-                        coberturas: {},
-                        cobertura: {
-                                nombre: "",
-                                compania_id: "",
-                                antiguedad: "",
-                                todo_riesgo: "",
-                                franquicia: "",
-                                activa: "",
-                                ajuste: "",
-                                detalle: ""
-                        },
-                        organizadores: {},
-                        organizador: {},
-                        productores: {},
-                        productor: {},
-                        localidades: {},
-                        nombreCompania: this.$route.params.nombre
-                };
-        },
+  data: function data() {
+    return {
+      compania: {
+        nombre: "",
+        cuit: "",
+        direccion: "",
+        localidad_id: "",
+        codigo_lr: "",
+        activo: "",
+        telefono_1: "",
+        telefono_aux: "",
+        telefono_siniestros: "",
+        email_emision: "",
+        email_siniestros: "",
+        id: ""
+      },
+      modoEditar: false,
+      codigo_organizadores: {},
+      codigo_organizador: {
+        codigo_organizador: "",
+        organizador_id: "",
+        compania_id: "",
+        activo: ""
+      },
+      codigo_productores: {},
+      codigo_productor: {
+        codigo_productor: "",
+        codigo_organizador_id: "",
+        productor_id: "",
+        compania_id: "",
+        activo: ""
+      },
+      coberturas: {},
+      cobertura: {
+        nombre: "",
+        compania_id: "",
+        antiguedad: "",
+        todo_riesgo: "",
+        franquicia: "",
+        activa: "",
+        ajuste: "",
+        detalle: ""
+      },
+      organizadores: {},
+      organizador: {},
+      productores: {},
+      productor: {},
+      localidades: {},
+      nombreCompania: this.$route.params.nombre
+    };
+  },
 
-        methods: _defineProperty({
+  methods: {
+    // FUNCIONES COMPANIA //
 
-                // FUNCIONES COMPANIA //
+    cargarCompania: function cargarCompania() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania).then(function (response) {
+        self.compania = response.data.data[0];
+        axios.get("http://127.0.0.1:8000/api/codigoorganizador/compania/" + self.compania.id).then(function (response) {
+          self.codigo_organizadores = response.data.data;
+        }).catch(function (err) {
+          console.log(err);
+        });
+        axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + self.compania.id).then(function (response) {
+          self.codigo_productores = response.data.data;
+        }).catch(function (err) {
+          console.log(err);
+        });
+        axios.get("http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id).then(function (response) {
+          self.coberturas = response.data.data;
+        }).catch(function (err) {
+          console.log(err);
+        });
+      });
+    },
+    updateCompania: function updateCompania() {
+      var _this = this;
 
-
-                cargarCompania: function cargarCompania() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania).then(function (response) {
-                                self.compania = response.data.data[0];
-                                axios.get("http://127.0.0.1:8000/api/codigoorganizador/compania/" + self.compania.id).then(function (response) {
-                                        self.codigo_organizadores = response.data.data;
-                                }).catch(function (err) {
-                                        console.log(err);
-                                });
-                                axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + self.compania.id).then(function (response) {
-                                        self.codigo_productores = response.data.data;
-                                }).catch(function (err) {
-                                        console.log(err);
-                                });
-                                axios.get("http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id).then(function (response) {
-                                        self.coberturas = response.data.data;
-                                }).catch(function (err) {
-                                        console.log(err);
-                                });
-                        });
-                },
-                updateCompania: function updateCompania() {
-                        var _this = this;
-
-                        var self = this;
-                        axios.put("http://127.0.0.1:8000/api/administracion/companias/" + this.compania.id, this.compania).then(function () {
-                                console.log("update ok");
-                                window.location.replace('http://127.0.0.1:8000/administracion/companias/' + _this.compania.nombre + "/edit");
-                        });
-                },
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/administracion/companias/" + this.compania.id, this.compania).then(function () {
+        console.log("update ok");
+        window.location.replace("http://127.0.0.1:8000/administracion/companias/" + _this.compania.nombre + "/edit");
+      });
+    },
 
 
-                //FIN - FUNCIONES COMPANIA // 
+    //FIN - FUNCIONES COMPANIA //
 
-                cargarLocalidades: function cargarLocalidades() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
-                                self.localidades = response.data.data;
-                        });
-                },
-                vaciarForm: function vaciarForm() {
-                        this.modoEditar = false;
-                        this.codigo_organizador = {};
-                        this.codigo_productor = {};
-                        this.cobertura = {};
-                        this.compania.activo = 1;
-                },
-
-
-                // FUNCIONES CODIGO ORGANIZADOR //
-                cargarCodigo_Organizador: function cargarCodigo_Organizador() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoorganizador").then(function (response) {
-                                self.codigo_organizadores = response.data.data;
-                        });
-                },
-                crearCodigo_Organizador: function crearCodigo_Organizador() {
-                        var _this2 = this;
-
-                        var self = this;
-                        self.codigo_organizador.compania_id = self.compania.id;
-                        axios.post("http://127.0.0.1:8000/api/codigoorganizador", self.codigo_organizador).then(function () {
-                                $("#modalcodigoorganizador").modal("hide");
-                                _this2.codigo_organizador = {};
-                                _this2.codigo_organizador.activo = true;
-                                _this2.cargarCodigo_Organizador();
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                updateCodigo_Organizador: function updateCodigo_Organizador(id) {
-                        var _this3 = this;
-
-                        var self = this;
-                        axios.put("http://127.0.0.1:8000/api/codigoorganizador/" + id, this.codigo_organizador).then(function () {
-                                $("#modalcodigoorganizador").modal("hide");
-                                _this3.cargarCodigo_Organizador();
-                                console.log('listo!');
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                editarCodigo_Organizador: function editarCodigo_Organizador(id) {
-                        this.modoEditar = true, $("#modalcodigoorganizador").modal("show");
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function (response) {
-                                self.codigo_organizador = response.data.data;
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                borrarCodigo_Organizador: function borrarCodigo_Organizador(id) {
-                        var _this4 = this;
-
-                        axios.delete("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function () {
-                                _this4.cargarCodigo_Organizador();
-                                console.log('borado!');
-                        });
-                },
+    cargarLocalidades: function cargarLocalidades() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
+        self.localidades = response.data.data;
+      });
+    },
+    vaciarForm: function vaciarForm() {
+      this.modoEditar = false;
+      this.codigo_organizador = {};
+      this.codigo_productor = {};
+      this.cobertura = {};
+      this.compania.activo = 1;
+    },
 
 
-                // FIN - FUNCIONES CODIGO ORGANIZADOR // 
+    // FUNCIONES CODIGO ORGANIZADOR //
+    cargarCodigo_Organizador: function cargarCodigo_Organizador() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoorganizador/compania/" + self.compania.id).then(function (response) {
+        self.codigo_organizadores = response.data.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    crearCodigo_Organizador: function crearCodigo_Organizador() {
+      var _this2 = this;
 
-                // FUNCIONES CODIGO PRODUCTOR //
-                cargarCodigo_Productor: function cargarCodigo_Productor() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoproductor").then(function (response) {
-                                self.codigo_productores = response.data.data;
-                        });
-                },
-                crearCodigo_Productor: function crearCodigo_Productor() {
-                        var _this5 = this;
+      var self = this;
+      self.codigo_organizador.compania_id = self.compania.id;
+      axios.post("http://127.0.0.1:8000/api/codigoorganizador", self.codigo_organizador).then(function () {
+        $("#modalcodigoorganizador").modal("hide");
+        _this2.codigo_organizador = {};
+        _this2.codigo_organizador.activo = true;
+        _this2.cargarCodigo_Organizador();
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    updateCodigo_Organizador: function updateCodigo_Organizador(id) {
+      var _this3 = this;
 
-                        var self = this;
-                        self.codigo_productor.compania_id = self.compania.id;
-                        axios.post("http://127.0.0.1:8000/api/codigoproductor", self.codigo_productor).then(function () {
-                                $("#modalcodigoproductor").modal("hide");
-                                _this5.codigo_productor = {};
-                                _this5.codigo_productor.activo = true;
-                                _this5.cargarCodigo_Productor();
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                updateCodigo_Productor: function updateCodigo_Productor(id) {
-                        var _this6 = this;
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/codigoorganizador/" + id, this.codigo_organizador).then(function () {
+        $("#modalcodigoorganizador").modal("hide");
+        _this3.cargarCodigo_Organizador();
+        console.log("listo!");
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    editarCodigo_Organizador: function editarCodigo_Organizador(id) {
+      this.modoEditar = true, $("#modalcodigoorganizador").modal("show");
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function (response) {
+        self.codigo_organizador = response.data.data;
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    borrarCodigo_Organizador: function borrarCodigo_Organizador(id) {
+      var _this4 = this;
 
-                        var self = this;
-                        axios.put("http://127.0.0.1:8000/api/codigoproductor/" + id, this.codigo_productor).then(function () {
-                                $("#modalcodigoproductor").modal("hide");
-                                _this6.cargarCodigo_Productor();
-                                console.log('listo!');
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                editarCodigo_Productor: function editarCodigo_Productor(id) {
-                        this.modoEditar = true, $("#modalcodigoproductor").modal("show");
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function (response) {
-                                self.codigo_productor = response.data.data;
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                borrarCodigo_Productor: function borrarCodigo_Productor(id) {
-                        var _this7 = this;
+      axios.delete("http://127.0.0.1:8000/api/codigoorganizador/" + id).then(function () {
+        _this4.cargarCodigo_Organizador();
+        console.log("borado!");
+      });
+    },
 
-                        axios.delete("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function () {
-                                _this7.cargarCodigo_Productor();
-                                console.log('borado!');
-                        });
-                },
 
-                // FIN - FUNCIONES CODIGO PRODUCTOR
+    // FIN - FUNCIONES CODIGO ORGANIZADOR //
 
-                // FUNCIONES COBERTURAS //
-                cargarCobertura: function cargarCobertura() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/cobertura").then(function (response) {
-                                self.coberturas = response.data.data;
-                        });
-                },
-                crearCobertura: function crearCobertura() {
-                        var _this8 = this;
+    // FUNCIONES CODIGO PRODUCTOR //
+    cargarCodigo_Productor: function cargarCodigo_Productor() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + self.compania.id).then(function (response) {
+        self.codigo_productores = response.data.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    crearCodigo_Productor: function crearCodigo_Productor() {
+      var _this5 = this;
 
-                        var self = this;
-                        self.cobertura.compania_id = self.compania.id;
-                        axios.post("http://127.0.0.1:8000/api/cobertura", self.cobertura).then(function () {
-                                $("#modalcobertura").modal("hide");
-                                _this8.cobertura = {};
-                                _this8.cobertura.activo = true;
-                                _this8.cargarCobertura();
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                updateCobertura: function updateCobertura(id) {
-                        var _this9 = this;
+      var self = this;
+      self.codigo_productor.compania_id = self.compania.id;
+      axios.post("http://127.0.0.1:8000/api/codigoproductor", self.codigo_productor).then(function () {
+        $("#modalcodigoproductor").modal("hide");
+        _this5.codigo_productor = {};
+        _this5.codigo_productor.activo = true;
+        _this5.cargarCodigo_Productor();
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    updateCodigo_Productor: function updateCodigo_Productor(id) {
+      var _this6 = this;
 
-                        var self = this;
-                        axios.put("http://127.0.0.1:8000/api/cobertura/" + id, this.cobertura).then(function () {
-                                $("#modalcobertura").modal("hide");
-                                _this9.cargarCobertura();
-                                console.log('listo!');
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                editarCobertura: function editarCobertura(id) {
-                        this.modoEditar = true, $("#modalcobertura").modal("show");
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/cobertura/" + id).then(function (response) {
-                                console.log(response.data.data);
-                                self.cobertura = response.data.data;
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                borrarCobertura: function borrarCobertura(id) {
-                        var _this10 = this;
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/codigoproductor/" + id, this.codigo_productor).then(function () {
+        $("#modalcodigoproductor").modal("hide");
+        _this6.cargarCodigo_Productor();
+        console.log("listo!");
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    editarCodigo_Productor: function editarCodigo_Productor(id) {
+      this.modoEditar = true, $("#modalcodigoproductor").modal("show");
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function (response) {
+        self.codigo_productor = response.data.data;
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    borrarCodigo_Productor: function borrarCodigo_Productor(id) {
+      var _this7 = this;
 
-                        axios.delete("http://127.0.0.1:8000/api/cobertura/" + id).then(function () {
-                                _this10.cargarCobertura();
-                                console.log('borado!');
-                        });
-                },
+      axios.delete("http://127.0.0.1:8000/api/codigoproductor/" + id).then(function () {
+        _this7.cargarCodigo_Productor();
+        console.log("borado!");
+      });
+    },
 
-                //FIN - FUNCIONES COBERTURAS //
+    // FIN - FUNCIONES CODIGO PRODUCTOR
 
-                cargarOrganizadores: function cargarOrganizadores() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/administracion/organizadores").then(function (response) {
-                                self.organizadores = response.data.data;
-                        });
-                },
-                cargarProductores: function cargarProductores() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/administracion/productores").then(function (response) {
-                                self.productores = response.data.data;
-                        });
-                }
-        }, "cargarCobertura", function cargarCobertura() {
-                var self = this;
-                axios.get("http://127.0.0.1:8000/api/cobertura").then(function (response) {
-                        // console.log(response.data.data);
-                        self.coberturas = response.data.data;
-                });
-        }),
-        created: function created() {
-                this.cargarCompania();
-                this.cargarLocalidades();
-                //     this.cargarCodigo_Organizador();
-                //     this.cargarCodigo_Productor();
-                this.cargarCobertura();
-                this.cargarOrganizadores();
-                this.cargarProductores();
-        }
+    // FUNCIONES COBERTURAS //
+    cargarCobertura: function cargarCobertura() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id).then(function (response) {
+        self.coberturas = response.data.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    crearCobertura: function crearCobertura() {
+      var _this8 = this;
+
+      var self = this;
+      self.cobertura.compania_id = self.compania.id;
+      axios.post("http://127.0.0.1:8000/api/cobertura", self.cobertura).then(function () {
+        $("#modalcobertura").modal("hide");
+        _this8.cobertura = {};
+        _this8.cobertura.activo = true;
+        _this8.cargarCobertura();
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    updateCobertura: function updateCobertura(id) {
+      var _this9 = this;
+
+      var self = this;
+      axios.put("http://127.0.0.1:8000/api/cobertura/" + id, this.cobertura).then(function () {
+        $("#modalcobertura").modal("hide");
+        _this9.cargarCobertura();
+        console.log("listo!");
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    editarCobertura: function editarCobertura(id) {
+      this.modoEditar = true, $("#modalcobertura").modal("show");
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/cobertura/" + id).then(function (response) {
+        console.log(response.data.data);
+        self.cobertura = response.data.data;
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    borrarCobertura: function borrarCobertura(id) {
+      var _this10 = this;
+
+      axios.delete("http://127.0.0.1:8000/api/cobertura/" + id).then(function () {
+        _this10.cargarCobertura();
+        console.log("borado!");
+      });
+    },
+
+    //FIN - FUNCIONES COBERTURAS //
+
+    cargarOrganizadores: function cargarOrganizadores() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/organizadores").then(function (response) {
+        self.organizadores = response.data.data;
+      });
+    },
+    cargarProductores: function cargarProductores() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/productores").then(function (response) {
+        self.productores = response.data.data;
+      });
+    }
+    //     cargarCobertura() {
+    //       let self = this;
+    //       axios.get("http://127.0.0.1:8000/api/cobertura").then(response => {
+    //         // console.log(response.data.data);
+    //         self.coberturas = response.data.data;
+    //       });
+    //     }
+
+  },
+  created: function created() {
+    this.cargarCompania();
+    this.cargarLocalidades();
+    this.cargarCobertura();
+    this.cargarOrganizadores();
+    this.cargarProductores();
+  }
 });
 
 /***/ }),
@@ -58673,57 +58675,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            poliza: {},
-            cliente: {},
-            clientes: {},
-            companias: {},
-            compania: {},
-            tipo_riesgos: {},
-            codigo_productores: {},
-            codigo_productor: {}
-        };
-    },
+  data: function data() {
+    return {
+      poliza: {},
+      cliente: {},
+      clientes: [],
+      companias: [],
+      compania: {},
+      tipo_riesgos: [],
+      codigo_productores: [],
+      codigo_productor: {}
+    };
+  },
 
-    methods: {
-        cargarClientes: function cargarClientes() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
-                self.clientes = response.data.data;
-            });
-        },
-        cargarTipo_Riesgos: function cargarTipo_Riesgos() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
-                self.tipo_riesgos = response.data.data;
-            });
-        },
-        cargarCompanias: function cargarCompanias() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
-                self.companias = response.data.data;
-            });
-        },
-        cargarCodigos_Productor: function cargarCodigos_Productor() {
-            var self = this;
-            axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + companiaid).then(function (response) {
-                self.codigo_productores = response.data.data;
-            }).catch(function (err) {
-                console.log(err);
-            });
-        }
+  methods: {
+    cargarClientes: function cargarClientes() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
+        self.clientes = response.data.data;
+      });
     },
-
-    created: function created() {
-        this.cargarClientes();
-        this.cargarTipo_Riesgos();
-        this.cargarCompanias();
-        this.cargarCodigos_Productor();
+    cargarTipo_Riesgos: function cargarTipo_Riesgos() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
+        self.tipo_riesgos = response.data.data;
+      });
+    },
+    cargarCompanias: function cargarCompanias() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
+        self.companias = response.data.data;
+      });
+    },
+    cargarCodigos_Productor: function cargarCodigos_Productor(id) {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id).then(function (response) {
+        console.log(response.data.data);
+        self.codigo_productores = response.data.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
     }
+  },
+
+  created: function created() {
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+  }
 });
 
 /***/ }),
@@ -58900,23 +58902,28 @@ var render = function() {
                       id: "compania_id"
                     },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.poliza,
-                          "compania_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.poliza,
+                            "compania_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          _vm.cargarCodigos_Productor(_vm.poliza.compania_id)
+                        }
+                      ]
                     }
                   },
                   _vm._l(_vm.companias, function(compania) {
@@ -58931,8 +58938,52 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-3 control-label",
+                  attrs: { for: "cliente" }
+                },
+                [_vm._v("Codigo Productor")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-9 mb-1" }, [
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-control select2",
+                    attrs: { name: "cliente_id" }
+                  },
+                  _vm._l(_vm.codigo_productores, function(codigo_productor) {
+                    return _c(
+                      "option",
+                      {
+                        key: codigo_productor.id,
+                        domProps: { value: codigo_productor.id }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(codigo_productor.productores.apellido) +
+                            " " +
+                            _vm._s(codigo_productor.productores.nombre) +
+                            " ((Cod. " +
+                            _vm._s(codigo_productor.codigo_productor) +
+                            "))"
+                        )
+                      ]
+                    )
+                  })
+                )
+              ])
+            ])
+          ])
         ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-footer" }),
+        _vm._v(" "),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "box-footer" }),
         _vm._v(" "),
@@ -58941,10 +58992,6 @@ var render = function() {
         _c("div", { staticClass: "box-footer" }),
         _vm._v(" "),
         _vm._m(2),
-        _vm._v(" "),
-        _c("div", { staticClass: "box-footer" }),
-        _vm._v(" "),
-        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "box-footer" })
       ]),
@@ -58958,27 +59005,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "label",
-          { staticClass: "col-sm-3 control-label", attrs: { for: "cliente" } },
-          [_vm._v("Codigo Productor")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-9 mb-1" }, [
-          _c("select", {
-            staticClass: "form-control select2",
-            attrs: { name: "cliente_id" }
-          })
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

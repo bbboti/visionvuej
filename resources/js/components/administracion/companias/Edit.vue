@@ -508,133 +508,161 @@
 export default {
   data() {
     return {
-        compania: {
-                nombre: "",
-                cuit: "",
-                direccion: "",
-                localidad_id: "",
-                codigo_lr: "",
-                activo: "",
-                telefono_1: "",
-                telefono_aux: "",
-                telefono_siniestros: "",
-                email_emision: "",
-                email_siniestros: "",
-                id:""
-        },
-        modoEditar:false,
-        codigo_organizadores:{},
-        codigo_organizador:{
-                codigo_organizador:"",
-                organizador_id:"",
-                compania_id: "",
-                activo:"",
-        },
-        codigo_productores:{},
-        codigo_productor:{
-                codigo_productor:"",
-                codigo_organizador_id:"",
-                productor_id:"",
-                compania_id: "",
-                activo:"",
-        },
-        coberturas:{},
-        cobertura:{
-                nombre:"",
-                compania_id:"",
-                antiguedad:"",
-                todo_riesgo:"",
-                franquicia:"",
-                activa:"",
-                ajuste:"",
-                detalle:"",
-        },
-        organizadores:{},
-        organizador:{},
-        productores:{},
-        productor:{},
-        localidades:{},
-        nombreCompania: this.$route.params.nombre
-        };
+      compania: {
+        nombre: "",
+        cuit: "",
+        direccion: "",
+        localidad_id: "",
+        codigo_lr: "",
+        activo: "",
+        telefono_1: "",
+        telefono_aux: "",
+        telefono_siniestros: "",
+        email_emision: "",
+        email_siniestros: "",
+        id: ""
+      },
+      modoEditar: false,
+      codigo_organizadores: {},
+      codigo_organizador: {
+        codigo_organizador: "",
+        organizador_id: "",
+        compania_id: "",
+        activo: ""
+      },
+      codigo_productores: {},
+      codigo_productor: {
+        codigo_productor: "",
+        codigo_organizador_id: "",
+        productor_id: "",
+        compania_id: "",
+        activo: ""
+      },
+      coberturas: {},
+      cobertura: {
+        nombre: "",
+        compania_id: "",
+        antiguedad: "",
+        todo_riesgo: "",
+        franquicia: "",
+        activa: "",
+        ajuste: "",
+        detalle: ""
+      },
+      organizadores: {},
+      organizador: {},
+      productores: {},
+      productor: {},
+      localidades: {},
+      nombreCompania: this.$route.params.nombre
+    };
   },
   methods: {
+    // FUNCIONES COMPANIA //
 
-// FUNCIONES COMPANIA //
+    cargarCompania() {
+      let self = this;
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/administracion/companias/" +
+            this.nombreCompania
+        )
+        .then(response => {
+          self.compania = response.data.data[0];
+          axios
+            .get(
+              "http://127.0.0.1:8000/api/codigoorganizador/compania/" +
+                self.compania.id
+            )
+            .then(response => {
+              self.codigo_organizadores = response.data.data;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          axios
+            .get(
+              "http://127.0.0.1:8000/api/codigoproductor/compania/" +
+                self.compania.id
+            )
+            .then(response => {
+              self.codigo_productores = response.data.data;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          axios
+            .get(
+              "http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id
+            )
+            .then(response => {
+              self.coberturas = response.data.data;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        });
+    },
 
+    updateCompania() {
+      let self = this;
+      axios
+        .put(
+          "http://127.0.0.1:8000/api/administracion/companias/" +
+            this.compania.id,
+          this.compania
+        )
+        .then(() => {
+          console.log("update ok");
+          window.location.replace(
+            "http://127.0.0.1:8000/administracion/companias/" +
+              this.compania.nombre +
+              "/edit"
+          );
+        });
+    },
 
-        cargarCompania() {
-        let self = this;
-                axios
-                .get(
-                "http://127.0.0.1:8000/api/administracion/companias/" + this.nombreCompania
-                )
-                .then(response => {
-                self.compania = response.data.data[0];
-                axios
-                .get("http://127.0.0.1:8000/api/codigoorganizador/compania/" + self.compania.id)
-                .then(response =>{
-                        self.codigo_organizadores = response.data.data;
-                }).catch((err)=>{
-                        console.log(err);
-                });
-                axios
-                .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + self.compania.id)
-                .then(response =>{
-                        self.codigo_productores = response.data.data;
-                }).catch((err)=>{
-                        console.log(err);
-                });
-                axios
-                .get("http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id)
-                .then(response =>{
-                        self.coberturas = response.data.data;
-                }).catch((err)=>{
-                        console.log(err);
-                });
-                });
-        },
+    //FIN - FUNCIONES COMPANIA //
 
-        updateCompania(){
-                let self = this;
-                axios.put("http://127.0.0.1:8000/api/administracion/companias/"+this.compania.id, this.compania)
-                .then(()=>{
-                        console.log("update ok")
-                window.location.replace('http://127.0.0.1:8000/administracion/companias/'+this.compania.nombre + "/edit")
-                })
-        },
+    cargarLocalidades() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/localidades")
+        .then(function(response) {
+          self.localidades = response.data.data;
+        });
+    },
+    vaciarForm() {
+      this.modoEditar = false;
+      this.codigo_organizador = {};
+      this.codigo_productor = {};
+      this.cobertura = {};
+      this.compania.activo = 1;
+    },
 
-//FIN - FUNCIONES COMPANIA // 
-        
-        cargarLocalidades() {
-        let self = this;
-        axios
-                .get("http://127.0.0.1:8000/api/localidades")
-                .then(function(response) {
-                self.localidades = response.data.data;
-                });
-        },
-        vaciarForm(){
-                this.modoEditar = false
-                this.codigo_organizador = {};
-                this.codigo_productor = {};
-                this.cobertura = {};
-                this.compania.activo = 1;
-        },
-
-// FUNCIONES CODIGO ORGANIZADOR //
-        cargarCodigo_Organizador(){
-        let self = this;
-        axios
-                .get("http://127.0.0.1:8000/api/codigoorganizador")
-                .then(response => {
-                self.codigo_organizadores = response.data.data;
-                });
-        },
-        crearCodigo_Organizador() {
-        let self = this;
-        self.codigo_organizador.compania_id = self.compania.id;
-        axios
-        .post("http://127.0.0.1:8000/api/codigoorganizador",self.codigo_organizador)
+    // FUNCIONES CODIGO ORGANIZADOR //
+    cargarCodigo_Organizador() {
+      let self = this;
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/codigoorganizador/compania/" +
+            self.compania.id
+        )
+        .then(response => {
+          self.codigo_organizadores = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    crearCodigo_Organizador() {
+      let self = this;
+      self.codigo_organizador.compania_id = self.compania.id;
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/codigoorganizador",
+          self.codigo_organizador
+        )
         .then(() => {
           $("#modalcodigoorganizador").modal("hide");
           this.codigo_organizador = {};
@@ -642,53 +670,65 @@ export default {
           this.cargarCodigo_Organizador();
         })
         .catch(e => console.log(e));
-        },
-        updateCodigo_Organizador(id){
-        let self = this;
-        axios
-        .put("http://127.0.0.1:8000/api/codigoorganizador/" + id, this.codigo_organizador)
-        .then(()=>{   
-            $("#modalcodigoorganizador").modal("hide");
-            this.cargarCodigo_Organizador();
-          console.log('listo!')
-        }).catch(e=>(console.log(e)))
-        },
-        editarCodigo_Organizador(id){
-        this.modoEditar = true,
-        $("#modalcodigoorganizador").modal("show");
-        let self = this;
-        axios
+    },
+    updateCodigo_Organizador(id) {
+      let self = this;
+      axios
+        .put(
+          "http://127.0.0.1:8000/api/codigoorganizador/" + id,
+          this.codigo_organizador
+        )
+        .then(() => {
+          $("#modalcodigoorganizador").modal("hide");
+          this.cargarCodigo_Organizador();
+          console.log("listo!");
+        })
+        .catch(e => console.log(e));
+    },
+    editarCodigo_Organizador(id) {
+      (this.modoEditar = true), $("#modalcodigoorganizador").modal("show");
+      let self = this;
+      axios
         .get("http://127.0.0.1:8000/api/codigoorganizador/" + id)
         .then(function(response) {
-          self.codigo_organizador = response.data.data;})
-          .catch(e=>console.log(e));
-        },
-        borrarCodigo_Organizador(id){
-        axios.delete("http://127.0.0.1:8000/api/codigoorganizador/" + id)
-        .then(()=>{
-            this.cargarCodigo_Organizador();
-            console.log('borado!')
+          self.codigo_organizador = response.data.data;
         })
-        },
-        
+        .catch(e => console.log(e));
+    },
+    borrarCodigo_Organizador(id) {
+      axios
+        .delete("http://127.0.0.1:8000/api/codigoorganizador/" + id)
+        .then(() => {
+          this.cargarCodigo_Organizador();
+          console.log("borado!");
+        });
+    },
 
-// FIN - FUNCIONES CODIGO ORGANIZADOR // 
+    // FIN - FUNCIONES CODIGO ORGANIZADOR //
 
-// FUNCIONES CODIGO PRODUCTOR //
-        cargarCodigo_Productor(){
-        let self = this;
-        axios
-                .get(
-                "http://127.0.0.1:8000/api/codigoproductor")
-                .then(response => {
-                self.codigo_productores = response.data.data;
-                });
-        },
-        crearCodigo_Productor() {
-        let self = this;
-        self.codigo_productor.compania_id = self.compania.id;
-        axios
-        .post("http://127.0.0.1:8000/api/codigoproductor",self.codigo_productor)
+    // FUNCIONES CODIGO PRODUCTOR //
+    cargarCodigo_Productor() {
+      let self = this;
+      axios
+        .get(
+          "http://127.0.0.1:8000/api/codigoproductor/compania/" +
+            self.compania.id
+        )
+        .then(response => {
+          self.codigo_productores = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    crearCodigo_Productor() {
+      let self = this;
+      self.codigo_productor.compania_id = self.compania.id;
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/codigoproductor",
+          self.codigo_productor
+        )
         .then(() => {
           $("#modalcodigoproductor").modal("hide");
           this.codigo_productor = {};
@@ -696,51 +736,58 @@ export default {
           this.cargarCodigo_Productor();
         })
         .catch(e => console.log(e));
-        },
-        updateCodigo_Productor(id){
-        let self = this;
-        axios
-        .put("http://127.0.0.1:8000/api/codigoproductor/" + id, this.codigo_productor)
-        .then(()=>{   
-            $("#modalcodigoproductor").modal("hide");
-            this.cargarCodigo_Productor();
-          console.log('listo!')
-        }).catch(e=>(console.log(e)))
-        },
-        editarCodigo_Productor(id){
-        this.modoEditar = true,
-        $("#modalcodigoproductor").modal("show");
-        let self = this;
-        axios
+    },
+    updateCodigo_Productor(id) {
+      let self = this;
+      axios
+        .put(
+          "http://127.0.0.1:8000/api/codigoproductor/" + id,
+          this.codigo_productor
+        )
+        .then(() => {
+          $("#modalcodigoproductor").modal("hide");
+          this.cargarCodigo_Productor();
+          console.log("listo!");
+        })
+        .catch(e => console.log(e));
+    },
+    editarCodigo_Productor(id) {
+      (this.modoEditar = true), $("#modalcodigoproductor").modal("show");
+      let self = this;
+      axios
         .get("http://127.0.0.1:8000/api/codigoproductor/" + id)
         .then(function(response) {
-          self.codigo_productor = response.data.data;})
-          .catch(e=>console.log(e));
-        },
-        borrarCodigo_Productor(id){
-        axios.delete("http://127.0.0.1:8000/api/codigoproductor/" + id)
-        .then(()=>{
-            this.cargarCodigo_Productor();
-            console.log('borado!')
+          self.codigo_productor = response.data.data;
         })
-        },
-// FIN - FUNCIONES CODIGO PRODUCTOR
+        .catch(e => console.log(e));
+    },
+    borrarCodigo_Productor(id) {
+      axios
+        .delete("http://127.0.0.1:8000/api/codigoproductor/" + id)
+        .then(() => {
+          this.cargarCodigo_Productor();
+          console.log("borado!");
+        });
+    },
+    // FIN - FUNCIONES CODIGO PRODUCTOR
 
-// FUNCIONES COBERTURAS //
-        cargarCobertura(){
-        let self = this;
-        axios
-                .get(
-                "http://127.0.0.1:8000/api/cobertura")
-                .then(response => {
-                self.coberturas = response.data.data;
-                });
-        },
-        crearCobertura() {
-        let self = this;
-        self.cobertura.compania_id = self.compania.id;
-        axios
-        .post("http://127.0.0.1:8000/api/cobertura",self.cobertura)
+    // FUNCIONES COBERTURAS //
+    cargarCobertura() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/cobertura/compania/" + self.compania.id)
+        .then(response => {
+          self.coberturas = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    crearCobertura() {
+      let self = this;
+      self.cobertura.compania_id = self.compania.id;
+      axios
+        .post("http://127.0.0.1:8000/api/cobertura", self.cobertura)
         .then(() => {
           $("#modalcobertura").modal("hide");
           this.cobertura = {};
@@ -748,74 +795,64 @@ export default {
           this.cargarCobertura();
         })
         .catch(e => console.log(e));
-        },
-        updateCobertura(id){
-        let self = this;
-        axios
+    },
+    updateCobertura(id) {
+      let self = this;
+      axios
         .put("http://127.0.0.1:8000/api/cobertura/" + id, this.cobertura)
-        .then(()=>{   
-            $("#modalcobertura").modal("hide");
-            this.cargarCobertura();
-          console.log('listo!')
-        }).catch(e=>(console.log(e)))
-        },
-        editarCobertura(id){
-        this.modoEditar = true,
-        $("#modalcobertura").modal("show");
-        let self = this;
-        axios
+        .then(() => {
+          $("#modalcobertura").modal("hide");
+          this.cargarCobertura();
+          console.log("listo!");
+        })
+        .catch(e => console.log(e));
+    },
+    editarCobertura(id) {
+      (this.modoEditar = true), $("#modalcobertura").modal("show");
+      let self = this;
+      axios
         .get("http://127.0.0.1:8000/api/cobertura/" + id)
         .then(function(response) {
-                console.log(response.data.data);
-          self.cobertura = response.data.data;})
-          .catch(e=>console.log(e));
-        },
-        borrarCobertura(id){
-        axios.delete("http://127.0.0.1:8000/api/cobertura/" + id)
-        .then(()=>{
-            this.cargarCobertura();
-            console.log('borado!')
+          console.log(response.data.data);
+          self.cobertura = response.data.data;
         })
-        },
-//FIN - FUNCIONES COBERTURAS //
+        .catch(e => console.log(e));
+    },
+    borrarCobertura(id) {
+      axios.delete("http://127.0.0.1:8000/api/cobertura/" + id).then(() => {
+        this.cargarCobertura();
+        console.log("borado!");
+      });
+    },
+    //FIN - FUNCIONES COBERTURAS //
 
-        cargarOrganizadores(){
-        let self = this;
-        axios
-                .get(
-                "http://127.0.0.1:8000/api/administracion/organizadores")
-                .then(response => {
-                        self.organizadores = response.data.data;
-                });
-                
-        },
-        cargarProductores(){
-        let self = this;
-        axios
-                .get(
-                "http://127.0.0.1:8000/api/administracion/productores")
-                .then(response => {
-                        self.productores = response.data.data;
-                });
-                
-        },
-        cargarCobertura(){
-        let self = this;
-        axios
-                .get(
-                "http://127.0.0.1:8000/api/cobertura")
-                .then(response => {
-                // console.log(response.data.data);
-                self.coberturas = response.data.data;
-                });
-        },
-        
+    cargarOrganizadores() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/organizadores")
+        .then(response => {
+          self.organizadores = response.data.data;
+        });
+    },
+    cargarProductores() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/productores")
+        .then(response => {
+          self.productores = response.data.data;
+        });
+    }
+    //     cargarCobertura() {
+    //       let self = this;
+    //       axios.get("http://127.0.0.1:8000/api/cobertura").then(response => {
+    //         // console.log(response.data.data);
+    //         self.coberturas = response.data.data;
+    //       });
+    //     }
   },
   created() {
     this.cargarCompania();
     this.cargarLocalidades();
-//     this.cargarCodigo_Organizador();
-//     this.cargarCodigo_Productor();
     this.cargarCobertura();
     this.cargarOrganizadores();
     this.cargarProductores();

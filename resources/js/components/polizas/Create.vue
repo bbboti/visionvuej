@@ -31,7 +31,7 @@
                                                 <div class="form-group">
                                                         <label for="cliente" class="col-sm-3 control-label">Compañia</label>
                                                         <div class="col-sm-9 mb-1">
-                                                        <select name='compania_id' class="form-control select2" value="compania_id" id="compania_id" v-model="poliza.compania_id" >
+                                                        <select name='compania_id' class="form-control select2" value="compania_id" id="compania_id" v-model="poliza.compania_id" @change='cargarCodigos_Productor(poliza.compania_id)'>
                                                             <option v-for="compania in companias" :key="compania.id" v-bind:value="compania.id" >{{compania.nombre}}</option>     
                                                         </select>
                                                         </div>
@@ -43,6 +43,7 @@
                                                         <label for="cliente" class="col-sm-3 control-label">Codigo Productor</label>
                                                         <div class="col-sm-9 mb-1">
                                                         <select name='cliente_id' class="form-control select2">
+                                                                 <option v-for="codigo_productor in codigo_productores" :key="codigo_productor.id" v-bind:value="codigo_productor.id" >{{codigo_productor.productores.apellido}} {{codigo_productor.productores.nombre}} ((Cod. {{codigo_productor.codigo_productor}}))</option> 
                                                         </select>
                                                         </div>
                                                 </div>
@@ -214,65 +215,61 @@
 </div>
 </template>
 <script>
-
-
-    export default {
-        data(){
-            return{
-                    poliza:{},
-                    cliente:{},
-                    clientes:{},
-                    companias:{},
-                    compania:{},
-                    tipo_riesgos:{},
-                    codigo_productores:{},
-                    codigo_productor:{},
-            };
-        },
-        methods:{
-                cargarClientes() {
-                        let self = this;
-                        axios
-                            .get("http://127.0.0.1:8000/api/clientes")
-                            .then(function(response) {
-                            self.clientes = response.data.data;
-                            });
-                        },    
-                cargarTipo_Riesgos() {
-                        let self = this;
-                        axios
-                            .get("http://127.0.0.1:8000/api/tiporiesgo")
-                            .then(function(response) {
-                            self.tipo_riesgos = response.data.data;
-                            });
-                        },           
-                
-                cargarCompanias() {
-                        let self = this;
-                        axios
-                            .get("http://127.0.0.1:8000/api/administracion/companias")
-                            .then(function(response) {
-                            self.companias = response.data.data;
-                            });
-                }, 
-                cargarCodigos_Productor() {
-                        let self = this;
-                        axios
-                        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + companiaid)
-                        .then(response =>{
-                            self.codigo_productores = response.data.data;
-                        }).catch((err)=>{console.log(err);
-                        });
-                }, 
-            },
-                           
-        
-        created() {
-                    this.cargarClientes();
-                    this.cargarTipo_Riesgos();
-                    this.cargarCompanias();
-                    this.cargarCodigos_Productor();
-        }
+export default {
+  data() {
+    return {
+      poliza: {},
+      cliente: {},
+      clientes: [],
+      companias: [],
+      compania: {},
+      tipo_riesgos: [],
+      codigo_productores: [],
+      codigo_productor: {}
     };
+  },
+  methods: {
+    cargarClientes() {
+      let self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function(response) {
+        self.clientes = response.data.data;
+      });
+    },
+    cargarTipo_Riesgos() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/tiporiesgo")
+        .then(function(response) {
+          self.tipo_riesgos = response.data.data;
+        });
+    },
 
+    cargarCompanias() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/companias")
+        .then(function(response) {
+          self.companias = response.data.data;
+        });
+    },
+    cargarCodigos_Productor(id) {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id)
+        .then(response => {
+          console.log(response.data.data);
+          self.codigo_productores = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+
+  created() {
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+  }
+};
 </script>
