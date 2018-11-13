@@ -1,11 +1,10 @@
 <template>
     <div>
-        <p>Organizadores</p>
-            <div class="box">
-                <div class="box-header">
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
-                </div>
-                <!-- /.box-header -->
+        <div class="card">
+        <div class="card-header">
+        <p class="d-inline align-bottom">ORGANIZADORES</p>
+                    <button href="" class="btn bgcolor-purple float-right" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</button>
+        </div>
                 <div class="box-body">
                         <div class="row">
                             <div class="col-12">
@@ -32,8 +31,8 @@
                                             <td v-if="organizador.activo == 1">SI</td>
                                             <td v-else>NO</td>
                                             <td>
-                                                <a @click.prevent="modoEdicion(organizador.id)" class="fa fa-edit"></a>
-                                                <a @click.prevent="borrarOrganizador(organizador.id)" class="fa fa-trash"></a>
+                                                <a @click.prevent="modoEdicion(organizador.id)" class="fa fa-edit icon-purple"></a>
+                                                <a @click.prevent="borrarOrganizador(organizador.id)" class="fa fa-trash icon-purple"></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -41,8 +40,8 @@
                             </div>
                         </div>
                 </div>
-                <!-- /.box-body -->
         </div>
+                <!-- /.box-body -->
         <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -114,7 +113,7 @@
                                                         </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value=1 v-model="organizador.activo">
+                                                    <input class="form-check-input radio-danger" type="radio" value=1 v-model="organizador.activo">
                                                     <label class="form-check-label">Activo</label>
                                                 </div>
                                                 <div class="form-check">
@@ -125,8 +124,8 @@
                                         </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" v-show="!modoEditar" class="btn btn-primary">Crear</button>
-                <button type="submit" v-show="modoEditar" class="btn btn-primary">Guardar</button>
+                <button type="submit" v-show="!modoEditar" class="btn bgcolor-purple">Crear</button>
+                <button type="submit" v-show="modoEditar" class="btn bgcolor-purple">Guardar</button>
             </div>
             </form>
             </div>
@@ -144,21 +143,21 @@ export default {
     return {
       organizadores: {},
       organizador: {
-              nombre:"",
-              apellido:"",
-              cuit:"",
-              matricula:"",
-              email:"",
-              telefono_1: "",
-              telefono_2: "",
-              activo:"",
+        nombre: "",
+        apellido: "",
+        cuit: "",
+        matricula: "",
+        email: "",
+        telefono_1: "",
+        telefono_2: "",
+        activo: ""
       },
-      modoEditar:false,
+      modoEditar: false
     };
   },
   methods: {
     crearOrganizador() {
-//       console.log(this.organizador);
+      //       console.log(this.organizador);
       let self = this;
       axios
         .post(
@@ -168,43 +167,48 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.organizador = {};
-        //   this.organizador.activo = 1;
+          //   this.organizador.activo = 1;
           this.cargarOrganizadores();
         })
         .catch(e => console.log(e));
     },
-    vaciarForm(){
-        this.organizador = {};
-        this.modoEditar = false;
+    vaciarForm() {
+      this.organizador = {};
+      this.modoEditar = false;
 
-        // this.organizador.activo = 1;
+      // this.organizador.activo = 1;
     },
-    updateOrganizador(id){
-        let self = this;
+    updateOrganizador(id) {
+      let self = this;
       axios
-      .put("http://127.0.0.1:8000/api/administracion/organizadores/" + id, this.organizador)
-      .then(()=>{   
-            $("#modal").modal("hide");
-            this.cargarOrganizadores();
-          console.log('listo!')
-      }).catch(e=>(console.log(e)))
+        .put(
+          "http://127.0.0.1:8000/api/administracion/organizadores/" + id,
+          this.organizador
+        )
+        .then(() => {
+          $("#modal").modal("hide");
+          this.cargarOrganizadores();
+          console.log("listo!");
+        })
+        .catch(e => console.log(e));
     },
-    modoEdicion(id){
-        this.modoEditar = true,
-        $("#modal").modal("show");
-        let self = this;
+    modoEdicion(id) {
+      (this.modoEditar = true), $("#modal").modal("show");
+      let self = this;
       axios
         .get("http://127.0.0.1:8000/api/administracion/organizadores/" + id)
         .then(function(response) {
-          self.organizador = response.data.data;})
-          .catch(e=>console.log(e));
-    },
-    borrarOrganizador(id){
-        axios.delete("http://127.0.0.1:8000/api/administracion/organizadores/" + id)
-        .then(()=>{
-            this.cargarOrganizadores();
-            console.log('borado!')
+          self.organizador = response.data.data;
         })
+        .catch(e => console.log(e));
+    },
+    borrarOrganizador(id) {
+      axios
+        .delete("http://127.0.0.1:8000/api/administracion/organizadores/" + id)
+        .then(() => {
+          this.cargarOrganizadores();
+          console.log("borado!");
+        });
     },
     cargarOrganizadores() {
       let self = this;

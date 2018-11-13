@@ -3,7 +3,7 @@
         <p>Productores</p>
             <div class="box">
                 <div class="box-header">
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -147,21 +147,21 @@ export default {
     return {
       productores: {},
       productor: {
-              nombre:"",
-              apellido:"",
-              cuit:"",
-              matricula:"",
-              email:"",
-              telefono_1: "",
-              telefono_2: "",
-              activo: "",
+        nombre: "",
+        apellido: "",
+        cuit: "",
+        matricula: "",
+        email: "",
+        telefono_1: "",
+        telefono_2: "",
+        activo: ""
       },
-      modoEditar: false,
+      modoEditar: false
     };
   },
   methods: {
     crearProductor() {
-//       console.log(this.productor);
+      //       console.log(this.productor);
       let self = this;
       axios
         .post(
@@ -171,42 +171,47 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.productor = {};
-        //   this.productor.activo = 1;
+          //   this.productor.activo = 1;
           this.cargarProductores();
         })
         .catch(e => console.log(e));
     },
-    vaciarForm(){
-        this.productor = {}
-        this.modoEditar = false;
-        // this.productor.activo = 1;
+    vaciarForm() {
+      this.productor = {};
+      this.modoEditar = false;
+      // this.productor.activo = 1;
     },
-    updateProductor(id){
-        let self = this;
+    updateProductor(id) {
+      let self = this;
       axios
-      .put("http://127.0.0.1:8000/api/administracion/productores/" + id, this.productor)
-      .then(()=>{   
-            $("#modal").modal("hide");
-            this.cargarProductores();
-          console.log('listo!')
-      }).catch(e=>(console.log(e)))
+        .put(
+          "http://127.0.0.1:8000/api/administracion/productores/" + id,
+          this.productor
+        )
+        .then(() => {
+          $("#modal").modal("hide");
+          this.cargarProductores();
+          console.log("listo!");
+        })
+        .catch(e => console.log(e));
     },
-    modoEdicion(id){
-        this.modoEditar = true,
-        $("#modal").modal("show");
-        let self = this;
+    modoEdicion(id) {
+      (this.modoEditar = true), $("#modal").modal("show");
+      let self = this;
       axios
         .get("http://127.0.0.1:8000/api/administracion/productores/" + id)
         .then(function(response) {
-          self.productor = response.data.data;})
-          .catch(e=>console.log(e));
-    },
-    borrarProductor(id){
-        axios.delete("http://127.0.0.1:8000/api/administracion/productores/" + id)
-        .then(()=>{
-            this.cargarProductores();
-            console.log('borado!')
+          self.productor = response.data.data;
         })
+        .catch(e => console.log(e));
+    },
+    borrarProductor(id) {
+      axios
+        .delete("http://127.0.0.1:8000/api/administracion/productores/" + id)
+        .then(() => {
+          this.cargarProductores();
+          console.log("borado!");
+        });
     },
     cargarProductores() {
       let self = this;

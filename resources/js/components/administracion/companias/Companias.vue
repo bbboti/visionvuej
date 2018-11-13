@@ -4,7 +4,7 @@
             <div class="box">
                 <div class="box-header">
 
-                    <router-link to="/administracion/companias/create" class="btn btn-success ">Crear</router-link>
+                    <router-link to="/administracion/companias/create" class="btn bgcolor-purple ">Crear</router-link>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -47,20 +47,20 @@
 
 </template>
 <script>
-    export default {
-        data(){
-            return{
-                companias:{},
-            }
-        },
-        created() {
-            let self = this
-            axios.get('http://127.0.0.1:8000/api/administracion/companias').then(function(response){
-                // console.log(response.data.data);
-                self.companias = response.data.data;
-            });
-
-        }
+export default {
+  data() {
+    return {
+      companias: {}
     };
-
+  },
+  created() {
+    let self = this;
+    axios
+      .get("http://127.0.0.1:8000/api/administracion/companias")
+      .then(function(response) {
+        // console.log(response.data.data);
+        self.companias = response.data.data;
+      });
+  }
+};
 </script>

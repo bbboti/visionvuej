@@ -52029,18 +52029,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            companias: {}
-        };
-    },
-    created: function created() {
-        var self = this;
-        axios.get('http://127.0.0.1:8000/api/administracion/companias').then(function (response) {
-            // console.log(response.data.data);
-            self.companias = response.data.data;
-        });
-    }
+  data: function data() {
+    return {
+      companias: {}
+    };
+  },
+  created: function created() {
+    var self = this;
+    axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
+      // console.log(response.data.data);
+      self.companias = response.data.data;
+    });
+  }
 });
 
 /***/ }),
@@ -52062,7 +52062,7 @@ var render = function() {
           _c(
             "router-link",
             {
-              staticClass: "btn btn-success ",
+              staticClass: "btn bgcolor-purple ",
               attrs: { to: "/administracion/companias/create" }
             },
             [_vm._v("Crear")]
@@ -52394,37 +52394,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-        data: function data() {
-                return {
-                        compania: {},
-                        localidades: {}
-                };
-        },
+  data: function data() {
+    return {
+      compania: {},
+      localidades: {}
+    };
+  },
 
-        methods: {
-                crearCompania: function crearCompania() {
-                        var _this = this;
+  methods: {
+    crearCompania: function crearCompania() {
+      var _this = this;
 
-                        var self = this;
-                        axios.post("http://127.0.0.1:8000/api/administracion/companias", self.compania).then(function () {
-                                _this.compania = {};
-                                _this.compania.activo = true;
-                                router.push("http://127.0.0.1:8000/administracion/companias");
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                cargarLocalidades: function cargarLocalidades() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
-                                console.log(response.data.data);
-                                self.localidades = response.data.data;
-                        });
-                }
-        },
-        created: function created() {
-                this.cargarLocalidades();
-        }
+      var self = this;
+      axios.post("http://127.0.0.1:8000/api/administracion/companias", self.compania).then(function () {
+        _this.compania = {};
+        _this.compania.activo = true;
+        router.push("http://127.0.0.1:8000/administracion/companias");
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    cargarLocalidades: function cargarLocalidades() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/localidades").then(function (response) {
+        console.log(response.data.data);
+        self.localidades = response.data.data;
+      });
+    }
+  },
+  created: function created() {
+    this.cargarLocalidades();
+  }
 });
 
 /***/ }),
@@ -52995,7 +52995,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+            { staticClass: "btn bgcolor-purple", attrs: { type: "submit" } },
             [_vm._v("Crear")]
           )
         ]
@@ -56393,7 +56393,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -56441,7 +56440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.put("http://127.0.0.1:8000/api/administracion/organizadores/" + id, this.organizador).then(function () {
         $("#modal").modal("hide");
         _this2.cargarOrganizadores();
-        console.log('listo!');
+        console.log("listo!");
       }).catch(function (e) {
         return console.log(e);
       });
@@ -56460,7 +56459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.delete("http://127.0.0.1:8000/api/administracion/organizadores/" + id).then(function () {
         _this3.cargarOrganizadores();
-        console.log('borado!');
+        console.log("borado!");
       });
     },
     cargarOrganizadores: function cargarOrganizadores() {
@@ -56484,14 +56483,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", [_vm._v("Organizadores")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "box" }, [
-      _c("div", { staticClass: "box-header" }, [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("p", { staticClass: "d-inline align-bottom" }, [
+          _vm._v("ORGANIZADORES")
+        ]),
+        _vm._v(" "),
         _c(
-          "a",
+          "button",
           {
-            staticClass: "btn btn-success",
+            staticClass: "btn bgcolor-purple float-right",
             attrs: {
               href: "",
               "data-toggle": "modal",
@@ -56559,7 +56560,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [
                           _c("a", {
-                            staticClass: "fa fa-edit",
+                            staticClass: "fa fa-edit icon-purple",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -56569,7 +56570,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("a", {
-                            staticClass: "fa fa-trash",
+                            staticClass: "fa fa-trash icon-purple",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -56931,7 +56932,7 @@ var render = function() {
                                 expression: "organizador.activo"
                               }
                             ],
-                            staticClass: "form-check-input",
+                            staticClass: "form-check-input radio-danger",
                             attrs: { type: "radio", value: "1" },
                             domProps: {
                               checked: _vm._q(_vm.organizador.activo, "1")
@@ -56990,7 +56991,7 @@ var render = function() {
                             expression: "!modoEditar"
                           }
                         ],
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn bgcolor-purple",
                         attrs: { type: "submit" }
                       },
                       [_vm._v("Crear")]
@@ -57007,7 +57008,7 @@ var render = function() {
                             expression: "modoEditar"
                           }
                         ],
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn bgcolor-purple",
                         attrs: { type: "submit" }
                       },
                       [_vm._v("Guardar")]
@@ -57350,7 +57351,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.put("http://127.0.0.1:8000/api/administracion/productores/" + id, this.productor).then(function () {
         $("#modal").modal("hide");
         _this2.cargarProductores();
-        console.log('listo!');
+        console.log("listo!");
       }).catch(function (e) {
         return console.log(e);
       });
@@ -57369,7 +57370,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.delete("http://127.0.0.1:8000/api/administracion/productores/" + id).then(function () {
         _this3.cargarProductores();
-        console.log('borado!');
+        console.log("borado!");
       });
     },
     cargarProductores: function cargarProductores() {
@@ -57400,7 +57401,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-success",
+            staticClass: "btn btn-primary",
             attrs: {
               href: "",
               "data-toggle": "modal",

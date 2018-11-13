@@ -151,51 +151,46 @@
                         
 <!-- SEGUNDO BLOQUE -->
                 </div>
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn bgcolor-purple">Crear</button>
                 </form>
         </div>
 </div>
 </template>
 <script>
-    export default {
-        data(){
-            return{
-                    compania:{
-                            
-                    },
-                    localidades:{},
-            };
-        },
-        methods:{
-                crearCompania() {
-                        let self = this;
-                        axios
-                        .post(
-                                "http://127.0.0.1:8000/api/administracion/companias",
-                                self.compania
-                        )
-                        .then(() =>{
-                        this.compania = {};
-                        this.compania.activo = true;
-                        router.push("http://127.0.0.1:8000/administracion/companias")                        
-                        })
-                        .catch(e=> console.log(e));
-                },
-                cargarLocalidades() {
-                        let self = this;
-                        axios
-                        .get("http://127.0.0.1:8000/api/localidades")
-                                .then(function(response) {
-                                console.log(response.data.data);
-                                self.localidades = response.data.data;
-                        });
-                }
-                        
-        },
-        created() {
-                    this.cargarLocalidades();
-
-        }
+export default {
+  data() {
+    return {
+      compania: {},
+      localidades: {}
     };
-
+  },
+  methods: {
+    crearCompania() {
+      let self = this;
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/administracion/companias",
+          self.compania
+        )
+        .then(() => {
+          this.compania = {};
+          this.compania.activo = true;
+          router.push("http://127.0.0.1:8000/administracion/companias");
+        })
+        .catch(e => console.log(e));
+    },
+    cargarLocalidades() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/localidades")
+        .then(function(response) {
+          console.log(response.data.data);
+          self.localidades = response.data.data;
+        });
+    }
+  },
+  created() {
+    this.cargarLocalidades();
+  }
+};
 </script>
