@@ -29,7 +29,7 @@
                                                 <div class="form-group">
                                                         <label for="compania" class=" control-label">Compañia</label>
                                                         <div class=" mb-1">
-                                                                <select name='compania_id' class="form-control form-control-sm select2" value="compania_id" id="compania_id" v-model="poliza.compania_id" selected='poliza.compania_id'  @change='cargarCodigos_ProductorOnChange(poliza.compania_id)'>
+                                                                <select name='compania_id' class="form-control form-control-sm select2" value="compania_id" id="compania_id" v-model="poliza.compania_id"  @change='cargarCodigos_ProductorOnChange(poliza.compania_id)'>
                                                                         <option v-for="compania in companias" :key="compania.id" v-bind:value="compania.id">{{compania.nombre}}</option>
                                                                 </select>
                                                         </div>
@@ -214,161 +214,164 @@
                 
 </template>
 <script>
+export default {
+  data() {
+    return {
+      poliza: {
+        cliente_id: "",
+        tipo_riesgo_id: "",
+        compania_id: "",
+        codigo_productor_id: "",
+        numero: "",
+        tipo_vigencia_id: "",
+        vigencia_desde: "",
+        vigencia_hasta: "",
+        numero_solicitud: "",
+        estado_poliza_id: "",
+        fecha_solicitud: "",
+        fecha_emision: "",
+        fecha_recepcion: "",
+        fecha_entrega_original: "",
+        fecha_entrega_email: "",
+        fecha_entrega_correo: "",
+        premio: "",
+        prima: "",
+        comision: "",
+        descuento: "",
+        medio_pago: "",
+        plan_pago: "",
+        cantidad_cuotas: "",
+        detalle_medio_pago: ""
+      },
+      cliente: {},
+      clientes: {},
+      companias: {},
+      compania: {},
+      tipo_riesgos: {},
+      codigo_productores: {},
+      tipo_vigencias: {},
+      numeroSolicitud: this.$route.params.numero_solicitud
+    };
+  },
+  methods: {
+    sumarMes(mes) {
+      let self = this;
+      var mes;
 
+      switch (this.poliza.tipo_vigencia_id) {
+        case 6:
+          var mes = 12;
+          break;
+        case 5:
+          var mes = 6;
+          break;
+        case 4:
+          var mes = 4;
+          break;
+        case 3:
+          var mes = 3;
+          break;
+        case 2:
+          var mes = 2;
+          break;
+        case 1:
+          var mes = 1;
+          break;
+      }
+      this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes)
+        .toISOString()
+        .slice(0, 10);
+    },
 
-        export default {
-                data() {
-                        return {
-                                poliza: {
-                                        cliente_id:"",
-                                        tipo_riesgo_id:"",
-                                        compania_id:"",
-                                        codigo_productor_id: "",
-                                        numero:"",
-                                        tipo_vigencia_id:"",
-                                        vigencia_desde: "",
-                                        vigencia_hasta: "",
-                                        numero_solicitud: "",
-                                        estado_poliza_id: "",
-                                        fecha_solicitud: "",
-                                        fecha_emision:"",
-                                        fecha_recepcion:"",
-                                        fecha_entrega_original:"",
-                                        fecha_entrega_email:"",
-                                        fecha_entrega_correo:"",
-                                        premio:"",
-                                        prima:"",
-                                        comision:"",
-                                        descuento:"",
-                                        medio_pago:"",
-                                        plan_pago:"",
-                                        cantidad_cuotas: "",
-                                        detalle_medio_pago:"",
-                                },
-                                cliente: {},
-                                clientes: {},
-                                companias: {},
-                                compania: {},
-                                tipo_riesgos: {},
-                                codigo_productores: {},
-                                tipo_vigencias:{},
-                                codigo_productor: {},
-                                numeroSolicitud: this.$route.params.numero_solicitud,
-                        };
-                },
-                methods: {
-                        sumarMes(mes){
-                                let self = this;
-                                var mes;
+    cargarPoliza() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud)
+        .then(function(response) {
+          self.poliza = response.data.data[0];
+          console.log(self.poliza.compania_id);
+          axios
+            .get(
+              "http://127.0.0.1:8000/api/codigoproductor/compania/" +
+                self.poliza.compania_id
+            )
+            .then(response => {
+              // console.log(response.data.data);
+              self.codigo_productores = response.data.data;
+            })
+            .catch(err => {
+              // console.log(err);
+            });
+        });
+    },
+    cargarClientes() {
+      let self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function(response) {
+        self.clientes = response.data.data;
+      });
+    },
+    cargarTipo_Riesgos() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/tiporiesgo")
+        .then(function(response) {
+          self.tipo_riesgos = response.data.data;
+        });
+    },
+    cargarTipo_Vigencias() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/tipovigencia")
+        .then(function(response) {
+          self.tipo_vigencias = response.data.data;
+        });
+    },
+    cargarCompanias() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/companias")
+        .then(function(response) {
+          self.companias = response.data.data;
+        });
+    },
+    cargarCodigos_ProductorOnChange(id) {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id)
+        .then(response => {
+          // console.log(response.data.data);
+          self.codigo_productores = response.data.data;
+        })
+        .catch(err => {
+          // console.log(err);
+        });
+    }
+    //     cargarCodigos_Productor() {
+    //       console.log(this.poliza.compania_id);
+    //       //       let self = this;
+    //       axios
+    //         .get(
+    //           "http://127.0.0.1:8000/api/codigoproductor/compania/" +
+    //             this.poliza.compania_id
+    //         )
+    //         .then(response => {
+    //           // console.log(response.data.data);
+    //           self.codigo_productores = response.data.data;
+    //         })
+    //         .catch(err => {
+    //           // console.log(err);
+    //         });
+    //     }
+  },
 
-                                switch (this.poliza.tipo_vigencia_id) {
-                                case 6:
-                                       var mes = 12;
-                                        break;
-                                case 5:
-                                       var mes = 6;
-                                        break;
-                                case 4:
-                                       var mes = 4;
-                                        break;
-                                case 3:
-                                        var mes = 3;
-                                        break;
-                                case 2:
-                                        var mes = 2;
-                                        break;
-                                case 1:
-                                       var mes = 1;
-                                        break;
-                        
-                                }
-                                this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0,10);
-                                
-                        },
-                        
-                        cargarPoliza(){
-                                let self = this;
-                                axios.get("http://127.0.0.1:8000/api/polizas/" + 
-                                    this.numeroSolicitud
-                                )
-                                
-                                .then(function (response){
-                                        self.poliza = response.data.data[0];
-                                });
-                        },
-                        cargarClientes() {
-                                let self = this;
-                                axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
-                                        self.clientes = response.data.data;
-                                });
-                        },
-                        cargarTipo_Riesgos() {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/tiporiesgo")
-                                        .then(function (response) {
-                                                self.tipo_riesgos = response.data.data;
-                                        });
-                        },
-                        cargarTipo_Vigencias() {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/tipovigencia")
-                                        .then(function (response) {
-                                                self.tipo_vigencias = response.data.data;
-                                        });
-                        },
-                        cargarCompanias() {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/administracion/companias")
-                                        .then(function (response) {
-                                                self.companias = response.data.data;
-                                        });
-                        },
-                        cargarCodigos_ProductorOnChange(id) {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id)
-                                        .then(response => {
-                                                // console.log(response.data.data);
-                                                self.codigo_productores = response.data.data;
-                                        })
-                                        .catch(err => {
-                                                // console.log(err);
-                                        });
-                        },
-                        cargarCodigos_Productor() {
-                                console.log(self.poliza.descuento);
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + this.poliza.compania_id)
-                                        .then(response => {
-                                                // console.log(response.data.data);
-                                                self.codigo_productores = response.data.data;
-                                        })
-                                        .catch(err => {
-                                                // console.log(err);
-                                        });
-                        }
-                        
-                },
-
-                created() {
-                        this.cargarPoliza();
-                        this.cargarClientes();
-                        this.cargarTipo_Riesgos();
-                        this.cargarCompanias();
-                        this.cargarTipo_Vigencias();
-                        this.cargarCodigos_Productor();  
-                        this.cargarCodigos_ProductorOnChange();
-
-                },
-                mounted() {
-                        // this.sumarMes();
-
-                        
-                }
-                
-        };
+  created() {
+    this.cargarPoliza();
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+    this.cargarTipo_Vigencias();
+    //     this.cargarCodigos_Productor();
+  },
+  mounted() {}
+};
 </script>

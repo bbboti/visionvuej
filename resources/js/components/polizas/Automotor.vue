@@ -47,7 +47,7 @@
                                             <td v-else>No recibida</td>
                                             <td> {{poliza.medio_pago}} </td>
                                             <td>
-                                                <router-link :to="`/polizas/automotor/${poliza.numero}/edit`" class="fa fa-edit"></router-link>
+                                                <router-link :to="`/polizas/automotor/${poliza.numero_solicitud}/edit`" class="fa fa-edit"></router-link>
                                                 <a href="" class="fa fa-car"></a>
                                                 <a href="" class="fa fa-folder-plus"></a>
                                                 <a href="" class="fa fa-car-crash"></a>
@@ -67,23 +67,21 @@
 
 </template>
 <script>
-    export default {
-        data(){
-            return{
-                polizas:{},
-                companias:{},
-                codigo_productor:{},
-                productor:{},
-            }
-        },
-        created() {
-            let self = this
-            axios.get('http://127.0.0.1:8000/api/polizas').then((response)=>{
-                console.log(response.data)
-                self.polizas = response.data.data;
-            });
-
-        }
+export default {
+  data() {
+    return {
+      polizas: {},
+      companias: {},
+      codigo_productor: {},
+      productor: {}
     };
-
+  },
+  created() {
+    let self = this;
+    axios.get("http://127.0.0.1:8000/api/polizas").then(response => {
+      // console.log(response.data)
+      self.polizas = response.data.data;
+    });
+  }
+};
 </script>

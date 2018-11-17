@@ -14366,8 +14366,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_add_months__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_add_months___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_date_fns_add_months__);
-
-
 __webpack_require__(16);
 
 window.Vue = __webpack_require__(42);
@@ -14378,39 +14376,57 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 var routes = [{
     path: '/clientes',
     component: __webpack_require__(46),
-    meta: { title: 'Clientes' }
+    meta: {
+        title: 'Clientes'
+    }
 }, {
     path: '/administracion/companias',
     component: __webpack_require__(49),
-    meta: { title: 'Compañias' }
+    meta: {
+        title: 'Compañias'
+    }
 }, {
     path: '/administracion/companias/create',
     component: __webpack_require__(52),
-    meta: { title: 'Compañias' }
+    meta: {
+        title: 'Compañias'
+    }
 }, {
     path: '/administracion/companias/:nombre/edit',
     component: __webpack_require__(55),
-    meta: { title: 'Compañias' }
+    meta: {
+        title: 'Compañias'
+    }
 }, {
     path: '/administracion/organizadores',
     component: __webpack_require__(58),
-    meta: { title: 'Organizadores' }
+    meta: {
+        title: 'Organizadores'
+    }
 }, {
     path: '/administracion/productores',
     component: __webpack_require__(61),
-    meta: { title: 'Productores' }
+    meta: {
+        title: 'Productores'
+    }
 }, {
     path: '/polizas/automotor',
     component: __webpack_require__(64),
-    meta: { title: 'Polizas Automotor' }
+    meta: {
+        title: 'Polizas Automotor'
+    }
 }, {
     path: '/polizas/create',
     component: __webpack_require__(67),
-    meta: { title: 'Polizas Automotor' }
+    meta: {
+        title: 'Polizas Automotor'
+    }
 }, {
-    path: '/polizas/:numero_solicitud/edit',
+    path: '/polizas/automotor/:numero_solicitud/edit',
     component: __webpack_require__(70),
-    meta: { title: 'Polizas Automotor' }
+    meta: {
+        title: 'Polizas Automotor'
+    }
 }];
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_date_fns_add_months___default.a);
@@ -58529,21 +58545,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            polizas: {},
-            companias: {},
-            codigo_productor: {},
-            productor: {}
-        };
-    },
-    created: function created() {
-        var self = this;
-        axios.get('http://127.0.0.1:8000/api/polizas').then(function (response) {
-            console.log(response.data);
-            self.polizas = response.data.data;
-        });
-    }
+  data: function data() {
+    return {
+      polizas: {},
+      companias: {},
+      codigo_productor: {},
+      productor: {}
+    };
+  },
+  created: function created() {
+    var self = this;
+    axios.get("http://127.0.0.1:8000/api/polizas").then(function (response) {
+      // console.log(response.data)
+      self.polizas = response.data.data;
+    });
+  }
 });
 
 /***/ }),
@@ -58710,7 +58726,7 @@ var render = function() {
                               attrs: {
                                 to:
                                   "/polizas/automotor/" +
-                                  poliza.numero +
+                                  poliza.numero_solicitud +
                                   "/edit"
                               }
                             }),
@@ -59062,138 +59078,134 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-        data: function data() {
-                return {
-                        poliza: {
-                                cliente_id: "",
-                                tipo_riesgo_id: "",
-                                compania_id: "",
-                                codigo_productor_id: "",
-                                numero: "",
-                                tipo_vigencia_id: "",
-                                vigencia_desde: new Date().toISOString().slice(0, 10),
-                                vigencia_hasta: "",
-                                numero_solicitud: "",
-                                estado_poliza_id: 1,
-                                fecha_solicitud: new Date().toISOString().slice(0, 10),
-                                fecha_emision: "",
-                                fecha_recepcion: "",
-                                fecha_entrega_original: "",
-                                fecha_entrega_email: "",
-                                fecha_entrega_correo: "",
-                                premio: "",
-                                prima: "",
-                                comision: "",
-                                descuento: "",
-                                medio_pago: "",
-                                plan_pago: "",
-                                cantidad_cuotas: '12',
-                                detalle_medio_pago: ""
-                        },
-                        cliente: {},
-                        clientes: {},
-                        companias: {},
-                        compania: {},
-                        tipo_riesgos: {},
-                        codigo_productores: {},
-                        tipo_vigencias: {},
-                        codigo_productor: {}
-                };
-        },
+  data: function data() {
+    return {
+      poliza: {
+        cliente_id: "",
+        tipo_riesgo_id: "",
+        compania_id: "",
+        codigo_productor_id: "",
+        numero: "",
+        tipo_vigencia_id: "",
+        vigencia_desde: new Date().toISOString().slice(0, 10),
+        vigencia_hasta: "",
+        numero_solicitud: "",
+        estado_poliza_id: 1,
+        fecha_solicitud: new Date().toISOString().slice(0, 10),
+        fecha_emision: "",
+        fecha_recepcion: "",
+        fecha_entrega_original: "",
+        fecha_entrega_email: "",
+        fecha_entrega_correo: "",
+        premio: "",
+        prima: "",
+        comision: "",
+        descuento: "",
+        medio_pago: "",
+        plan_pago: "",
+        cantidad_cuotas: "12",
+        detalle_medio_pago: ""
+      },
+      cliente: {},
+      clientes: {},
+      companias: {},
+      compania: {},
+      tipo_riesgos: {},
+      codigo_productores: {},
+      tipo_vigencias: {},
+      codigo_productor: {}
+    };
+  },
 
-        methods: {
-                sumarMes: function sumarMes(mes) {
-                        var self = this;
-                        var mes;
+  methods: {
+    sumarMes: function sumarMes(mes) {
+      var self = this;
+      var mes;
 
-                        switch (this.poliza.tipo_vigencia_id) {
-                                case 6:
-                                        var mes = 12;
-                                        break;
-                                case 5:
-                                        var mes = 6;
-                                        break;
-                                case 4:
-                                        var mes = 4;
-                                        break;
-                                case 3:
-                                        var mes = 3;
-                                        break;
-                                case 2:
-                                        var mes = 2;
-                                        break;
-                                case 1:
-                                        var mes = 1;
-                                        break;
+      switch (this.poliza.tipo_vigencia_id) {
+        case 6:
+          var mes = 12;
+          break;
+        case 5:
+          var mes = 6;
+          break;
+        case 4:
+          var mes = 4;
+          break;
+        case 3:
+          var mes = 3;
+          break;
+        case 2:
+          var mes = 2;
+          break;
+        case 1:
+          var mes = 1;
+          break;
+      }
+      this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0, 10);
+    },
+    cargarUltimoNumeroSolicitud: function cargarUltimoNumeroSolicitud() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/numerosolicitud").then(function (response) {
+        self.poliza.numero_solicitud = response.data.data[0].numero_solicitud + 1;
+      });
+    },
+    crearPoliza: function crearPoliza() {
+      var _this = this;
 
-                        }
-                        this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0, 10);
-                },
-                cargarUltimoNumeroSolicitud: function cargarUltimoNumeroSolicitud() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/numerosolicitud").then(function (response) {
-                                // console.log(response.data.data);
-                                self.poliza.numero_solicitud = response.data.data[0].numero_solicitud + 1;
-                        });
-                },
-                crearPoliza: function crearPoliza() {
-                        var _this = this;
+      var self = this;
+      self.poliza.numero_solicitud = self.poliza.numero_solicitud;
 
-                        var self = this;
-                        self.poliza.numero_solicitud = self.poliza.numero_solicitud;
+      axios.post("http://127.0.0.1:8000/api/polizas", self.poliza).then(function () {
+        _this.poliza = {};
+        $router.push("http://127.0.0.1:8000/polizas");
+      }).catch(function (e) {
+        return console.log(e);
+      });
+    },
+    cargarClientes: function cargarClientes() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
+        self.clientes = response.data.data;
+      });
+    },
+    cargarTipo_Riesgos: function cargarTipo_Riesgos() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
+        self.tipo_riesgos = response.data.data;
+      });
+    },
+    cargarTipo_Vigencias: function cargarTipo_Vigencias() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/tipovigencia").then(function (response) {
+        self.tipo_vigencias = response.data.data;
+      });
+    },
+    cargarCompanias: function cargarCompanias() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
+        self.companias = response.data.data;
+      });
+    },
+    cargarCodigos_Productor: function cargarCodigos_Productor(id) {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id).then(function (response) {
+        self.codigo_productores = response.data.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  },
 
-                        axios.post("http://127.0.0.1:8000/api/polizas", self.poliza).then(function () {
-                                _this.poliza = {};
-                                router.push("http://127.0.0.1:8000/polizas");
-                        }).catch(function (e) {
-                                return console.log(e);
-                        });
-                },
-                cargarClientes: function cargarClientes() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
-                                self.clientes = response.data.data;
-                        });
-                },
-                cargarTipo_Riesgos: function cargarTipo_Riesgos() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
-                                self.tipo_riesgos = response.data.data;
-                        });
-                },
-                cargarTipo_Vigencias: function cargarTipo_Vigencias() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/tipovigencia").then(function (response) {
-                                self.tipo_vigencias = response.data.data;
-                        });
-                },
-                cargarCompanias: function cargarCompanias() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
-                                self.companias = response.data.data;
-                        });
-                },
-                cargarCodigos_Productor: function cargarCodigos_Productor(id) {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id).then(function (response) {
-                                console.log(response.data.data);
-                                self.codigo_productores = response.data.data;
-                        }).catch(function (err) {
-                                console.log(err);
-                        });
-                }
-        },
-
-        created: function created() {
-                this.cargarClientes();
-                this.cargarTipo_Riesgos();
-                this.cargarCompanias();
-                this.cargarTipo_Vigencias();
-                this.cargarUltimoNumeroSolicitud();
-                this.sumarMes();
-        }
+  created: function created() {
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+    this.cargarTipo_Vigencias();
+    this.cargarUltimoNumeroSolicitud();
+    this.sumarMes();
+  }
 });
 
 /***/ }),
@@ -60664,141 +60676,147 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-        data: function data() {
-                return {
-                        poliza: {
-                                cliente_id: "",
-                                tipo_riesgo_id: "",
-                                compania_id: "",
-                                codigo_productor_id: "",
-                                numero: "",
-                                tipo_vigencia_id: "",
-                                vigencia_desde: "",
-                                vigencia_hasta: "",
-                                numero_solicitud: "",
-                                estado_poliza_id: "",
-                                fecha_solicitud: "",
-                                fecha_emision: "",
-                                fecha_recepcion: "",
-                                fecha_entrega_original: "",
-                                fecha_entrega_email: "",
-                                fecha_entrega_correo: "",
-                                premio: "",
-                                prima: "",
-                                comision: "",
-                                descuento: "",
-                                medio_pago: "",
-                                plan_pago: "",
-                                cantidad_cuotas: "",
-                                detalle_medio_pago: ""
-                        },
-                        cliente: {},
-                        clientes: {},
-                        companias: {},
-                        compania: {},
-                        tipo_riesgos: {},
-                        codigo_productores: {},
-                        tipo_vigencias: {},
-                        codigo_productor: {},
-                        numeroSolicitud: this.$route.params.numero_solicitud
-                };
-        },
+  data: function data() {
+    return {
+      poliza: {
+        cliente_id: "",
+        tipo_riesgo_id: "",
+        compania_id: "",
+        codigo_productor_id: "",
+        numero: "",
+        tipo_vigencia_id: "",
+        vigencia_desde: "",
+        vigencia_hasta: "",
+        numero_solicitud: "",
+        estado_poliza_id: "",
+        fecha_solicitud: "",
+        fecha_emision: "",
+        fecha_recepcion: "",
+        fecha_entrega_original: "",
+        fecha_entrega_email: "",
+        fecha_entrega_correo: "",
+        premio: "",
+        prima: "",
+        comision: "",
+        descuento: "",
+        medio_pago: "",
+        plan_pago: "",
+        cantidad_cuotas: "",
+        detalle_medio_pago: ""
+      },
+      cliente: {},
+      clientes: {},
+      companias: {},
+      compania: {},
+      tipo_riesgos: {},
+      codigo_productores: {},
+      tipo_vigencias: {},
+      numeroSolicitud: this.$route.params.numero_solicitud
+    };
+  },
 
-        methods: {
-                sumarMes: function sumarMes(mes) {
-                        var self = this;
-                        var mes;
+  methods: {
+    sumarMes: function sumarMes(mes) {
+      var self = this;
+      var mes;
 
-                        switch (this.poliza.tipo_vigencia_id) {
-                                case 6:
-                                        var mes = 12;
-                                        break;
-                                case 5:
-                                        var mes = 6;
-                                        break;
-                                case 4:
-                                        var mes = 4;
-                                        break;
-                                case 3:
-                                        var mes = 3;
-                                        break;
-                                case 2:
-                                        var mes = 2;
-                                        break;
-                                case 1:
-                                        var mes = 1;
-                                        break;
+      switch (this.poliza.tipo_vigencia_id) {
+        case 6:
+          var mes = 12;
+          break;
+        case 5:
+          var mes = 6;
+          break;
+        case 4:
+          var mes = 4;
+          break;
+        case 3:
+          var mes = 3;
+          break;
+        case 2:
+          var mes = 2;
+          break;
+        case 1:
+          var mes = 1;
+          break;
+      }
+      this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0, 10);
+    },
+    cargarPoliza: function cargarPoliza() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud).then(function (response) {
+        self.poliza = response.data.data[0];
+        console.log(self.poliza.compania_id);
+        axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + self.poliza.compania_id).then(function (response) {
+          // console.log(response.data.data);
+          self.codigo_productores = response.data.data;
+        }).catch(function (err) {
+          // console.log(err);
+        });
+      });
+    },
+    cargarClientes: function cargarClientes() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
+        self.clientes = response.data.data;
+      });
+    },
+    cargarTipo_Riesgos: function cargarTipo_Riesgos() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
+        self.tipo_riesgos = response.data.data;
+      });
+    },
+    cargarTipo_Vigencias: function cargarTipo_Vigencias() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/tipovigencia").then(function (response) {
+        self.tipo_vigencias = response.data.data;
+      });
+    },
+    cargarCompanias: function cargarCompanias() {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
+        self.companias = response.data.data;
+      });
+    },
+    cargarCodigos_ProductorOnChange: function cargarCodigos_ProductorOnChange(id) {
+      var self = this;
+      axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id).then(function (response) {
+        // console.log(response.data.data);
+        self.codigo_productores = response.data.data;
+      }).catch(function (err) {
+        // console.log(err);
+      });
+    }
+    //     cargarCodigos_Productor() {
+    //       console.log(this.poliza.compania_id);
+    //       //       let self = this;
+    //       axios
+    //         .get(
+    //           "http://127.0.0.1:8000/api/codigoproductor/compania/" +
+    //             this.poliza.compania_id
+    //         )
+    //         .then(response => {
+    //           // console.log(response.data.data);
+    //           self.codigo_productores = response.data.data;
+    //         })
+    //         .catch(err => {
+    //           // console.log(err);
+    //         });
+    //     }
 
-                        }
-                        this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0, 10);
-                },
-                cargarPoliza: function cargarPoliza() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud).then(function (response) {
-                                self.poliza = response.data.data[0];
-                        });
-                },
-                cargarClientes: function cargarClientes() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
-                                self.clientes = response.data.data;
-                        });
-                },
-                cargarTipo_Riesgos: function cargarTipo_Riesgos() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/tiporiesgo").then(function (response) {
-                                self.tipo_riesgos = response.data.data;
-                        });
-                },
-                cargarTipo_Vigencias: function cargarTipo_Vigencias() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/tipovigencia").then(function (response) {
-                                self.tipo_vigencias = response.data.data;
-                        });
-                },
-                cargarCompanias: function cargarCompanias() {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/administracion/companias").then(function (response) {
-                                self.companias = response.data.data;
-                        });
-                },
-                cargarCodigos_ProductorOnChange: function cargarCodigos_ProductorOnChange(id) {
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id).then(function (response) {
-                                // console.log(response.data.data);
-                                self.codigo_productores = response.data.data;
-                        }).catch(function (err) {
-                                // console.log(err);
-                        });
-                },
-                cargarCodigos_Productor: function cargarCodigos_Productor() {
-                        console.log(self.poliza.descuento);
-                        var self = this;
-                        axios.get("http://127.0.0.1:8000/api/codigoproductor/compania/" + this.poliza.compania_id).then(function (response) {
-                                // console.log(response.data.data);
-                                self.codigo_productores = response.data.data;
-                        }).catch(function (err) {
-                                // console.log(err);
-                        });
-                }
-        },
+  },
 
-        created: function created() {
-                this.cargarPoliza();
-                this.cargarClientes();
-                this.cargarTipo_Riesgos();
-                this.cargarCompanias();
-                this.cargarTipo_Vigencias();
-                this.cargarCodigos_Productor();
-                this.cargarCodigos_ProductorOnChange();
-        },
-        mounted: function mounted() {
-                // this.sumarMes();
-
-
-        }
+  created: function created() {
+    this.cargarPoliza();
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+    this.cargarTipo_Vigencias();
+    //     this.cargarCodigos_Productor();
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -60982,8 +61000,7 @@ var render = function() {
                           attrs: {
                             name: "compania_id",
                             value: "compania_id",
-                            id: "compania_id",
-                            selected: "poliza.compania_id"
+                            id: "compania_id"
                           },
                           on: {
                             change: [

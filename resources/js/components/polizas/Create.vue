@@ -215,154 +215,146 @@
                 
 </template>
 <script>
+export default {
+  data() {
+    return {
+      poliza: {
+        cliente_id: "",
+        tipo_riesgo_id: "",
+        compania_id: "",
+        codigo_productor_id: "",
+        numero: "",
+        tipo_vigencia_id: "",
+        vigencia_desde: new Date().toISOString().slice(0, 10),
+        vigencia_hasta: "",
+        numero_solicitud: "",
+        estado_poliza_id: 1,
+        fecha_solicitud: new Date().toISOString().slice(0, 10),
+        fecha_emision: "",
+        fecha_recepcion: "",
+        fecha_entrega_original: "",
+        fecha_entrega_email: "",
+        fecha_entrega_correo: "",
+        premio: "",
+        prima: "",
+        comision: "",
+        descuento: "",
+        medio_pago: "",
+        plan_pago: "",
+        cantidad_cuotas: "12",
+        detalle_medio_pago: ""
+      },
+      cliente: {},
+      clientes: {},
+      companias: {},
+      compania: {},
+      tipo_riesgos: {},
+      codigo_productores: {},
+      tipo_vigencias: {},
+      codigo_productor: {}
+    };
+  },
+  methods: {
+    sumarMes(mes) {
+      let self = this;
+      var mes;
 
+      switch (this.poliza.tipo_vigencia_id) {
+        case 6:
+          var mes = 12;
+          break;
+        case 5:
+          var mes = 6;
+          break;
+        case 4:
+          var mes = 4;
+          break;
+        case 3:
+          var mes = 3;
+          break;
+        case 2:
+          var mes = 2;
+          break;
+        case 1:
+          var mes = 1;
+          break;
+      }
+      this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes)
+        .toISOString()
+        .slice(0, 10);
+    },
 
-        export default {
-                data() {
-                        return {
-                                poliza: {
-                                        cliente_id:"",
-                                        tipo_riesgo_id:"",
-                                        compania_id:"",
-                                        codigo_productor_id: "",
-                                        numero:"",
-                                        tipo_vigencia_id:"",
-                                        vigencia_desde: new Date().toISOString().slice(0,10),
-                                        vigencia_hasta: "",
-                                        numero_solicitud: "",
-                                        estado_poliza_id: 1,
-                                        fecha_solicitud: new Date().toISOString().slice(0,10),
-                                        fecha_emision:"",
-                                        fecha_recepcion:"",
-                                        fecha_entrega_original:"",
-                                        fecha_entrega_email:"",
-                                        fecha_entrega_correo:"",
-                                        premio:"",
-                                        prima:"",
-                                        comision:"",
-                                        descuento:"",
-                                        medio_pago:"",
-                                        plan_pago:"",
-                                        cantidad_cuotas: '12',
-                                        detalle_medio_pago:"",
-                                },
-                                cliente: {},
-                                clientes: {},
-                                companias: {},
-                                compania: {},
-                                tipo_riesgos: {},
-                                codigo_productores: {},
-                                tipo_vigencias:{},
-                                codigo_productor: {}
-                        };
-                },
-                methods: {
-                        sumarMes(mes){
-                                let self = this;
-                                var mes;
+    cargarUltimoNumeroSolicitud() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/numerosolicitud")
+        .then(function(response) {
+          self.poliza.numero_solicitud =
+            response.data.data[0].numero_solicitud + 1;
+        });
+    },
+    crearPoliza() {
+      let self = this;
+      self.poliza.numero_solicitud = self.poliza.numero_solicitud;
 
-                                switch (this.poliza.tipo_vigencia_id) {
-                                case 6:
-                                       var mes = 12;
-                                        break;
-                                case 5:
-                                       var mes = 6;
-                                        break;
-                                case 4:
-                                       var mes = 4;
-                                        break;
-                                case 3:
-                                        var mes = 3;
-                                        break;
-                                case 2:
-                                        var mes = 2;
-                                        break;
-                                case 1:
-                                       var mes = 1;
-                                        break;
-                        
-                                }
-                                this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0,10);
-                                
-                        },
-                        
-                        cargarUltimoNumeroSolicitud(){
-                        let self = this;
-                        axios
-                                .get("http://127.0.0.1:8000/api/numerosolicitud").then(function (response) {
-                                                // console.log(response.data.data);
-                                                self.poliza.numero_solicitud = response.data.data[0].numero_solicitud + 1;
+      axios
+        .post("http://127.0.0.1:8000/api/polizas", self.poliza)
+        .then(() => {
+          this.poliza = {};
+          $router.push("http://127.0.0.1:8000/polizas");
+        })
+        .catch(e => console.log(e));
+    },
+    cargarClientes() {
+      let self = this;
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function(response) {
+        self.clientes = response.data.data;
+      });
+    },
+    cargarTipo_Riesgos() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/tiporiesgo")
+        .then(function(response) {
+          self.tipo_riesgos = response.data.data;
+        });
+    },
+    cargarTipo_Vigencias() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/tipovigencia")
+        .then(function(response) {
+          self.tipo_vigencias = response.data.data;
+        });
+    },
+    cargarCompanias() {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/administracion/companias")
+        .then(function(response) {
+          self.companias = response.data.data;
+        });
+    },
+    cargarCodigos_Productor(id) {
+      let self = this;
+      axios
+        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id)
+        .then(response => {
+          self.codigo_productores = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
 
-                                        });
-                        },
-                        crearPoliza() {
-                        let self = this;
-                        self.poliza.numero_solicitud = self.poliza.numero_solicitud;
-
-                        axios
-                                .post(
-                                "http://127.0.0.1:8000/api/polizas",
-                                self.poliza
-                                )
-                                .then(() => {
-                                this.poliza = {};
-                                router.push("http://127.0.0.1:8000/polizas");
-                                })
-                                .catch(e => console.log(e));
-                        },
-                        cargarClientes() {
-                                let self = this;
-                                axios.get("http://127.0.0.1:8000/api/clientes").then(function (response) {
-                                        self.clientes = response.data.data;
-                                });
-                        },
-                        cargarTipo_Riesgos() {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/tiporiesgo")
-                                        .then(function (response) {
-                                                self.tipo_riesgos = response.data.data;
-                                        });
-                        },
-                        cargarTipo_Vigencias() {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/tipovigencia")
-                                        .then(function (response) {
-                                                self.tipo_vigencias = response.data.data;
-                                        });
-                        },
-                        cargarCompanias() {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/administracion/companias")
-                                        .then(function (response) {
-                                                self.companias = response.data.data;
-                                        });
-                        },
-                        cargarCodigos_Productor(id) {
-                                let self = this;
-                                axios
-                                        .get("http://127.0.0.1:8000/api/codigoproductor/compania/" + id)
-                                        .then(response => {
-                                                console.log(response.data.data);
-                                                self.codigo_productores = response.data.data;
-                                        })
-                                        .catch(err => {
-                                                console.log(err);
-                                        });
-                        },
-                        
-                },
-
-                created() {
-                        this.cargarClientes();
-                        this.cargarTipo_Riesgos();
-                        this.cargarCompanias();
-                        this.cargarTipo_Vigencias();
-                        this.cargarUltimoNumeroSolicitud();
-                        this.sumarMes();
-                },
-                
-        };
+  created() {
+    this.cargarClientes();
+    this.cargarTipo_Riesgos();
+    this.cargarCompanias();
+    this.cargarTipo_Vigencias();
+    this.cargarUltimoNumeroSolicitud();
+    this.sumarMes();
+  }
+};
 </script>
