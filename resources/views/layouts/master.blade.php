@@ -58,11 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-header">POLIZAS</li>
                         <li class="nav-item">
                             <router-link to="/polizas/automotor" class="nav-link">
-<<<<<<< HEAD
                                 <i class="fa fa-car nav-icon"></i>
-=======
-                                <i class="nav-icon fa fa-car"></i>
->>>>>>> 1ee560b116d538c36828b2ad667380c5f6eca1f6
                                 <p>Automotor</p>
                             </router-link>
                         </li>

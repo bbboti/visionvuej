@@ -1,12 +1,10 @@
     <template>
     <div>
-        <p>Companias</p>
-            <div class="box">
-                <div class="box-header">
-
-                    <router-link to="/administracion/companias/create" class="btn bgcolor-purple ">Crear</router-link>
-                </div>
-                <!-- /.box-header -->
+        <div class="card">
+            <div class="card-header">
+                    <p class="d-inline align-bottom">COMPAÑIAS</p>
+                    <router-link to="/administracion/companias/create" class="btn bgcolor-purple float-right" >Crear</router-link>
+            </div>
                 <div class="box-body">
                         <div class="row">
                             <div class="col-12">

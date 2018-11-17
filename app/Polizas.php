@@ -7,6 +7,7 @@ use App\Clientes;
 use App\CodigoProductor;
 use App\TipoRiesgo;
 use App\EstadoPoliza;
+use App\TipoVigencia;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,4 +36,7 @@ class Polizas extends Model
         return $this->belongsTo(EstadoPoliza::class, 'estado_poliza_id');
     }
 
+    public function tipo_vigencias() {
+        return $this->belongsTo(TipoVigencia::class, 'tipo_vigencia_id');
+    }
 }

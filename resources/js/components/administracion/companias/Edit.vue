@@ -1,11 +1,11 @@
 <template>
     <div>
-        <p>Companias</p>
-             <div class="col-md-12">
-
-        <div class="content">
+        <div class="col-md-12">
+        <div class="card">
+                <div class="card-header">
+                    <p class="d-inline align-bottom">COMPAÑIA</p>
+                </div>
                         <form @submit.prevent="updateCompania()">
-
                 <div class="row">
 <!-- ARREGLO BLOQUE -->
                         <div class="col-md-6">
@@ -80,12 +80,13 @@
                                                 </div>
                                         </div>
                         </div>
+                
 <!-- SEGUNDO BLOQUE -->
 
 
 <!-- ARREGLO BLOQUE -->
-                <div class="card-body">
-                        <h5 class="box-title">Informacion de Contacto</h5>
+        <div class="card-body">
+                        <p class="d-inline align-bottom">Contactos</p>
                 <div class="row">
                 <div class="col-md-6">
                                         <div class="box-body">
@@ -146,17 +147,18 @@
                                         </div>
                         </div>
                 </div>
-                </div>
+        </div>
 
                         
 <!-- SEGUNDO BLOQUE -->
 
                 </div>
-                <button type="submit" class="btn btn-primary button-center w3-right">Guardar Cambios</button>
+                <button type="submit" class="btn bgcolor-purple float-left">Guardar Cambios</button>
                 </form>
                 </div>
+        </div>
 
-
+<!-- FIN DATOS COMPANIA -->
 
 
 
@@ -166,14 +168,11 @@
 <!-- COMIENZO CODIGO ORGANIZADORES -->
         <!-- Tabla de Codigo de Organizadores -->
         <div class="col-md-12">
-                <div class="box box-primary">
-                        <div class="box-header with-border">
-                                <h5 class="box-title">Codigos de Organizadores</h5>
-                                <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcodigoorganizador" @click.prevent="vaciarForm()">Crear</a>
+                <div class="card">
+                        <div class="card-header">
+                                <p class="d-inline align-bottom">CODIGOS ORGANIZADOR</p>
+                                <button href="" class="btn bgcolor-purple float-right" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</button>
                         </div>
-                        <!-- Button trigger modal -->
-
-                        <!-- /.box-header -->
                         <div class="box-body">
                                         <div class="row">
                                                 <div class="col-sm-12">
@@ -264,14 +263,11 @@
 <!-- COMIENZO CODIGO PRODUCTORES         -->
         <!-- Tabla de Codigo de Productores -->
         <div class="col-md-12">
-                        <div class="box box-primary">
-                                <div class="box-header with-border">
-                                        <h5 class="box-title">Codigos de Productores</h5>
-                                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcodigoproductor" @click.prevent="vaciarForm()" >Crear</a>
+                        <div class="card">
+                                <div class="card-header">
+                                        <p class="d-inline align-bottom">CODIGOS PRODUCTOR</p>
+                                        <button href="" class="btn bgcolor-purple float-right" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</button>
                                 </div>
-                                <!-- Button trigger modal -->
-                                
-                                <!-- /.box-header -->
                                 <div class="box-body">
                                                 <div class="row">
                                                         <div class="col-sm-12">
@@ -372,14 +368,11 @@
         <!-- Tabla de Cobertura -->
 <div class="col-md-12">
 
-        <div class="box box-primary">
-                <div class="box-header with-border">
-                        <h5 class="box-title">Coberturas</h5>
-                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modalcobertura" @click.prevent="vaciarForm()">Crear</a>
-                </div>
-                <!-- Button trigger modal -->
-                
-                <!-- /.box-header -->
+        <div class="card">
+            <div class="card-header">
+                    <p class="d-inline align-bottom">COBERTURAS</p>
+                    <button href="" class="btn bgcolor-purple float-right" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</button>
+            </div>
                  <div class="box-body">
                                 <div class="row">
                                         <div class="col-sm-12">
@@ -499,7 +492,6 @@
 <!-- FIN COBERTURA -->
 
 
-  </div>
         </div>
 
 
@@ -842,13 +834,7 @@ export default {
           self.productores = response.data.data;
         });
     }
-    //     cargarCobertura() {
-    //       let self = this;
-    //       axios.get("http://127.0.0.1:8000/api/cobertura").then(response => {
-    //         // console.log(response.data.data);
-    //         self.coberturas = response.data.data;
-    //       });
-    //     }
+   
   },
   created() {
     this.cargarCompania();

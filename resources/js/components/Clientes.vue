@@ -1,11 +1,10 @@
 <template>
     <div>
-        <p>Clientes</p>
-            <div class="box">
-                <div class="box-header">
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
-                </div>
-                <!-- /.box-header -->
+        <div class="card">
+            <div class="card-header">
+                    <p class="d-inline align-bottom">CLIENTES</p>
+                    <button href="" class="btn bgcolor-purple float-right" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</button>
+            </div>
                 <div class="box-body">
                         <div class="row">
                             <div class="col-12">
@@ -374,7 +373,8 @@ export default {
         .catch(e => console.log(e));
     },
     vaciarForm(){
-        this.cliente = {}
+        this.cliente = {};
+        this.modoEditar = false;
     },
     updateCliente(id){
         let self = this;
@@ -387,8 +387,7 @@ export default {
       }).catch(e=>(console.log(e)))
     },
     modoEdicion(id){
-        this.modoEditar = true,
-        $("#modal").modal("show");
+        (this.modoEditar = true), $("#modal").modal("show");
         let self = this;
       axios
         .get("http://127.0.0.1:8000/api/clientes/" + id)

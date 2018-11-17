@@ -1,11 +1,10 @@
 <template>
     <div>
-        <p>Productores</p>
-            <div class="box">
-                <div class="box-header">
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</a>
-                </div>
-                <!-- /.box-header -->
+        <div class="card">
+            <div class="card-header">
+                    <p class="d-inline align-bottom">PRODUCTORES</p>
+                    <button href="" class="btn bgcolor-purple float-right" data-toggle="modal" data-target="#modal" @click.prevent="vaciarForm()">Crear</button>
+            </div>
                 <div class="box-body">
                         <div class="row">
                             <div class="col-12">
@@ -161,7 +160,6 @@ export default {
   },
   methods: {
     crearProductor() {
-      //       console.log(this.productor);
       let self = this;
       axios
         .post(
@@ -171,7 +169,6 @@ export default {
         .then(() => {
           $("#modal").modal("hide");
           this.productor = {};
-          //   this.productor.activo = 1;
           this.cargarProductores();
         })
         .catch(e => console.log(e));
@@ -179,7 +176,6 @@ export default {
     vaciarForm() {
       this.productor = {};
       this.modoEditar = false;
-      // this.productor.activo = 1;
     },
     updateProductor(id) {
       let self = this;

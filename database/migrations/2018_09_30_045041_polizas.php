@@ -19,10 +19,11 @@ class Polizas extends Migration
             $table->integer('compania_id');
             $table->integer('codigo_productor_id');
             $table->integer('tipo_riesgo_id');
+            $table->integer('numero_solicitud');
             $table->string('numero')->nullable();
             $table->integer('estado_poliza_id')->nullable();
             $table->string('renueva_numero')->nullable();
-            $table->enum('tipo_vigencia', ['Mensual', 'Bimestral', 'Trimestral', 'Cuatrimestral', 'Semestral', 'Anual', 'Dias']);
+            $table->integer('tipo_vigencia_id')->nullable();
             $table->integer('vigencia_dias')->nullable();
             $table->string('vigencia_desde')->nullable();
             $table->string('vigencia_hasta')->nullable();

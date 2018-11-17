@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EstadoPolizas extends Migration
+class TipoVigencias extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class EstadoPolizas extends Migration
      */
     public function up()
     {
-        Schema::create('estado_polizas', function (Blueprint $table) {
+        Schema::create('tipo_vigencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('vigencia');
             $table->timestamps();
         });
     }
@@ -27,5 +27,7 @@ class EstadoPolizas extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('tipo_vigencias');
+
     }
 }

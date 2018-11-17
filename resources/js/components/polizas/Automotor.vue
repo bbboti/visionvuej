@@ -1,11 +1,10 @@
     <template>
     <div>
-        <p>Polizas Automotor</p>
-            <div class="box">
-                <div class="box-header">
-                    <router-link to="/polizas/create" class="btn btn-success ">Crear</router-link>
-                </div>
-                <!-- /.box-header -->
+        <div class="card">
+            <div class="card-header">
+                    <p class="d-inline align-bottom">Polizas Automotor</p>
+                    <router-link to="/polizas/create" class="btn bgcolor-purple float-right" >Crear</router-link>
+            </div>
                 <div class="box-body">
                         <div class="row">
                             <div class="col-12">
@@ -33,7 +32,7 @@
                                             <td> {{poliza.companias.nombre}} </td>
                                             <td> {{poliza.codigo_productor.codigo_productor}} </td>
                                             <td> <a href="" class="fa fa-user"></a>  {{poliza.clientes.apellido}} {{poliza.clientes.nombre}}  </td>
-                                            <td> {{poliza.tipo_vigencia}} </td>
+                                            <td> {{poliza.tipo_vigencias.vigencia}} </td>
                                             <td> {{poliza.vigencia_desde}} </td>
                                             <td> {{poliza.vigencia_hasta}} </td>
                                             <td> {{poliza.estado_polizas.nombre}} </td>
@@ -80,6 +79,7 @@
         created() {
             let self = this
             axios.get('http://127.0.0.1:8000/api/polizas').then((response)=>{
+                console.log(response.data)
                 self.polizas = response.data.data;
             });
 

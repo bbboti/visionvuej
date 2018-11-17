@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Polizas;
 use Illuminate\Database\Eloquent\Model;
 
 class TipoRiesgo extends Model

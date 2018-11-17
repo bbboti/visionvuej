@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Polizas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Poliza as PolizasResource;
 
 
@@ -16,9 +17,17 @@ class PolizaController extends Controller
      */
     public function index()
     {
-        $polizas = Polizas::with(['codigo_productor', 'estado_polizas', 'clientes', 'companias'])->get();
+        $polizas = Polizas::with(['codigo_productor', 'estado_polizas', 'clientes', 'companias', 'tipo_vigencias'])->get();
 
         return PolizasResource::collection($polizas);
+    }
+
+    public function numeroDeSolicitud()
+    {
+        $nro_solicitud =  DB::table('polizas')->orderBy('numero_solicitud', 'DESC')->take(1)->get();
+
+        // toString($nro_solicitud);
+        return new PolizasResource($nro_solicitud);
     }
 
     /**
@@ -29,6 +38,8 @@ class PolizaController extends Controller
     public function create()
     {
         $polizas = Polizas::all();
+
+        return PolizasResource::collection($polizas);
     }
 
     /**
@@ -42,13 +53,14 @@ class PolizaController extends Controller
         
         $poliza = Polizas::create([
             'cliente_id' => $request->input('cliente_id'),
-            'companias_id' => $request->input('companias_id'),
+            'compania_id' => $request->input('compania_id'),
             'codigo_productor_id' => $request->input('codigo_productor_id'),
             'tipo_riesgo_id' => $request->input('tipo_riesgo_id'),
+            'numero_solicitud' => $request->input('numero_solicitud'),
             'numero' => $request->input('numero'),
             'estado_poliza_id' => $request->input('estado_poliza_id'),
             'renueva_numero' => $request->input('renueva_numero'),
-            'tipo_vigencia' => $request->input('tipo_vigencia'),
+            'tipo_vigencia_id' => $request->input('tipo_vigencia_id'),
             'vigencia_dias' => $request->input('vigencia_dias'),
             'vigencia_desde' => $request->input('vigencia_desde'),
             'vigencia_hasta' => $request->input('vigencia_hasta'),
@@ -79,9 +91,9 @@ class PolizaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($numero)
+    public function show($numero_solicitud)
     {
-        $poliza = Polizas::where('numero', $numero)->get();
+        $poliza = Polizas::where('numero_solicitud', $numero_solicitud)->get();
 
         return new PolizasResource($poliza);
     }
@@ -109,13 +121,14 @@ class PolizaController extends Controller
         $poliza = Polizas::find($id);
         $poliza->update([
             'cliente_id' => $request->input('cliente_id'),
-            'companias_id' => $request->input('companias_id'),
+            'compania_id' => $request->input('compania_id'),
             'codigo_productor_id' => $request->input('codigo_productor_id'),
             'tipo_riesgo_id' => $request->input('tipo_riesgo_id'),
+            'numero_solicitud' => $request->input('numero_solicitud'),
             'numero' => $request->input('numero'),
             'estado_poliza_id' => $request->input('estado_poliza_id'),
             'renueva_numero' => $request->input('renueva_numero'),
-            'tipo_vigencia' => $request->input('tipo_vigencia'),
+            'tipo_vigencia_id' => $request->input('tipo_vigencia_id'),
             'vigencia_dias' => $request->input('vigencia_dias'),
             'vigencia_desde' => $request->input('vigencia_desde'),
             'vigencia_hasta' => $request->input('vigencia_hasta'),

@@ -50,16 +50,21 @@ let routes = [
     component: require('./components/polizas/Create.vue'),
     meta: {title: 'Polizas Automotor'}
 },
+{
+    path: '/polizas/:numero_solicitud/edit',
+    component: require('./components/polizas/Edit.vue'),
+    meta: {title: 'Polizas Automotor'}
+},
 
 
 ]
+import addMonths from 'date-fns/add_months';
+Vue.use(addMonths);
 
-// router.beforeEach((to, from, next) => {
-//     document.title = to.meta.title(to)
-//     next()
-//   })
 
- 
+
+
+
 const router = new VueRouter({
   mode: 'history',
   routes

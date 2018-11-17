@@ -48,5 +48,8 @@ Route::get('/polizas/automotor', function () {
 Route::get('/polizas/create', function () {
     return view('layouts.master');
 });
+Route::get('/polizas/{numero_solicitud}/edit', function () {
+    return view('layouts.master');
+});
 
 
