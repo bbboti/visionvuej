@@ -53,7 +53,7 @@
                                                 <div class="form-group">
                                                         <label for="tipo_vigencia_id" class=" control-label">Vigencia</label>
                                                         <div class="mb-1">
-                                                                <select name='tipo_vigencia_id' class="form-control form-control-sm select2" value="tipo_vigencia_id" v-model="poliza.tipo_vigencia_id" @change='sumarMes(poliza.tipo_vigencia_id)'>
+                                                                <select name='tipo_vigencia_id' class="form-control form-control-sm " value="tipo_vigencia_id" v-model="poliza.tipo_vigencia_id" @change='sumarMes(poliza.tipo_vigencia_id)'>
                                                                         <option v-for="tipo_vigencia in tipo_vigencias" :key="tipo_vigencia.id" v-bind:value="tipo_vigencia.id">{{tipo_vigencia.vigencia}}</option>
                                                                 </select>
                                                         </div>
@@ -76,7 +76,6 @@
                                                 <div class="form-group">
                                                         <label for="numero_solicitud" class="">Nro de Solicitud:</label>
                                                         <div class="mb-1">
-                                                                <!-- <input  class="form-control form-control-sm" id="numero_solicitud" name="numero_solicitud" v-model="poliza.numero_solicitud"> -->
                                                                 <p>{{poliza.numero_solicitud}}</p>
                                                         </div>
                                                 </div>
@@ -130,13 +129,7 @@
                                                                         <div class="form-group">
                                                                                 <label for="premio" class="control-label">Premio:</label>
                                                                                 <div class="mb-1">
-                                                                                        <input type="number" class="form-control form-control-sm" id="premio" name="premio" v-model="poliza.premio">
-                                                                                </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                                <label for="comision" class="control-label">Comision:</label>
-                                                                                <div class="mb-1">
-                                                                                        <input type="number" class="form-control form-control-sm" id="comision" name="comision" v-model="poliza.comision">
+                                                                                        <input type="text" class="form-control form-control-sm" id="premio" name="premio" v-model="poliza.premio">
                                                                                 </div>
                                                                         </div>
                                                                 </div>
@@ -144,14 +137,26 @@
                                                                         <div class="form-group">
                                                                                 <label for="prima" class="control-label">Prima:</label>
                                                                                 <div class="mb-1">
-                                                                                        <input type="number" class="form-control form-control-sm" id="prima" name="prima" v-model="poliza.prima">
+                                                                                        <input type="text" class="form-control form-control-sm" id="prima" name="prima" v-model="poliza.prima">
                                                                                 </div>
                                                                         </div>
-                                                                        
+                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+
+                                                                <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                                <label for="prima" class="control-label">Comision:</label>
+                                                                                <div class="mb-1">
+                                                                                        <input type="text" class="form-control form-control-sm" id="comision" value="0" name="comision" v-model="poliza.comision">
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-6">
                                                                         <div class="form-group">
                                                                                 <label for="descuento" class="control-label">Descuento:</label>
                                                                                 <div class="mb-1">
-                                                                                        <input type="number" class="form-control form-control-sm" id="descuento" name="descuento" v-model="poliza.descuento">
+                                                                                        <input type="text" class="form-control form-control-sm" id="descuento" name="descuento" v-model="poliza.descuento">
                                                                                 </div>
                                                                         </div>
                                                                 </div>
@@ -163,10 +168,10 @@
                                                         <div class="form-group">
                                                                 <label for="medio_pago" class=" control-label">Medio de Pago:</label>
                                                                 <div class=" mb-1">
-                                                                        <select name='medio_pago' class="form-control form-control-sm select2" v-model="poliza.medio_pago">
+                                                                        <select name='medio_pago' class="form-control form-control-sm " v-model="poliza.medio_pago">
                                                                                 <option value='TC'>TARJETA DE CREDITO</option>
                                                                                 <option value='DC'>DEBITO EN CUENTA</option>
-                                                                                <option value='DC'>PAGO EFECTIVO / PAGO FACIL</option>
+                                                                                <option value='EFT'>PAGO EFECTIVO / PAGO FACIL</option>
                                                                         </select>
                                                                 </div>
                                                         </div>
@@ -175,7 +180,7 @@
                                                         <div class="form-group">
                                                                 <label for="plan_pago" class=" control-label">Plan de Pago:</label>
                                                                 <div class=" mb-1">
-                                                                        <select name='plan_pago' class="form-control form-control-sm select2" v-model="poliza.plan_pago">
+                                                                        <select name='plan_pago' class="form-control form-control-sm" v-model="poliza.plan_pago">
                                                                                 <option value='MENSUAL'>MENSUAL</option>
                                                                                 <option value='TRIMESTRAL'>TRIMESTRAL</option>
                                                                                 <option value='SEMESTRAL'>SEMESTRAL</option>
@@ -237,8 +242,8 @@ export default {
         fecha_entrega_correo: "",
         premio: "",
         prima: "",
-        comision: "",
-        descuento: "",
+        comision: "0",
+        descuento: "0",
         medio_pago: "",
         plan_pago: "",
         cantidad_cuotas: "12",

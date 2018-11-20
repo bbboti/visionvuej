@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
 
-                        <li class="nav-header">PENDIENTES</li>
+                        {{-- <li class="nav-header">PENDIENTES</li>
                         <li class="nav-item">
                             <a href="pages/calendar.html" class="nav-link">
                                 <i class="fa fa-angle-double-right nav-icon"></i>
@@ -135,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <span class="right badge badge-danger">2</span>
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-header">CLIENTES</li>
                         <li class="nav-item">

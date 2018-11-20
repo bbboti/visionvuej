@@ -59077,6 +59077,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -59100,8 +59105,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fecha_entrega_correo: "",
         premio: "",
         prima: "",
-        comision: "",
-        descuento: "",
+        comision: "0",
+        descuento: "0",
         medio_pago: "",
         plan_pago: "",
         cantidad_cuotas: "12",
@@ -59568,7 +59573,7 @@ var render = function() {
                               expression: "poliza.tipo_vigencia_id"
                             }
                           ],
-                          staticClass: "form-control form-control-sm select2",
+                          staticClass: "form-control form-control-sm ",
                           attrs: {
                             name: "tipo_vigencia_id",
                             value: "tipo_vigencia_id"
@@ -60000,11 +60005,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control form-control-sm",
-                          attrs: {
-                            type: "number",
-                            id: "premio",
-                            name: "premio"
-                          },
+                          attrs: { type: "text", id: "premio", name: "premio" },
                           domProps: { value: _vm.poliza.premio },
                           on: {
                             input: function($event) {
@@ -60014,49 +60015,6 @@ var render = function() {
                               _vm.$set(
                                 _vm.poliza,
                                 "premio",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "control-label",
-                          attrs: { for: "comision" }
-                        },
-                        [_vm._v("Comision:")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-1" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.poliza.comision,
-                              expression: "poliza.comision"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: {
-                            type: "number",
-                            id: "comision",
-                            name: "comision"
-                          },
-                          domProps: { value: _vm.poliza.comision },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.poliza,
-                                "comision",
                                 $event.target.value
                               )
                             }
@@ -60088,7 +60046,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control form-control-sm",
-                          attrs: { type: "number", id: "prima", name: "prima" },
+                          attrs: { type: "text", id: "prima", name: "prima" },
                           domProps: { value: _vm.poliza.prima },
                           on: {
                             input: function($event) {
@@ -60100,8 +60058,58 @@ var render = function() {
                           }
                         })
                       ])
-                    ]),
-                    _vm._v(" "),
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "control-label",
+                          attrs: { for: "prima" }
+                        },
+                        [_vm._v("Comision:")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-1" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.poliza.comision,
+                              expression: "poliza.comision"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: {
+                            type: "text",
+                            id: "comision",
+                            value: "0",
+                            name: "comision"
+                          },
+                          domProps: { value: _vm.poliza.comision },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.poliza,
+                                "comision",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _c(
                         "label",
@@ -60124,7 +60132,7 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-sm",
                           attrs: {
-                            type: "number",
+                            type: "text",
                             id: "descuento",
                             name: "descuento"
                           },
@@ -60173,7 +60181,7 @@ var render = function() {
                             expression: "poliza.medio_pago"
                           }
                         ],
-                        staticClass: "form-control form-control-sm select2",
+                        staticClass: "form-control form-control-sm ",
                         attrs: { name: "medio_pago" },
                         on: {
                           change: function($event) {
@@ -60204,7 +60212,7 @@ var render = function() {
                           _vm._v("DEBITO EN CUENTA")
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "DC" } }, [
+                        _c("option", { attrs: { value: "EFT" } }, [
                           _vm._v("PAGO EFECTIVO / PAGO FACIL")
                         ])
                       ]
@@ -60236,7 +60244,7 @@ var render = function() {
                                 expression: "poliza.plan_pago"
                               }
                             ],
-                            staticClass: "form-control form-control-sm select2",
+                            staticClass: "form-control form-control-sm",
                             attrs: { name: "plan_pago" },
                             on: {
                               change: function($event) {
@@ -60675,6 +60683,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60743,6 +60756,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
       this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes).toISOString().slice(0, 10);
     },
+
+
+    //     sumarSoloMes(mes){
+    //        this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes)
+    //         .toISOString()
+    //         .slice(0, 10);     
+    //     },
+
     cargarPoliza: function cargarPoliza() {
       var self = this;
       axios.get("http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud).then(function (response) {
@@ -60789,23 +60810,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // console.log(err);
       });
     }
-    //     cargarCodigos_Productor() {
-    //       console.log(this.poliza.compania_id);
-    //       //       let self = this;
-    //       axios
-    //         .get(
-    //           "http://127.0.0.1:8000/api/codigoproductor/compania/" +
-    //             this.poliza.compania_id
-    //         )
-    //         .then(response => {
-    //           // console.log(response.data.data);
-    //           self.codigo_productores = response.data.data;
-    //         })
-    //         .catch(err => {
-    //           // console.log(err);
-    //         });
-    //     }
-
   },
 
   created: function created() {
@@ -61252,6 +61256,9 @@ var render = function() {
                         },
                         domProps: { value: _vm.poliza.vigencia_desde },
                         on: {
+                          change: function($event) {
+                            _vm.sumarMes(_vm.poliza.vigencia_desde)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
@@ -61632,8 +61639,47 @@ var render = function() {
                           }
                         })
                       ])
-                    ]),
-                    _vm._v(" "),
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "control-label",
+                          attrs: { for: "prima" }
+                        },
+                        [_vm._v("Prima:")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-1" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.poliza.prima,
+                              expression: "poliza.prima"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: { type: "number", id: "prima", name: "prima" },
+                          domProps: { value: _vm.poliza.prima },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.poliza, "prima", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _c(
                         "label",
@@ -61679,41 +61725,6 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "control-label",
-                          attrs: { for: "prima" }
-                        },
-                        [_vm._v("Prima:")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-1" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.poliza.prima,
-                              expression: "poliza.prima"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: { type: "number", id: "prima", name: "prima" },
-                          domProps: { value: _vm.poliza.prima },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.poliza, "prima", $event.target.value)
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c(
                         "label",
@@ -61785,7 +61796,7 @@ var render = function() {
                             expression: "poliza.medio_pago"
                           }
                         ],
-                        staticClass: "form-control form-control-sm select2",
+                        staticClass: "form-control form-control-sm ",
                         attrs: { name: "medio_pago" },
                         on: {
                           change: function($event) {
@@ -61816,7 +61827,7 @@ var render = function() {
                           _vm._v("DEBITO EN CUENTA")
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "DC" } }, [
+                        _c("option", { attrs: { value: "EFT" } }, [
                           _vm._v("PAGO EFECTIVO / PAGO FACIL")
                         ])
                       ]
@@ -61848,7 +61859,7 @@ var render = function() {
                                 expression: "poliza.plan_pago"
                               }
                             ],
-                            staticClass: "form-control form-control-sm select2",
+                            staticClass: "form-control form-control-sm ",
                             attrs: { name: "plan_pago" },
                             on: {
                               change: function($event) {

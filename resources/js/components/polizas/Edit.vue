@@ -61,7 +61,7 @@
                                                 <div class="form-group">
                                                         <label for="vigencia_desde" class=" control-label">Desde:</label>
                                                         <div class="mb-1">
-                                                                <input type="date" class="form-control form-control-sm" id="vigencia_desde" name="vigencia_desde" v-model="poliza.vigencia_desde">
+                                                                <input type="date" class="form-control form-control-sm" id="vigencia_desde" name="vigencia_desde" v-model="poliza.vigencia_desde" @change='sumarMes(poliza.vigencia_desde)'>
                                                         </div>
                                                 </div>
                                                 <div class="form-group">
@@ -132,6 +132,18 @@
                                                                                         <input type="number" class="form-control form-control-sm" id="premio" name="premio" v-model="poliza.premio">
                                                                                 </div>
                                                                         </div>
+                                                                </div>
+                                                                <div class="col-md-6"> 
+                                                                        <div class="form-group">
+                                                                                <label for="prima" class="control-label">Prima:</label>
+                                                                                <div class="mb-1">
+                                                                                        <input type="number" class="form-control form-control-sm" id="prima" name="prima" v-model="poliza.prima">
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-6">
+                                                                        
                                                                         <div class="form-group">
                                                                                 <label for="comision" class="control-label">Comision:</label>
                                                                                 <div class="mb-1">
@@ -139,14 +151,7 @@
                                                                                 </div>
                                                                         </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                                <label for="prima" class="control-label">Prima:</label>
-                                                                                <div class="mb-1">
-                                                                                        <input type="number" class="form-control form-control-sm" id="prima" name="prima" v-model="poliza.prima">
-                                                                                </div>
-                                                                        </div>
-                                                                        
+                                                                <div class="col-md-6">      
                                                                         <div class="form-group">
                                                                                 <label for="descuento" class="control-label">Descuento:</label>
                                                                                 <div class="mb-1">
@@ -162,10 +167,10 @@
                                                         <div class="form-group">
                                                                 <label for="medio_pago" class=" control-label">Medio de Pago:</label>
                                                                 <div class=" mb-1">
-                                                                        <select name='medio_pago' class="form-control form-control-sm select2" v-model="poliza.medio_pago">
+                                                                        <select name='medio_pago' class="form-control form-control-sm " v-model="poliza.medio_pago">
                                                                                 <option value='TC'>TARJETA DE CREDITO</option>
                                                                                 <option value='DC'>DEBITO EN CUENTA</option>
-                                                                                <option value='DC'>PAGO EFECTIVO / PAGO FACIL</option>
+                                                                                <option value='EFT'>PAGO EFECTIVO / PAGO FACIL</option>
                                                                         </select>
                                                                 </div>
                                                         </div>
@@ -174,7 +179,7 @@
                                                         <div class="form-group">
                                                                 <label for="plan_pago" class=" control-label">Plan de Pago:</label>
                                                                 <div class=" mb-1">
-                                                                        <select name='plan_pago' class="form-control form-control-sm select2" v-model="poliza.plan_pago">
+                                                                        <select name='plan_pago' class="form-control form-control-sm " v-model="poliza.plan_pago">
                                                                                 <option value='MENSUAL'>MENSUAL</option>
                                                                                 <option value='TRIMESTRAL'>TRIMESTRAL</option>
                                                                                 <option value='SEMESTRAL'>SEMESTRAL</option>
@@ -283,6 +288,12 @@ export default {
         .slice(0, 10);
     },
 
+//     sumarSoloMes(mes){
+//        this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes)
+//         .toISOString()
+//         .slice(0, 10);     
+//     },
+
     cargarPoliza() {
       let self = this;
       axios
@@ -346,22 +357,7 @@ export default {
           // console.log(err);
         });
     }
-    //     cargarCodigos_Productor() {
-    //       console.log(this.poliza.compania_id);
-    //       //       let self = this;
-    //       axios
-    //         .get(
-    //           "http://127.0.0.1:8000/api/codigoproductor/compania/" +
-    //             this.poliza.compania_id
-    //         )
-    //         .then(response => {
-    //           // console.log(response.data.data);
-    //           self.codigo_productores = response.data.data;
-    //         })
-    //         .catch(err => {
-    //           // console.log(err);
-    //         });
-    //     }
+
   },
 
   created() {
