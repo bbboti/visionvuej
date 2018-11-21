@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-header">CLIENTES</li>
                         <li class="nav-item">
                             <router-link to="/clientes" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
+                                <i class="fa fa-users nav-icon"></i>
                                 <p>Listado Clientes</p>
                             </router-link>
                         </li>

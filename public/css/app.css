@@ -30715,56 +30715,6 @@ readers do not read off random characters that represent icons */
   background-color: #a02622 !important;
 }
 
-.pretty input:checked ~ .state.p-violeta label:after,
-.pretty.p-toggle .state.p-violeta label:after {
-  background-color: #B536DA !important;
-}
-
-.pretty input:checked ~ .state.p-violeta .icon,
-.pretty input:checked ~ .state.p-violeta .svg,
-.pretty.p-toggle .state.p-violeta .icon,
-.pretty.p-toggle .state.p-violeta .svg {
-  color: #fff;
-  stroke: #fff;
-}
-
-.pretty input:checked ~ .state.p-violeta-o label:before,
-.pretty.p-toggle .state.p-violeta-o label:before {
-  border-color: #B536DA;
-}
-
-.pretty input:checked ~ .state.p-violeta-o label:after,
-.pretty.p-toggle .state.p-violeta-o label:after {
-  background-color: transparent;
-}
-
-.pretty input:checked ~ .state.p-violeta-o .icon,
-.pretty input:checked ~ .state.p-violeta-o .svg,
-.pretty input:checked ~ .state.p-violeta-o svg,
-.pretty.p-toggle .state.p-violeta-o .icon,
-.pretty.p-toggle .state.p-violeta-o .svg,
-.pretty.p-toggle .state.p-violeta-o svg {
-  color: #B536DA;
-  stroke: #B536DA;
-}
-
-.pretty.p-default:not(.p-fill) input:checked ~ .state.p-violeta-o label:after {
-  background-color: #B536DA !important;
-}
-
-.pretty.p-switch input:checked ~ .state.p-violeta:before {
-  border-color: #B536DA;
-}
-
-.pretty.p-switch.p-fill input:checked ~ .state.p-violeta:before {
-  background-color: #B536DA !important;
-}
-
-.pretty.p-switch.p-slim input:checked ~ .state.p-violeta:before {
-  border-color: #751a90;
-  background-color: #751a90 !important;
-}
-
 .pretty.p-bigger label:before,
 .pretty.p-bigger label:after,
 .pretty.p-bigger .icon,

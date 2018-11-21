@@ -1,6 +1,6 @@
 <template>
         <div>
-                <form @submit.prevent="crearPoliza">
+                <form @submit.prevent="updatePoliza()">
                 <div class="card">
                         <div class="card-header">
                                 <p class="d-inline align-bottom">EDITAR POLIZA</p>
@@ -163,20 +163,19 @@
                                                         </div>
                                                         
                                                 </div>
-                                                        <div class="row">
-                                                             
-                                                <div class="col-md-6 pt-md-4">
-                                                <div class="">
-                                                        <button type="submit" class="btn bgcolor-purple">Guardar Cambios</button>  
-                                                </div>        
-                                                <div class="pt-3">
-                                                        <p class="d-inline">Flota</p>
-                                                        <p-check class="p-switch p-fill" v-model="poliza.flota" color="violeta"></p-check>
-                                                </div>
-                                              
-                                        </div>    
-
+                                                <div class="row">    
+                                                        <div class="col-md-6 pt-sm-4">
+                                                               
+                                                        <div class="pt-6">
+                                                                <p class="d-inline">Flota</p>
+                                                                <p-check class="p-switch p-fill" id="flota" name="flota" v-model="poliza.flota" color="violeta"></p-check>
                                                         </div>
+                                                        <div class="pt-sm-3">
+                                                                <button type="submit" class="btn bgcolor-purple">Guardar Cambios</button>  
+                                                        </div> 
+                                                </div>    
+
+                                        </div>
                                         </div>
                                         
                                         <div class="col-md-6">
@@ -435,7 +434,7 @@ export default {
         .get("http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud)
         .then(function(response) {
           self.poliza = response.data.data[0];
-          console.log(self.poliza.compania_id);
+        //   console.log(self.poliza.compania_id);
           axios
             .get(
               "http://127.0.0.1:8000/api/codigoproductor/compania/" +
@@ -449,6 +448,18 @@ export default {
               // console.log(err);
             });
         });
+    },
+    updatePoliza(){
+            let self = this;
+            axios
+            .put("http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud, 
+            this.poliza)
+                .then(() => {
+                        console.log("update ok");
+                        windows.location.replace(
+                        "http://127.0.0.1:8000/api/polizas/" + this.numeroSolicitud + "/edit"
+                        );
+                });
     },
     cargarClientes() {
       let self = this;
