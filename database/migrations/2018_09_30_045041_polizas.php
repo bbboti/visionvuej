@@ -39,9 +39,10 @@ class Polizas extends Migration
             $table->integer('cantidad_cuotas')->nullable();
             $table->string('medio_pago')->nullable();
             $table->string('detalle_medio_pago')->nullable();
-            $table->integer('comision')->nullable();
-            $table->integer('descuento')->nullable();
+            $table->string('comision')->nullable();
+            $table->string('descuento')->nullable();
             $table->string('archivada')->nullable();
+            $table->boolean('flota')->nullable();
             $table->timestamps();
         });
     }

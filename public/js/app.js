@@ -60688,6 +60688,140 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60716,7 +60850,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         medio_pago: "",
         plan_pago: "",
         cantidad_cuotas: "",
-        detalle_medio_pago: ""
+        detalle_medio_pago: "",
+        flota: ""
       },
       cliente: {},
       clientes: {},
@@ -61994,19 +62129,73 @@ var render = function() {
                   ])
                 ])
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("label", { staticClass: "switch" }, [
+                  _c("p", [_vm._v(" Flota ")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.poliza.flota,
+                        expression: "poliza.flota"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "checkbox", id: "flota", name: "flota" },
+                    domProps: {
+                      checked: Array.isArray(_vm.poliza.flota)
+                        ? _vm._i(_vm.poliza.flota, null) > -1
+                        : _vm.poliza.flota
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.poliza.flota,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.poliza, "flota", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.poliza,
+                                "flota",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.poliza, "flota", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "slider round" })
+                ])
+              ])
             ])
           ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn bgcolor-purple", attrs: { type: "submit" } },
-            [_vm._v("Crear Poliza")]
-          ),
           _vm._v(" "),
           _c("div")
         ])
       ]
-    )
+    ),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _vm._m(4)
   ])
 }
 var staticRenderFns = [
@@ -62017,6 +62206,226 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("p", { staticClass: "d-inline align-bottom" }, [
         _vm._v("EDITAR POLIZA")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c(
+        "button",
+        { staticClass: "btn bgcolor-purple", attrs: { type: "submit" } },
+        [_vm._v("Guardar Cambios")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("p", { staticClass: "d-inline align-bottom" }, [_vm._v("RIESGO")]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn bgcolor-purple float-right" }, [
+          _vm._v("Crear")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body p-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-sm table-bordered table-hover dataTable",
+                attrs: {
+                  id: "example2",
+                  role: "grid",
+                  "aria-describedby": "example2_info"
+                }
+              },
+              [
+                _c("thead", { staticClass: "thead-light" }, [
+                  _c("tr", { attrs: { role: "row" } }, [
+                    _c("th", [_vm._v("Marca / Modelo / Version")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Patente")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Motor")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Chasis")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Tipo")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Cobertura")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Franquicia")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Edicion")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("p", { staticClass: "d-inline align-bottom" }, [_vm._v("ENDOSOS")]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn bgcolor-purple float-right" }, [
+          _vm._v("Crear")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body p-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-sm table-bordered table-hover dataTable",
+                attrs: {
+                  id: "example2",
+                  role: "grid",
+                  "aria-describedby": "example2_info"
+                }
+              },
+              [
+                _c("thead", { staticClass: "thead-light" }, [
+                  _c("tr", { attrs: { role: "row" } }, [
+                    _c("th", [_vm._v("Fecha de Pedido")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Motivo")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Nro Endoso")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Fecha de Emision")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Completo")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Edicion")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("p", { staticClass: "d-inline align-bottom" }, [
+          _vm._v("SINIESTROS")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn bgcolor-purple float-right" }, [
+          _vm._v("Crear")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body p-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-sm table-bordered table-hover dataTable",
+                attrs: {
+                  id: "example2",
+                  role: "grid",
+                  "aria-describedby": "example2_info"
+                }
+              },
+              [
+                _c("thead", { staticClass: "thead-light" }, [
+                  _c("tr", { attrs: { role: "row" } }, [
+                    _c("th", [_vm._v("F. Denuncia")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("F. Ocurrencia")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Nro Siniestro")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Cobertura")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Cerrado")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Edicion")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
       ])
     ])
   }

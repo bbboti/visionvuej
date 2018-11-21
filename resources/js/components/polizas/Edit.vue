@@ -159,9 +159,12 @@
                                                                                 </div>
                                                                         </div>
                                                                 </div>
+                                                                
                                                         </div>
+                                                        
                                                 </div>
                                         </div>
+                                        
                                         <div class="col-md-6">
                                                 <div class="card p-3">
                                                         <div class="form-group">
@@ -208,14 +211,145 @@
                                                         </div>
                                                 </div>
                                         </div>
+
+                                        <div class="col-md-6">
+                                                <div class="col-md-6">
+                                                        <button type="submit" class="btn bgcolor-purple">Guardar Cambios</button>
+                                                        
+                                                </div>
+                                                <div class="col-md-6">
+                                                        <label class="switch">
+                                                                <p> Flota </p>
+                                                                <input type="checkbox" v-model="poliza.flota" class="form-control form-control-sm" id="flota" name="flota">
+                                                                <span class="slider round"></span>
+                                                        </label>
+                                                </div>
+                                        </div>
                                 </div>
-                                        <button type="submit" class="btn bgcolor-purple">Crear Poliza</button>
                                 <div>
                                         
                                 </div>
                         </div>
                                 </form>
+                <div class="card">
+                        <div class="card-header">
+                                <p class="d-inline align-bottom">RIESGO</p>
+                                <button class="btn bgcolor-purple float-right">Crear</button>
+                        </div>
+                        <div class="box-body p-2">
+                                        <div class="row">
+                                                <div class="col-sm-12">
+                                        <table id="example2" class="table table-sm table-bordered table-hover dataTable" role="grid"
+                                        aria-describedby="example2_info">
+                                        <thead class="thead-light">
+                                                <tr role="row">
+                                                                                <th>Marca / Modelo / Version</th>
+                                                                                <th>Patente</th>
+                                                                                <th>Motor</th>
+                                                                                <th>Chasis</th>
+                                                                                <th>Tipo</th>
+                                                                                <th>Cobertura</th>
+                                                                                <th>Franquicia</th>
+                                                                                <th>Edicion</th>
+
+                                                                        </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td> 
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td>   
+                                                                                <td></td>   
+                                                                                <td></td>                                                                                 
+                                                                        </tr>
+                                                                </tbody>
+                                                        </table>
+                                                </div>
+                                        </div>
+
+
+                                </div>
+                        </div>
+                        <div class="card">
+                        <div class="card-header">
+                                <p class="d-inline align-bottom">ENDOSOS</p>
+                                <button class="btn bgcolor-purple float-right">Crear</button>
+                        </div>
+                        <div class="box-body p-2">
+                                        <div class="row">
+                                                <div class="col-sm-12">
+                                        <table id="example2" class="table table-sm table-bordered table-hover dataTable" role="grid"
+                                        aria-describedby="example2_info">
+                                        <thead class="thead-light">
+                                                <tr role="row">
+                                                                                <th>Fecha de Pedido</th>
+                                                                                <th>Motivo</th>
+                                                                                <th>Nro Endoso</th>
+                                                                                <th>Fecha de Emision</th>
+                                                                                <th>Completo</th>
+                                                                                <th>Edicion</th>
+                                                                        </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td> 
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td>                                                                                
+                                                                        </tr>
+                                                                </tbody>
+                                                        </table>
+                                                </div>
+                                        </div>
+
+
+                                </div>
+                        </div>
+                        <div class="card">
+                        <div class="card-header">
+                                <p class="d-inline align-bottom">SINIESTROS</p>
+                                <button class="btn bgcolor-purple float-right">Crear</button>
+                        </div>
+                        <div class="box-body p-2">
+                                        <div class="row">
+                                                <div class="col-sm-12">
+                                        <table id="example2" class="table table-sm table-bordered table-hover dataTable" role="grid"
+                                        aria-describedby="example2_info">
+                                        <thead class="thead-light">
+                                                <tr role="row">
+                                                                                <th>F. Denuncia</th>
+                                                                                <th>F. Ocurrencia</th>
+                                                                                <th>Nro Siniestro</th>
+                                                                                <th>Cobertura</th>
+                                                                                <th>Cerrado</th>
+                                                                                <th>Edicion</th>
+                                                                        </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td> 
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                                <td></td>   
+                                                                                                                                                      
+                                                                        </tr>
+                                                                </tbody>
+                                                        </table>
+                                                </div>
+                                        </div>
+
+
+                                </div>
+                        </div>
                 </div>
+                
                 
 </template>
 <script>
@@ -246,7 +380,8 @@ export default {
         medio_pago: "",
         plan_pago: "",
         cantidad_cuotas: "",
-        detalle_medio_pago: ""
+        detalle_medio_pago: "",
+        flota: ""
       },
       cliente: {},
       clientes: {},
