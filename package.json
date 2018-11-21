@@ -24,6 +24,7 @@
         "admin-lte": "^3.0.0-alpha.2",
         "awesome-bootstrap-checkbox": "^1.0.1",
         "date-fns": "^1.29.0",
+        "pretty-checkbox-vue": "^1.1.9",
         "vue-router": "^3.0.1"
     }
 }

@@ -163,6 +163,20 @@
                                                         </div>
                                                         
                                                 </div>
+                                                        <div class="row">
+                                                             
+                                                <div class="col-md-6 pt-md-4">
+                                                <div class="">
+                                                        <button type="submit" class="btn bgcolor-purple">Guardar Cambios</button>  
+                                                </div>        
+                                                <div class="pt-3">
+                                                        <p class="d-inline">Flota</p>
+                                                        <p-check class="p-switch p-fill" v-model="poliza.flota" color="violeta"></p-check>
+                                                </div>
+                                              
+                                        </div>    
+
+                                                        </div>
                                         </div>
                                         
                                         <div class="col-md-6">
@@ -209,20 +223,6 @@
                                                                         </div>
                                                                 </div>
                                                         </div>
-                                                </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                                <div class="col-md-6">
-                                                        <button type="submit" class="btn bgcolor-purple">Guardar Cambios</button>
-                                                        
-                                                </div>
-                                                <div class="col-md-6">
-                                                        <label class="switch">
-                                                                <p> Flota </p>
-                                                                <input type="checkbox" v-model="poliza.flota" class="form-control form-control-sm" id="flota" name="flota">
-                                                                <span class="slider round"></span>
-                                                        </label>
                                                 </div>
                                         </div>
                                 </div>
@@ -423,11 +423,11 @@ export default {
         .slice(0, 10);
     },
 
-//     sumarSoloMes(mes){
-//        this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes)
-//         .toISOString()
-//         .slice(0, 10);     
-//     },
+    //     sumarSoloMes(mes){
+    //        this.poliza.vigencia_hasta = addMonths(this.poliza.vigencia_desde, mes)
+    //         .toISOString()
+    //         .slice(0, 10);
+    //     },
 
     cargarPoliza() {
       let self = this;
@@ -492,7 +492,6 @@ export default {
           // console.log(err);
         });
     }
-
   },
 
   created() {

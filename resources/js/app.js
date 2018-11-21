@@ -75,9 +75,8 @@ let routes = [{
 import addMonths from 'date-fns/add_months';
 Vue.use(addMonths);
 
-
-
-
+import PrettyCheckbox from 'pretty-checkbox-vue';
+Vue.use(PrettyCheckbox);
 
 const router = new VueRouter({
     mode: 'history',
