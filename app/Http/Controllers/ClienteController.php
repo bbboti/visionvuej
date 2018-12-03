@@ -43,34 +43,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tipo_persona' => 'string',
-            'nombre' => 'string',
-            'apellido' => 'string',
-            'razon_social' => 'string',
-            'tipo_doc' => 'string',
-            'nro_dni' => 'integer|unique:clientes',
-            'sexo' => 'string',
-            'nacimiento' => 'string',
-            'condicion_fiscal' => 'string',
-            'cuit' => 'string',
-            'registro' => 'integer',
-            'vencimiento_registro' => 'string',
-            'email' => 'string',
-            'email_alt' => 'string',
-            'direccion' => 'string',
-            'direccion_nro' => 'integer',
-            'direccion_piso' => 'string',
-            'direccion_depto' => 'string',
-            'localidad_id' => 'integer',
-            'barrio_cerrado' => 'string',
-            'lote' => 'string',
-            'celular' => 'string',
-            'telefono_1' => 'string',
-            'telefono_2' => 'string',
-            'img_registro' => 'string',
-            'observaciones_1' => 'string',
-            'observaciones_2' => 'string',
-            'productor_id' => 'integer',
+
         ]);
 
 

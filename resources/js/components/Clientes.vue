@@ -12,8 +12,7 @@
                                     aria-describedby="example2_info">
                                     <thead class="thead-light">
                                         <tr role="row">
-                                            <th>Apellido</th>
-                                            <th>Nombre</th>
+                                            <th>Apellido / Nombre</th>
                                             <th>DNI</th>
                                             <th>Celular</th>
                                             <th>Email</th>
@@ -23,8 +22,8 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="cliente in clientes" :key="cliente.id" role="row" class="odd">
-                                            <td>{{cliente.apellido}}</td>
-                                            <td>{{cliente.nombre}} </td>
+                                            <td v-if="cliente.razon_social === null">{{cliente.apellido}} {{cliente.nombre}}</td>
+                                            <td v-else>{{cliente.razon_social}}</td>
                                             <td>{{cliente.nro_dni}} </td>
                                             <td>{{cliente.celular}} </td>
                                             <td>{{cliente.email}} </td>
@@ -59,37 +58,63 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Tipo de Persona </label>
-                  <select class="form-control form-control-sm select2" style="width: 100%;" name='condicion_fiscal' v-model="cliente.tipo_persona">
-                        <option selected="selected">Persona Fisica</option>
-                        <option>Persona Juridica</option>
+                  <select class="form-control form-control-sm" v-model="cliente.tipo_persona">
+                        <option value="Persona Fisica">Persona Fisica</option>
+                        <option value="Persona Juridica">Persona Juridica</option>
                   </select>
+                </div>
+                <div class="form-group" v-if="cliente.tipo_persona === 'Persona Juridica'">
+                  <label>Razon Social</label>
+                    <input type="text" class="form-control form-control-sm" id="razon_social" name="razon_social" v-model="cliente.razon_social"
+                    :class="{ ' input-invalido': $v.cliente.razon_social.$error }"
+                    @input="$v.cliente.razon_social.$touch()"
+                        v-model.trim="cliente.razon_social">
+                        <p class="msg-invalido" v-if="!$v.cliente.razon_social.required && $v.cliente.razon_social.$dirty && cliente.tipo_persona === 'Persona Juridica'">El
+                            campo Razon Social es obligatorio</p>
                 </div>
                 <div class="form-group">
                   <label>Nombre</label>
-                    <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" v-model="cliente.nombre">
+                    <input type="text" class="form-control form-control-sm" :class="{ ' input-invalido': $v.cliente.nombre.$error }" id="nombre" name="nombre"
+                     v-model="cliente.nombre"
+                     @input="$v.cliente.nombre.$touch()"
+                        v-model.trim="cliente.nombre">
+                        <p class="msg-invalido" v-if="!$v.cliente.nombre.required && $v.cliente.nombre.$dirty">El
+                            campo Nombre es obligatorio</p>
+                        <p class="msg-invalido" v-if="!$v.cliente.nombre.alpha && $v.cliente.nombre.$dirty">El campo
+                            Nombre solo admite letras</p>
                 </div>
                 <div class="form-group">
                   <label>Apellido</label>
-                    <input type="text" class="form-control form-control-sm " id="apellido" name="apellido" v-model="cliente.apellido">
+                    <input type="text" class="form-control form-control-sm " :class="{ ' input-invalido': $v.cliente.apellido.$error }"
+                    id="apellido" name="apellido" v-model="cliente.apellido"
+                    @input="$v.cliente.apellido.$touch()"
+                        v-model.trim="cliente.apellido">
+                        <p class="msg-invalido" v-if="!$v.cliente.apellido.required && $v.cliente.apellido.$dirty">El
+                            campo Apellido es obligatorio</p>
+                        <p class="msg-invalido" v-if="!$v.cliente.apellido.alpha && $v.cliente.apellido.$dirty">El campo
+                            Apellido solo admite letras</p>
                 </div>
-                <div class="form-group">
-                  <label>Razon Social</label>
-                    <input type="text" class="form-control form-control-sm" id="razon_social" name="razon_social" v-model="cliente.razon_social">
-                </div>
-
+                <div class="form-group" v-if="cliente.tipo_persona !== 'Persona Juridica'">
                 <label>Documento</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <select class="form-control form-control-sm select2" name='tipo_doc' v-model="cliente.tipo_doc">
-                                <option selected="selected">DNI</option>
+                            <select class="form-control form-control-sm"  name='tipo_doc' v-model="cliente.tipo_doc">
+                                <option>DNI</option>
                                 <option>LE</option>
                                 <option>Pasaporte</option>
                             </select>                        
                         </div>
-                            <input type="text" class="form-control form-control-sm" id="nro_dni" name="nro_dni" placeholder="Nro" v-model="cliente.nro_dni">
+                            <input type="text" class="form-control form-control-sm" :class="{ ' input-invalido': $v.cliente.nro_dni.$error }" id="nro_dni" 
+                            name="nro_dni" placeholder="Nro" v-model="cliente.nro_dni"  @input="$v.cliente.nro_dni.$touch()"
+                        v-model.trim="cliente.nro_dni">
+                        <p class="msg-invalido" v-if="!$v.cliente.nro_dni.required && $v.cliente.nro_dni.$dirty">El
+                            campo DNI es obligatorio</p>
+                        <p class="msg-invalido" v-if="!$v.cliente.nro_dni.numeric && $v.cliente.nro_dni.$dirty">El campo
+                            DNI solo admite numeros</p>
                     </div>
+                </div>
 
-                <div class="form-group">
+                <div class="form-group" v-if="cliente.tipo_persona !== 'Persona Juridica'">
                     <div class="form-check form-check-inline">
                     <label class="form-check-label"> Masculino  
                         <input class="form-check-input" type="radio" id="masculino" name="sexo" v-model="cliente.sexo" value='M' > 
@@ -100,16 +125,20 @@
                         <input class="form-check-input" type="radio" id="femenino" name="sexo" v-model="cliente.sexo" value='F' > 
                     </label>
                     </div>
+                    <p class="msg-invalido" v-if="!$v.cliente.sexo.required && $v.cliente.sexo.$dirty">El
+                            campo sexo es obligatorio</p>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" v-if="cliente.tipo_persona !== 'Persona Juridica'">
                   <label>Fecha de Nacimiento</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                     </div>
-                    <input name="nacimiento" type="date" class="form-control form-control-sm" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask v-model="cliente.nacimiento">
+                    <input name="nacimiento" type="date" class="form-control form-control-sm" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask v-model="cliente.nacimiento" :class="{ ' input-invalido': $v.cliente.nacimiento.$error }">
                   </div>
+                  <p class="msg-invalido" v-if="!$v.cliente.nacimiento.required && $v.cliente.nacimiento.$dirty">El
+                            campo nacimiento es obligatorio</p>
                 </div>
                 </div>
 
@@ -122,7 +151,15 @@
                                 <option>MONOTRIBUTO</option>
                             </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" v-if="cliente.tipo_persona === 'Persona Juridica'">
+                        <label>CUIT</label>
+                            <input type="text" class="form-control form-control-sm mb-1" name="cuit" v-model="cliente.cuit" :class="{ ' input-invalido': $v.cliente.cuit.$error }"
+                            @input="$v.cliente.cuit.$touch()"
+                            v-model.trim="cliente.cuit">
+                            <p class="msg-invalido" v-if="!$v.cliente.cuit.required && $v.cliente.cuit.$dirty  && cliente.tipo_persona === 'Persona Juridica'">El
+                            campo CUIT es obligatorio</p>
+                    </div>
+                    <div class="form-group" v-if="cliente.tipo_persona === 'Persona Fisica'">
                         <label>CUIT</label>
                             <input type="text" class="form-control form-control-sm mb-1" name="cuit" v-model="cliente.cuit">
                     </div>
@@ -131,14 +168,24 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                         </div>
-                            <input name="email" type="email" class="form-control form-control-sm" placeholder="Email" v-model="cliente.email">
+                            <input name="email" type="email" class="form-control form-control-sm" placeholder="Email" v-model="cliente.email"
+                            :class="{ ' input-invalido': $v.cliente.email.$error }"
+                            @input="$v.cliente.email.$touch()"
+                            v-model.trim="cliente.email">
+                            <p class="msg-invalido" v-if="!$v.cliente.email.email && $v.cliente.email.$dirty">El
+                            formato email es incorrecto</p>
                     </div>
                     <label>Email Alternativo</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                         </div>
-                            <input name="email_alt" type="email" class="form-control form-control-sm" placeholder="Email Alternativo" v-model="cliente.email_alt">
+                            <input name="email_alt" type="email" class="form-control form-control-sm" placeholder="Email Alternativo" v-model="cliente.email_alt"
+                            :class="{ ' input-invalido': $v.cliente.email_alt.$error }"
+                            @input="$v.cliente.email_alt.$touch()"
+                            v-model.trim="cliente.email_alt">
+                            <p class="msg-invalido" v-if="!$v.cliente.email_alt.email && $v.cliente.email_alt.$dirty">El
+                            formato email es incorrecto</p>
                     </div>
                     <div class="form-group">
                         <label>Observaciones</label>
@@ -162,20 +209,31 @@
                 <div class="form-group">
                     <div class="input-group mb-12">
                         <div class="input-group-prepend mb-9">
-                            <input type="text" class="form-control form-control-sm" placeholder="Nombre" id="" name="direccion" v-model="cliente.direccion">                      
+                            <input type="text" class="form-control form-control-sm" placeholder="Calle" id="" name="direccion" v-model="cliente.direccion"
+                            @input="$v.cliente.direccion.$touch()"
+                        v-model.trim="cliente.direccion"
+                        :class="{ ' input-invalido': $v.cliente.direccion.$error }">
                         </div>
                         <div class="input-group-prepend mb-3">
-                            <input type="text" class="form-control form-control-sm" placeholder="Nro" id="direccion_nro" name="direccion_nro" v-model="cliente.direccion_nro">
+                            <input type="text" class="form-control form-control-sm" placeholder="Nro" id="direccion_nro" name="direccion_nro" 
+                            v-model="cliente.direccion_nro"
+                            @input="$v.cliente.direccion_nro.$touch()"
+                        v-model.trim="cliente.direccion_nro"
+                        :class="{ ' input-invalido': $v.cliente.direccion_nro.$error }">
                         </div>
                     </div>
+                        <p class="msg-invalido" v-if="!$v.cliente.direccion.required && $v.cliente.direccion.$dirty">El
+                            campo direccion es obligatorio</p> 
+                         <p class="msg-invalido" v-if="!$v.cliente.direccion_nro.required && $v.cliente.direccion_nro.$dirty">El
+                            numero es obligatorio</p>                
                 </div>
 
                 <div class="form-group">
-                    <div class="input-group mb-12">
-                        <div class="input-group-prepend mb-9">
+                    <div class="input-group">
+                        <div class="">
                             <input type="text" class="form-control form-control-sm" placeholder="Piso" id="direccion_piso" name="direccion_piso" v-model="cliente.direccion_piso">                      
                         </div>
-                        <div class="input-group-prepend mb-3">
+                        <div class="">
                             <input type="text" class="form-control form-control-sm" placeholder="Depto" id="direccion_depto" name="direccion_depto" v-model="cliente.direccion_depto">
                         </div>
                     </div>
@@ -183,10 +241,13 @@
 
 
                 <div class="form-group">
-                    <label>Localidad</label>
-                        <select name='localidad_id' class="form-control form-control-sm" v-model="cliente.localidad_id">
-                            <option v-for="localidad in localidades" :key="localidad.id" v-bind:value='localidad.id' >{{localidad.nombre}}  / CP: {{localidad.codigo_postal}}</option>
-                        </select>
+                        <label>Localidad</label>
+                        <multiselect name='localidad_id' class="" v-model="cliente.localidad_id" :custom-label="nombreYCodigo" :options="localidades" placeholder="Buscar Localidad" 
+                        :class="{ ' input-invalido': $v.cliente.localidad_id.$error }">
+                            <!-- <option v-for="localidad in localidades" :key="localidad.id" v-bind:value='localidad.id' >{{localidad.nombre}}  / CP: {{localidad.codigo_postal}}</option> -->
+                        </multiselect>
+                        <p class="msg-invalido" v-if="!$v.cliente.productor_id.required && $v.cliente.productor_id.$dirty">
+                            El campo localidad es obligatorio</p> 
                 </div>
 
                 
@@ -251,9 +312,12 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div>
-                        <select name='productor_id' class="form-control form-control-sm mb-1 selectbuscador" v-model="cliente.productor_id">
+                        <select name='productor_id' class="form-control form-control-sm mb-1 selectbuscador" v-model="cliente.productor_id"
+                        :class="{ ' input-invalido': $v.cliente.productor_id.$error }">
                             <option v-for="productor in productores" :key="productor.id" v-bind:value="productor.id">{{productor.apellido+" "+productor.nombre}}</option>
                         </select>
+                        <p class="msg-invalido" v-if="!$v.cliente.productor_id.required && $v.cliente.productor_id.$dirty">El
+                            campo productor es obligatorio</p> 
                     </div>
                 </div>
             </div>
@@ -317,98 +381,218 @@
 
 </template>
 <script>
+import { helpers } from "vuelidate/lib/validators";
+const alpha = helpers.regex("alpha", /^[a-zA-Z ]*$/);
+import { required, numeric, email, minValue } from "vuelidate/lib/validators";
+
 export default {
   data() {
     return {
       clientes: {},
       productores: {},
       productor: {},
-      localidades: {},
+      localidades: [],
       cliente: {
-          tipo_persona:"",
-          nombre:"",
-          apellido:"",
-          razon_social:"",
-          tipo_doc:"",
-          nro_dni:"",
-          sexo:"",
-          nacimiento:"",
-          condicion_fiscal:"",
-          cuit:"",
-          registro:"",
-          vencimiento_registro:"",
-          email:"",
-          email_alt:"",
-          direccion:"",
-          direccion_nro:"",
-          direccion_piso:"",
-          direccion_depto:"",
-          localidad_id:"",
-          barrio_cerrado:"",
-          lote:"",
-          celular:"",
-          telefono_1:"",
-          telefono_2:"",
-          img_registro:"",
-          observaciones_1:"",
-          obeservaciones_2:"",
-          productor_id:"",
+        tipo_persona: "",
+        nombre: "",
+        apellido: "",
+        razon_social: "",
+        tipo_doc: "",
+        nro_dni: "",
+        sexo: "",
+        nacimiento: "",
+        condicion_fiscal: "",
+        cuit: "",
+        registro: "",
+        vencimiento_registro: "",
+        email: "",
+        email_alt: "",
+        direccion: "",
+        direccion_nro: "",
+        direccion_piso: "",
+        direccion_depto: "",
+        localidad_id: "",
+        barrio_cerrado: "",
+        lote: "",
+        celular: "",
+        telefono_1: "",
+        telefono_2: "",
+        img_registro: "",
+        observaciones_1: "",
+        obeservaciones_2: "",
+        productor_id: ""
       },
-    modoEditar: false,
+      modoEditar: false
     };
+  },
+    validations() {
+        if (this.cliente.tipo_persona === 'Persona Fisica'){
+            return {
+                cliente: {
+                    nombre: {
+                        required,
+                        alpha
+                    },
+                    apellido: {
+                        required,
+                        alpha
+                    },
+                    nro_dni: {
+                        required,
+                        numeric
+                    },
+                    nacimiento: {
+                        required
+                    },
+                    email: {
+                        email
+                    },
+                    sexo: {
+                        required
+                    },
+                    nacimiento: {
+                        required
+                    },
+                    email: {
+                        email
+                    },
+                    email_alt: {
+                        email
+                    },
+                    direccion: {
+                        required
+                    },
+                    direccion_nro: {
+                        required
+                    },
+                    localidad_id:{
+                            required
+                    },
+                    productor_id: {
+                        required
+                    }
+                }
+            } 
+                } else {
+                return {
+                    cliente: {
+                        nombre: {
+                            alpha
+                        },
+                        apellido: {
+                            alpha
+                        },
+                        nro_dni: {
+                            numeric
+                        },
+                        nacimiento: {
+                        },
+                        email: {
+                            email
+                        },
+                        cuit: {
+                            required
+                        },
+                        sexo: {
+                        },
+                        nacimiento: {
+                        },
+                        email: {
+                            email
+                        },
+                        email_alt: {
+                            email
+                        },
+                        direccion: {
+                            required
+                        },
+                        direccion_nro: {
+                            required
+                        },
+                        localidad_id:{
+                            required
+                        },
+                        productor_id: {
+                            required
+                        },
+                        razon_social: {
+                            required
+                        }
+                        }
+                }
+            }
   },
   methods: {
     crearCliente() {
       let self = this;
+      this.$Progress.start();
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.$Progress.fail();
+      } else {
+        axios
+          .post("http://127.0.0.1:8000/api/clientes", self.cliente)
+          .then(() => {
+            $("#modal").modal("hide");
+            this.$Progress.finish();
+            this.cliente = {};
+            this.cargarClientes();
+            toast({
+              type: "success",
+              title: "Cliente creado!"
+            });
+          })
+          .catch(error => {
+            console.log(error.response.data);
+            this.errors = error.response.data;
+          });
+      }
+    },
+    cambiarACondicionJuridica() {
+      this.tipo_persona = 2;
+    },
+    vaciarForm() {
+      this.cliente = {
+        tipo_persona: "Persona Fisica",
+        condicion_fiscal: "CONSUMIDOR FINAL",
+        tipo_doc: "DNI"
+      };
+      this.$v.cliente.$reset();
+      this.errors = [];
+      this.modoEditar = false;
+    },
+    updateCliente(id) {
+      let self = this;
       axios
-        .post(
-          "http://127.0.0.1:8000/api/clientes",
-          self.cliente
-        )
+        .put("http://127.0.0.1:8000/api/clientes/" + id, this.cliente)
         .then(() => {
           $("#modal").modal("hide");
-          this.cliente = {};
           this.cargarClientes();
+          console.log("listo!");
         })
         .catch(e => console.log(e));
     },
-    vaciarForm(){
-        this.cliente = {};
-        this.modoEditar = false;
-    },
-    updateCliente(id){
-        let self = this;
-      axios
-      .put("http://127.0.0.1:8000/api/clientes/" + id, this.cliente)
-      .then(()=>{   
-            $("#modal").modal("hide");
-            this.cargarClientes();
-          console.log('listo!')
-      }).catch(e=>(console.log(e)))
-    },
-    modoEdicion(id){
-        (this.modoEditar = true), $("#modal").modal("show");
-        let self = this;
+    modoEdicion(id) {
+      (this.modoEditar = true), $("#modal").modal("show");
+      let self = this;
       axios
         .get("http://127.0.0.1:8000/api/clientes/" + id)
         .then(function(response) {
-          self.cliente = response.data.data;})
-          .catch(e=>console.log(e));
-    },
-    borrarCliente(id){
-        axios.delete("http://127.0.0.1:8000/api/clientes/" + id)
-        .then(()=>{
-            this.cargarClientes();
-            console.log('borado!')
+          self.cliente = response.data.data;
         })
+        .catch(e => console.log(e));
+    },
+    borrarCliente(id) {
+      axios.delete("http://127.0.0.1:8000/api/clientes/" + id).then(() => {
+        this.cargarClientes();
+        console.log("borado!");
+      });
     },
     cargarClientes() {
       let self = this;
-      axios
-        .get("http://127.0.0.1:8000/api/clientes")
-        .then(function(response) {
-          self.clientes = response.data.data;
-        });
+      axios.get("http://127.0.0.1:8000/api/clientes").then(function(response) {
+        self.clientes = response.data.data;
+      });
     },
     cargarProductores() {
       let self = this;
@@ -425,6 +609,9 @@ export default {
         .then(function(response) {
           self.localidades = response.data.data;
         });
+    },
+    nombreYCodigo({ nombre, codigo_postal }) {
+      return `${nombre} — (CP:${codigo_postal})`;
     }
   },
   created() {

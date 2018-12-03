@@ -170,6 +170,10 @@ export default {
           $("#modal").modal("hide");
           this.productor = {};
           this.cargarProductores();
+          toast({
+              type: "success",
+              title: "Productor creado!"
+            });
         })
         .catch(e => console.log(e));
     },

@@ -75,8 +75,43 @@ let routes = [{
 import addMonths from 'date-fns/add_months';
 Vue.use(addMonths);
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
 import PrettyCheckbox from 'pretty-checkbox-vue';
 Vue.use(PrettyCheckbox);
+
+import VueProgressBar from 'vue-progressbar';
+const options = {
+    color: '#B536DA',
+    failedColor: '#874b4b',
+    thickness: '5px',
+    transition: {
+      speed: '0.6s',
+      opacity: '0.6s',
+      termination: 300
+    },
+    autoRevert: true,
+    location: 'top',
+    inverse: false
+  };
+  
+Vue.use(VueProgressBar, options);
+
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect);
+
+
+import swal from 'sweetalert2'
+window.swal = swal;
+
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 6000
+});
+window.toast = toast;
 
 const router = new VueRouter({
     mode: 'history',

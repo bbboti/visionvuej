@@ -3,7 +3,7 @@
                 <form @submit.prevent="updatePoliza()">
                 <div class="card">
                         <div class="card-header">
-                                <p class="d-inline align-bottom">EDITAR POLIZA</p>
+                                <p class="d-inline align-bottom">EDITAR POLIZA {{poliza.numero}}</p>
                         </div>
                                         <div class="p-3">
                                         <div class="card p-3">
